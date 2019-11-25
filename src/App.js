@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute'
 import Landing from './components/landing/landing'
 import ParentLogin from './components/parentlogin/ParentLogin'
+import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
         <Switch>
           <PublicRoute exact path={'/'} component={Landing} />
           <PublicRoute exact path={'/parent'} component={ParentLogin} />
-          {/* <PublicRoute exact path={'/register'} component={RegistrationRoute} /> */}
+          <PublicRoute exact path={'/register'} component={RegistrationRoute} />
           {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>
