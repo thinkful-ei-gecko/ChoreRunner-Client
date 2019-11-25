@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom'
+import PublicRoute from './routes/PublicRoute'
+import Landing from './components/landing/landing'
+import ParentLogin from './components/parentlogin/ParentLogin'
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <main>
+        <Switch>
+          <PublicRoute exact path={'/'} component={Landing} />
+          <PublicRoute exact path={'/parent'} component={ParentLogin} />
+          {/* <PublicRoute exact path={'/register'} component={RegistrationRoute} /> */}
+          {/* <Route component={NotFoundPage} /> */}
+        </Switch>
+      </main>
     </div>
   );
 }
