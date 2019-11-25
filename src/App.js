@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute'
 import Landing from './components/landing/landing'
-import ParentLogin from './components/parentlogin'
+import ParentLogin from './components/parentlogin/ParentLogin'
 
 import './App.css';
 
