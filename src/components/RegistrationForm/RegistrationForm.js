@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Input, Required, Label } from '../Form/Form'
-//import AuthApiService from '../../services/auth-api-service'
+import AuthApiService from '../../services/auth-api-service'
 import Button from '../Button/Button'
 import './RegistrationForm.css'
 
@@ -14,24 +14,24 @@ class RegistrationForm extends Component {
 
   firstInput = React.createRef()
 
-  // handleSubmit = ev => {
-  //   ev.preventDefault()
-  //   const { name, username, password } = ev.target
-  //   AuthApiService.postUser({
-  //     name: name.value,
-  //     username: username.value,
-  //     password: password.value,
-  //   })
-  //     .then(user => {
-  //       name.value = ''
-  //       username.value = ''
-  //       password.value = ''
-  //       this.props.onRegistrationSuccess()
-  //     })
-  //     .catch(res => {
-  //       this.setState({ error: res.error })
-  //     })
-  // }
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { name, username, password } = ev.target
+    AuthApiService.postUser({
+      name: name.value,
+      username: username.value,
+      password: password.value,
+    })
+      .then(user => {
+        name.value = ''
+        username.value = ''
+        password.value = ''
+        this.props.onRegistrationSuccess()
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
+  }
 
   componentDidMount() {
     this.firstInput.current.focus()
