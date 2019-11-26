@@ -63,6 +63,7 @@ export class HouseholdProvider extends Component{
 
     render() {
         const value = {
+            household:this.state.household,
             householdField: this.state.householdField,
             addHouseholdField: this.addHouseholdField,
             handleHouseHoldFieldChange: this.handleHouseHoldFieldChange,
