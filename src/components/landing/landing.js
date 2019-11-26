@@ -15,7 +15,7 @@ export default class Landing extends Component {
                 <div className='img-placeholder'> IMAGE/VIDEO PLACEHOLDER</div> 
 
                 <Link tabIndex={1 } style={{ textDecoration: 'none' }} to='/kigLogin'>I am a kid</Link>
-                <Link tabIndex={2 } style={{ textDecoration: 'none' }} to='/parent'>I am a parent</Link>
+                <Link tabIndex={2 } style={{ textDecoration: 'none' }} to='/login'>I am a parent</Link>
                 <Link tabIndex={3 } style={{ textDecoration: 'none' }} to='/register'>I am new</Link>
 
             </div>
