@@ -12,7 +12,8 @@ const HouseholdContext = React.createContext({
     householdField: [{ name: "" }],
     addIngredField:() => {},
     handleHouseHoldFieldChange: () => {},
-    submitHousehold: () => {}
+    submitHousehold: () => {},
+    setHousehold: () => {}
 })
 export default HouseholdContext
 
@@ -20,6 +21,13 @@ export class HouseholdProvider extends Component{
     state = {
         household: '',
         householdField: [{ name: "" }] 
+    }
+
+    setHousehold = (household) => {
+        this.setState({
+            household
+        })
+        console.log('(in household context) household updated, heres proof ->', this.state.household)
     }
 
     //--------------------- Parent Dashboard's add household handlers ------------------------ 
@@ -50,26 +58,17 @@ export class HouseholdProvider extends Component{
 
     }
 
-    submitHousehold = (e) => {
-        e.preventDefault()
-        let name = this.state.householdField.map(data => data.name)
-
-        ApiService.postHousehold(name)
-        .then(result => {
-            console.log('handle submit res', result)
-            this.setState({
-                household: result
-            })
-        })
-        console.log(name) // ["dunders", "mifflins"] or ["dunders"]
-    }
     //----------------------------------------------------------------------------------------
+
+
     render() {
         const value = {
             householdField: this.state.householdField,
             addHouseholdField: this.addHouseholdField,
             handleHouseHoldFieldChange: this.handleHouseHoldFieldChange,
-            submitHousehold: this.submitHousehold
+            submitHousehold: this.submitHousehold,
+            setHousehold: this.setHousehold
+
         }
         return (
             <HouseholdContext.Provider value ={value}>
