@@ -4,6 +4,7 @@ import PublicRoute from './routes/PublicRoute'
 import Landing from './components/landing/landing'
 import ParentLogin from './components/parentlogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
+import AddTask from './routes/AddTask/AddTask'
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
           <PublicRoute exact path={'/'} component={Landing} />
           <PublicRoute exact path={'/parent'} component={ParentLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
+          <Route path={'/add-task'} component={AddTask}></Route>
           {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>
