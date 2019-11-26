@@ -3,9 +3,22 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 
 export default class ParentDashboard extends Component {
-    state = { error: null }
+    state = { error: null,
+        household:'' }
 
     static contextType = HouseholdContext
+//moved to context
+    // handleHouseholdSubmit = e => {
+    //     e.preventDefault();
+    //     let name=e.target.householdName.value
+    //     ApiService.postHousehold(name)
+    //       .then(result => {
+    //           console.log('handle submit res', result)
+    //           this.setState({
+    //               household: result
+    //           })
+    //       })
+    // }
 
     render() {
         const { householdField } = this.context
@@ -38,9 +51,8 @@ export default class ParentDashboard extends Component {
                         <button className='addHH' type='button' onClick={this.context.addHouseholdField}>+ add household</button>
                         <button className='submitHH' onClick={(e) => this.context.submitHousehold(e)}>submit</button>
                     </form>
-
-                    <p> example: add household members</p>
                 </div>
+                    <p> example: add household members</p>
                 {/* <div className='addmembers-container'>
                     <form className='add-members-form'>
                         {

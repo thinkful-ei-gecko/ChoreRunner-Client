@@ -10,7 +10,7 @@ export default class ParentLogin extends Component {
 
     onLoginSuccess = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/parentDash'
+        const destination = (location.state || {}).from || '/parent-dashboard'
         history.push(destination)
       }
     

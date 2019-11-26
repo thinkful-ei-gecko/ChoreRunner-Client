@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-
+import ApiService from '../services/api-service'
 
 export const household = {
+    household: '',
     householdField: [{ name: "" }],
     membersField: [{ name: "", household: "", code: "" }]
 }
 
 const HouseholdContext = React.createContext({
+    household: '',
     householdField: [{ name: "" }],
     addIngredField:() => {},
     handleHouseHoldFieldChange: () => {},
@@ -16,6 +18,7 @@ export default HouseholdContext
 
 export class HouseholdProvider extends Component{
     state = {
+        household: '',
         householdField: [{ name: "" }] 
     }
 
@@ -49,8 +52,16 @@ export class HouseholdProvider extends Component{
 
     submitHousehold = (e) => {
         e.preventDefault()
-        let dataArray = this.state.householdField.map(data => data.name)
-        console.log(dataArray) // ["dunders", "mifflins"]
+        let name = this.state.householdField.map(data => data.name)
+
+        ApiService.postHousehold(name)
+        .then(result => {
+            console.log('handle submit res', result)
+            this.setState({
+                household: result
+            })
+        })
+        console.log(name) // ["dunders", "mifflins"] or ["dunders"]
     }
     //----------------------------------------------------------------------------------------
     render() {
