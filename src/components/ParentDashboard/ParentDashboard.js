@@ -33,6 +33,7 @@ export default class ParentDashboard extends Component {
     render() {
         const { householdField } = this.context
         const { error } = this.state
+        console.log(this.context)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
@@ -66,7 +67,7 @@ export default class ParentDashboard extends Component {
                 <div className='household-details container'>
                     ----------------------- HOUSEHOLD DETAILS ----------------------
                     <p>Household for household1: SHY-MONKEY</p>
-                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE (HOUSEHOLDS NAME) TASKS</Link>
+                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE {this.context.household.name} TASKS</Link>
                 </div>
             </div>
         )
