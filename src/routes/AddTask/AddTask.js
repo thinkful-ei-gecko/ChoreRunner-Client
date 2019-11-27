@@ -83,11 +83,11 @@ export default class AddTask extends React.Component {
     // Delete request to remove completed task.
     // Post request to update points after task deletion
 
-    const { household_id } = this.props.match.params;
-    ChoreApiService.getTasks(household_id)
-      .then(res => this.context.setTasks(res))
-      .catch(this.context.setError)
-      console.log(household_id)
+    // const { household_id } = this.props.match.params;
+    // ChoreApiService.getTasks(household_id)
+    //   .then(res => this.context.setTasks(res))
+    //   .catch(this.context.setError)
+    //   console.log(household_id)
   }
 
   render() {
