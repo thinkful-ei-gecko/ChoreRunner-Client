@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import config from '../../config'
 import TokenService from '../../services/token-service'
+import AddMembers from '../AddMembers/AddMembers'
 
 export default class ParentDashboard extends Component {
-    state = { error: null }
+    state = { 
+        error: null,
+        household: ''
+     }
 
     static contextType = HouseholdContext
 
@@ -27,13 +31,18 @@ export default class ParentDashboard extends Component {
               ? res.json().then(e => Promise.reject(e))
               : res.json()
             )
-            .then(result => this.context.setHousehold(result))
+            .then(result => {
+                this.context.setHousehold(result)
+                this.setState({
+                  household: result
+                })
+            })
     }
 
     render() {
+        console.log('state in dashboard', this.state.household)
         const { householdField } = this.context
         const { error } = this.state
-        console.log(this.context)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
@@ -63,11 +72,12 @@ export default class ParentDashboard extends Component {
                         <button className='submitHH' onClick={(e) => this.handleHouseholdSubmit(e)}>submit</button>
                     </form>
                 </div>
-                    <p> example: add household members</p>
+                    <h2>Add household members</h2>
+                    <AddMembers />
                 <div className='household-details container'>
                     ----------------------- HOUSEHOLD DETAILS ----------------------
                     <p>Household for household1: SHY-MONKEY</p>
-                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE {this.context.household.name} TASKS</Link>
+                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE {this.context.household} TASKS</Link>
                 </div>
             </div>
         )
