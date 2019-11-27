@@ -3,12 +3,14 @@ import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
 
 export default class ParentLogin extends Component {
+
     static contextType = UserContext
+
     state = { error: null }
 
     onLoginSuccess = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/parent-dashboard'
+        const destination = (location.state || {}).from || '/parentDash'
         history.push(destination)
       }
     

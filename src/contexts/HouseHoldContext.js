@@ -1,43 +1,33 @@
-import React, { Component } from 'react'
-import ApiService from '../services/api-service'
-
-export const household = {
-    household: '',
-
-}
+import React, { Component } from 'react';
+import ApiService from '../services/api-service';
 
 const HouseholdContext = React.createContext({
-    household: '',
-    setHousehold: () => {}
-})
-export default HouseholdContext
+  households: [],
+  setHouseholds: () => {},
+});
 
-export class HouseholdProvider extends Component{
-    state = {
-        household: '',
-        householdField: [{ name: "" }] 
-    }
+export default HouseholdContext;
 
-    setHousehold = (household) => {
-        this.setState({
-            household
-        })
-        console.log('(in household context) household updated, heres proof ->', this.state.household)
-    }
+export class HouseholdProvider extends Component {
+  state = {
+    households:[],
+  };
 
-    
+  setHouseholds = households => {
+    this.setState({
+      households,
+    });
+  };
 
-    render() {
-        const value = {
-            household:this.state.household,
-            setHousehold: this.setHousehold
-
-        }
-        return (
-            <HouseholdContext.Provider value ={value}>
-                {this.props.children}
-            </HouseholdContext.Provider>
-        )
-    }
+  render() {
+    const value = {
+      households: this.state.households,
+      setHouseholds: this.setHouseholds,
+    };
+    return (
+      <HouseholdContext.Provider value={value}>
+        {this.props.children}
+      </HouseholdContext.Provider>
+    );
+  }
 }
-
