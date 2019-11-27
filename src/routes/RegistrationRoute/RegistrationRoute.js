@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
-
+import '../../components/RegistrationForm/RegistrationForm.css'
 class RegistrationRoute extends Component {
   static defaultProps = {
     history: {
@@ -15,7 +15,7 @@ class RegistrationRoute extends Component {
 
   render() {
     return (
-      <section>
+      <section className='register-container'>
         <p className='descriptionLine'>
           Assign tasks for your kids to earn rewards in this fun app.
         </p>
