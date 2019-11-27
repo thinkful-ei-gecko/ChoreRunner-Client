@@ -22,6 +22,9 @@ export default class Landing extends Component {
 					<Link className='new-button' tabIndex={3} style={{ textDecoration: 'none' }} to='/register'>I am new</Link>
 				</div>
 
+                <Link tabIndex={1 } style={{ textDecoration: 'none' }} to='/kidLogin'>I am a kid</Link>
+                <Link tabIndex={2 } style={{ textDecoration: 'none' }} to='/login'>I am a parent</Link>
+                <Link tabIndex={3 } style={{ textDecoration: 'none' }} to='/register'>I am new</Link>
 
 			</div>
 		)
