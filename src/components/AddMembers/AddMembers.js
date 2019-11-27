@@ -1,20 +1,71 @@
 import React from 'react';
-import config from '../../config';
 import TokenService from '../../services/token-service';
-import HouseholdContext from '../../contexts/HouseHoldContext'
+import config from '../../config'
 
 export default class AddMembers extends React.Component {
-  
-  static contextType = HouseholdContext;
+  state = {
+    name: '',
+    username: '',
+    password: '',
+    household_id: ''
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let newMember = {
+      name: this.state.name,
+      username: this.state.username,
+      password: this.state.password,
+      household_id: this.state.household_id
+    }
+    fetch(`${config.API_ENDPOINT}/members`, {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(newMember)
+  })
+      .then(res =>
+          (!res.ok)
+              ? res.json().then(e => Promise.reject(e))
+              : res.json()
+      )
+      .then(member => console.log('in addmember', member))
+  }
+
+  handleNameChange = e => {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  handleHouseholdChange = e => {
+    this.setState({
+      household_id: e.target.value
+    })
+  }
+
+  handleChildUsernameChange = e => {
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  handleChildPasswordChange = e => {
+    this.setState({
+      password: e.target.value
+    })
+  }
+
   render() {
-    console.log(this.context.household)
     return(
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="member-name">Name</label>
         <input type="text" id="member-name" required onChange={this.handleNameChange}></input>
         <label htmlFor="household">Household</label>
         <select type="text" id="assignee" required onChange={this.handleHouseholdChange}>
-          {/* {this.props.members.map((member, index) => <option key={index}>{member.name}</option>)} */}
+          {this.props.households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
         </select>
         <label htmlFor="child-username">Child username</label>
         <input type="text" id="child-username" required onChange={this.handleChildUsernameChange}></input>
