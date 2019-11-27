@@ -34,7 +34,7 @@ export default class ParentDashboard extends Component {
         }
         ApiService.addMember(newMember)
             .then(res => {
-                //want to set the context with the added member. 
+                //want to push to the context array with the added member. 
                 console.log(res)
             })
             .catch(error => console.log(error))
@@ -65,12 +65,16 @@ export default class ParentDashboard extends Component {
         const {households} = this.context
         console.log(households)
         const { error } = this.state
+        const styles = {
+            width: "33%",
+            margin: "20px auto",
+            display: "block"}
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
                 <div className='add-household container'>
                     <p>add household</p>
-                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit}>
+                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit} style={styles}>
                         <label htmlFor='householdName'> ADD HOUSEHOLD</label>
                         <input name='householdName' type='text' required ></input>
                         <button className='submitHH' type='submit'>add</button>
@@ -81,18 +85,18 @@ export default class ParentDashboard extends Component {
                      into another component so that this page is clean
                      
                      Example add a family member...*/}
-                     <form className="add-household-form" onSubmit={this.handleAddMember}>
+                     <form className="add-household-form" onSubmit={this.handleAddMember} styles={styles}>
                          <label>Member Name
-                            <input type="text" name="memberName"/>
+                            <input type="text" name="memberName" style={styles}/>
                          </label>
                          <label>Select a username
-                             <input type="text" name="username" />
+                             <input type="text" name="username"style={styles} />
                          </label>
                          <label>Set a password
-                            <input type="text" name="memberPassword" />
+                            <input type="text" name="memberPassword" style={styles} />
                          </label>
                          <label>Select household
-                            <select name="household">
+                            <select name="household" style={styles}>
                                 {this.renderOptions()}
                             </select>
                          </label>
