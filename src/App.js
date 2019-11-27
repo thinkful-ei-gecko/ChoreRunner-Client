@@ -6,7 +6,6 @@ import Landing from './components/Landing/Landing'
 import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
-import ParentLogin from './components/ParentLogin/ParentLogin'
 import Header from './components/Header/Header'
 import AddTask from './routes/AddTask/AddTask'
 import './App.css';

@@ -62,17 +62,17 @@ export default class ParentDashboard extends Component {
                 )
             })
         )
+    }
 
     render() {
         const {households} = this.context
         console.log(households)
-        console.log(this.state.householdsList)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
                 <div className='add-household container'>
                     <p>add household</p>
-                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit} style={styles}>
+                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit}>
                         <label htmlFor='householdName'> ADD HOUSEHOLD</label>
                         <input name='householdName' type='text' required ></input>
                         <button className='submitHH' type='submit'>add</button>
@@ -83,18 +83,18 @@ export default class ParentDashboard extends Component {
                      into another component so that this page is clean
                      
                      Example add a family member...*/}
-                     <form className="add-household-form" onSubmit={this.handleAddMember} styles={styles}>
+                     <form className="add-household-form" onSubmit={this.handleAddMember} >
                          <label>Member Name
-                            <input type="text" name="memberName" style={styles}/>
+                            <input type="text" name="memberName" />
                          </label>
                          <label>Select a username
-                             <input type="text" name="username"style={styles} />
+                             <input type="text" name="username" />
                          </label>
                          <label>Set a password
-                            <input type="text" name="memberPassword" style={styles} />
+                            <input type="text" name="memberPassword" />
                          </label>
                          <label>Select household
-                            <select name="household" style={styles}>
+                            <select name="household" >
                                 {this.renderOptions()}
                             </select>
                          </label>
@@ -103,8 +103,8 @@ export default class ParentDashboard extends Component {
 
                 <div className='household-details container'>
                     <h2>Add household members</h2>
-                    <AddMembers />
-                    {this.context.households.map((household, index) => {
+                    {/* {/* <AddMembers /> */}
+                    {households.map((household, index) => {
                         return <Link to={`/household/${household.id}`} key={index}><p>{household.name}</p></Link>
                     })}
                 </div>
