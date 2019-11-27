@@ -1,6 +1,7 @@
 import React from 'react';
 import TokenService from '../../services/token-service';
-import config from '../../config'
+import config from '../../config';
+import HouseholdContext from '../../contexts/HouseHoldContext';
 
 export default class AddMembers extends React.Component {
   state = {
@@ -9,6 +10,7 @@ export default class AddMembers extends React.Component {
     password: '',
     household_id: ''
   }
+  static contextType = HouseholdContext
 
   handleSubmit = e => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default class AddMembers extends React.Component {
       password: this.state.password,
       household_id: this.state.household_id
     }
-    fetch(`${config.API_ENDPOINT}/members`, {
+    fetch(`${config.API_ENDPOINT}/households/${this.state.household_id}/members`, {
       method: 'POST',
       headers: {
           'content-type': 'application/json',
@@ -59,13 +61,14 @@ export default class AddMembers extends React.Component {
   }
 
   render() {
+    const {households} = this.context
     return(
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="member-name">Name</label>
         <input type="text" id="member-name" required onChange={this.handleNameChange}></input>
         <label htmlFor="household">Household</label>
         <select type="text" id="assignee" required onChange={this.handleHouseholdChange}>
-          {this.props.households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
+          {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
         </select>
         <label htmlFor="child-username">Child username</label>
         <input type="text" id="child-username" required onChange={this.handleChildUsernameChange}></input>

@@ -5,11 +5,11 @@ import ApiService from '../../services/api-service.js'
 import AddMembers from '../AddMembers/AddMembers'
 
 export default class ParentDashboard extends Component {
-//     state = { 
-//         error: null,
-//         householdName: '',
-//         householdsList: []
-//     }
+    // state = { 
+    //     error: null,
+    //     // householdName: '',
+    //     householdsList: []
+    // }
     static contextType = HouseholdContext
 
     componentDidMount() {
@@ -34,7 +34,7 @@ export default class ParentDashboard extends Component {
             password,
             household_id,
         }
-        ApiService.addMember(newMember)
+        ApiService.addMember(newMember, household_id)
             .then(res => {
           this.context.addMember(res)
                 //want to push to the context array with the added member. 
@@ -78,32 +78,9 @@ export default class ParentDashboard extends Component {
                         <button className='submitHH' type='submit'>add</button>
                     </form>
                 </div>
-                <p> example: add household members</p>
-                    {/* this is an example, but we really might want to move this
-                     into another component so that this page is clean
-                     
-                     Example add a family member...*/}
-                     <form className="add-household-form" onSubmit={this.handleAddMember} >
-                         <label>Member Name
-                            <input type="text" name="memberName" />
-                         </label>
-                         <label>Select a username
-                             <input type="text" name="username" />
-                         </label>
-                         <label>Set a password
-                            <input type="text" name="memberPassword" />
-                         </label>
-                         <label>Select household
-                            <select name="household" >
-                                {this.renderOptions()}
-                            </select>
-                         </label>
-                         <button type="submit">Add Member</button>
-                     </form>
-
                 <div className='household-details container'>
                     <h2>Add household members</h2>
-                    {/* {/* <AddMembers /> */}
+                        <AddMembers />
                     {households.map((household, index) => {
                         return <Link to={`/household/${household.id}`} key={index}><p>{household.name}</p></Link>
                     })}
