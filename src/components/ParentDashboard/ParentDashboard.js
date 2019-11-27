@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import ApiService from '../../services/api-service.js'
+import AddMembers from '../AddMembers/AddMembers'
 
 export default class ParentDashboard extends Component {
-    state = { 
-        error: null,
-        householdName: ''
-    }
+//     state = { 
+//         error: null,
+//         householdName: '',
+//         householdsList: []
+//     }
     static contextType = HouseholdContext
 
     componentDidMount() {
@@ -34,6 +36,7 @@ export default class ParentDashboard extends Component {
         }
         ApiService.addMember(newMember)
             .then(res => {
+          this.context.addMember(res)
                 //want to push to the context array with the added member. 
                 console.log(res)
             })
@@ -59,16 +62,11 @@ export default class ParentDashboard extends Component {
                 )
             })
         )
-    }
 
     render() {
         const {households} = this.context
         console.log(households)
-        const { error } = this.state
-        const styles = {
-            width: "33%",
-            margin: "20px auto",
-            display: "block"}
+        console.log(this.state.householdsList)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
@@ -104,9 +102,11 @@ export default class ParentDashboard extends Component {
                      </form>
 
                 <div className='household-details container'>
-                    ----------------------- HOUSEHOLD DETAILS ----------------------
-                    <p>Household for household1: SHY-MONKEY</p>
-                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE TASKS</Link>
+                    <h2>Add household members</h2>
+                    <AddMembers />
+                    {this.context.households.map((household, index) => {
+                        return <Link to={`/household/${household.id}`} key={index}><p>{household.name}</p></Link>
+                    })}
                 </div>
             </div>
         )
