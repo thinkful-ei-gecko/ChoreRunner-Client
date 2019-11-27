@@ -39,6 +39,17 @@ const ApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
+
+  getMemberTasks() {
+    return fetch(`${config.API_ENDPOINT}/householdId/members/memberId/tasks`, {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
 };
 
 export default ApiService;
