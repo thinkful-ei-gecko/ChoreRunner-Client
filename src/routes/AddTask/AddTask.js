@@ -1,12 +1,15 @@
 import React from 'react';
 import config from '../../config';
 import TokenService from '../../services/token-service';
+import ChoreApiService from '../../services/chore-api-service'
 
 export default class AddTask extends React.Component {
   state = {
     title: '',
     points: '',
-    tasks: []
+    tasks: [],
+    showForm: false,
+    points: '',
   }
 
   handleSubmit = e => {
@@ -53,20 +56,61 @@ export default class AddTask extends React.Component {
     })
   }
 
+  toggleForm = () => {
+    const formToggle = !this.state.showForm
+    this.setState({ showForm: formToggle })
+  }
+
+  renderTasks = () => {
+    this.props.tasks.map((task, idx) => {
+      let totalScore = task.points.reduce((a, b) => a + b)
+      return <>
+      <li>
+        <p>{task.assigned}'s Tasks:</p>
+        <label>{task.title}</label>
+        <p>Points: {task.points}</p>
+        <button>Done</button>
+      </li>
+      <p>Total Score: {totalScore}</p>
+      </>
+    })
+  }
+
+  componentDidMount() {
+    // Fetch request to get tasks and members.
+    // Delete request to remove completed task.
+    // Post request to update points after task deletion
+
+    // const household_id = this.props.match.params.id;
+    // ChoreApiService.getTasks(household_id);
+  }
+
   render() {
     console.log(this.state)
+    let display; 
+    if(this.state.showForm) {
+      display = <form onSubmit={this.handleSubmit}>
+      <label htmlFor="task-name">Task name</label>
+      <input type="text" id="task-name" required onChange={this.handleTitleChange}></input>
+      <label htmlFor="assignee">Task assigned to</label>
+      <select type="text" id="assignee" required onChange={this.handleAssigneeChange}>
+        {/* {this.props.members.map((member, index) => <option key={index}>{member.name}</option>)} */}
+      </select>
+      <label htmlFor="points">Points</label>
+      <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange}></input>
+      <button type="submit">Add task</button>
+    </form>
+    } 
+    
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="task-name">Task name</label>
-        <input type="text" id="task-name" required onChange={this.handleTitleChange}></input>
-        <label htmlFor="assignee">Task assigned to</label>
-        <select type="text" id="assignee" required onChange={this.handleAssigneeChange}>
-          {/* {this.props.members.map((member, index) => <option key={index}>{member.name}</option>)} */}
-        </select>
-        <label htmlFor="points">Points</label>
-        <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange}></input>
-        <button type="submit">Add task</button>
-      </form>
+      <>
+        <div>
+          <button onClick={this.toggleForm}>Toggle Form</button>
+            {display}
+        </div>
+        <div htmlFor="task-table">
+        </div>
+      </>
     )
   }
 }

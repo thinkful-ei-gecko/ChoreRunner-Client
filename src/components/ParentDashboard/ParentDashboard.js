@@ -8,29 +8,42 @@ import AddMembers from '../AddMembers/AddMembers'
 export default class ParentDashboard extends Component {
     state = { 
         error: null,
+<<<<<<< HEAD
         household: ''
      }
+=======
+        householdName: ''
+    }
+>>>>>>> b7fa9182277daa8eacda3c46de1e14c7af168d62
 
     static contextType = HouseholdContext
 
-    handleHouseholdSubmit = e => {
+    updateHHname = (e) => {
+        this.setState({
+            householdName: e.target.value
+        })
+    }
+
+    handleHouseholdSubmit = (e) => {
         e.preventDefault();
-        let name = this.context.householdField.map(data => data.name)
+
+        let name = this.state.householdName
 
         fetch(`${config.API_ENDPOINT}/households`, {
             method: 'POST',
             headers: {
-              'content-type': 'application/json',
-              'authorization': `bearer ${TokenService.getAuthToken()}`
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify({ name }) // req.body = {name: ["dunders"]}
-          })
+        })
             .then(res =>
-              // console.log(res)
-              (!res.ok)
-              ? res.json().then(e => Promise.reject(e))
-              : res.json()
+                // console.log(res)
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
             )
+<<<<<<< HEAD
             .then(result => {
                 this.context.setHousehold(result)
                 this.setState({
@@ -43,37 +56,35 @@ export default class ParentDashboard extends Component {
         console.log('state in dashboard', this.state.household)
         const { householdField } = this.context
         const { error } = this.state
+=======
+            .then(result => this.context.setHousehold(result))
+            .then(after => this.setState({householdName: ''}))
+    }
+
+    render() {
+ 
+        const { error } = this.state
+        console.log(this.context)
+        console.log(this.state.householdName)
+>>>>>>> b7fa9182277daa8eacda3c46de1e14c7af168d62
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
                 <div className='add-household container'>
                     <p>add household</p>
-                    <form className='add-household-form'>
-                        {
-                            householdField.map((val, idx) => {
-                                let hhId = `i-${idx}`
-                                return (
-                                    <div key={idx}>
-                                        <input
-                                            type="text"
-                                            name={hhId}
-                                            data-id={idx}
-                                            id={hhId}
-                                            className="name"
-                                            value={householdField[idx].name}
-                                            onChange={this.context.handleHouseHoldFieldChange}
-                                            required
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
-                        <button className='addHH' type='button' onClick={this.context.addHouseholdField}>+ add household</button>
-                        <button className='submitHH' onClick={(e) => this.handleHouseholdSubmit(e)}>submit</button>
+                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit}>
+                        
+                        <label htmlFor='householdName'> ADD HOUSEHOLD</label>
+                        <input name='householdName' type='text' value={this.state.householdName} onChange={this.updateHHname} required ></input>
+                        <button className='submitHH' type='submit'>add</button>
                     </form>
                 </div>
+<<<<<<< HEAD
                     <h2>Add household members</h2>
                     <AddMembers />
+=======
+                <p> example: add household members</p>
+>>>>>>> b7fa9182277daa8eacda3c46de1e14c7af168d62
                 <div className='household-details container'>
                     ----------------------- HOUSEHOLD DETAILS ----------------------
                     <p>Household for household1: SHY-MONKEY</p>
