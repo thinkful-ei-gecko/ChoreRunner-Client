@@ -44,6 +44,54 @@ const AuthApiService = {
           : res.json()
       )
   },
+
+
+  //Members Login
+
+  //Maybe don't need this because parent takes care of this beforehand.
+  
+  // postMember(user) {
+  //   return fetch(`${config.API_ENDPOINT}/users`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(user),
+  //   })
+  //     .then(res =>
+  //       (!res.ok)
+  //         ? res.json().then(e => Promise.reject(e))
+  //         : res.json()
+  //     )
+  // },
+  
+  postMemberLogin({ username, password }) {
+    return fetch(`${config.API_ENDPOINT}/membersAuth/token`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(err => Promise.reject(err))
+          : res.json()
+      )
+  },
+  refreshMemberToken() {
+    return fetch(`${config.API_ENDPOINT}/membersAuth/token`, {
+      method: 'PUT',
+      headers: {
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
 }
 
 export default AuthApiService
