@@ -17,7 +17,7 @@ const ApiService = {
   },
 
   getHouseholds() {
-    return fetch(`${config.API_ENDPOINT}/users/households`, {
+    return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
         'content-type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -27,8 +27,8 @@ const ApiService = {
     );
   },
 
-  addMember(newMember) {
-    return fetch(`${config.API_ENDPOINT}/members`, {
+  addMember(newMember, householdId) {
+    return fetch(`${config.API_ENDPOINT}/${householdId}/members`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseHoldContext';
+import AddMember from '../AddMember/AddMember';
 import ApiService from '../../services/api-service.js';
 import './ParentDashboard.css'
 
 export default class ParentDashboard extends Component {
+
   static contextType = HouseholdContext;
+
 
   componentDidMount() {
     ApiService.getHouseholds()
@@ -18,8 +21,27 @@ export default class ParentDashboard extends Component {
         })
       );
 
-    //ApiService.getMembers 
-  }
+    handleAddMember = e => {
+        e.preventDefault();
+        let name = e.target.memberName.value;
+        let username = e.target.username.value;
+        let password = e.target.memberPassword.value;
+        let household_id = e.target.household.value;
+        let newMember = {
+            name, 
+            username, 
+            password,
+            household_id,
+        }
+        ApiService.addMember(newMember, household_id)
+            .then(res => {
+          this.context.addMember(res)
+                //want to push to the context array with the added member. 
+                console.log(res)
+            })
+            .catch(error => console.log(error))
+    }
+    
 
   handleAddMember = e => {
     e.preventDefault();
@@ -70,12 +92,13 @@ export default class ParentDashboard extends Component {
       return (
           <div key={household.householdId} className="house_card">
         <Link to={`/household/${household.id}`} >
-          <p >{household.housename}</p>
+          <p >{household.name}</p>
         </Link>
         </div>
       );
     });
   }
+
 
 
   render() {
@@ -120,6 +143,12 @@ export default class ParentDashboard extends Component {
         <div className="household_buttons">
         {this.renderHouseholds()}
         </div>
+
+ <div className='household-details container'>
+                    <h2>Add household members</h2>
+                        <AddMembers />
+                    
+                </div>
      </section>
     );
   }
