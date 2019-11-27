@@ -10,7 +10,6 @@ export default class AddTask extends React.Component {
     points: '',
     tasks: [],
     showForm: false,
-    points: '',
   }
 
   static contextType = TasksContext

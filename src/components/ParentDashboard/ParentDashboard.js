@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import config from '../../config'
 import TokenService from '../../services/token-service'
+import AddMembers from '../AddMembers/AddMembers'
 
 export default class ParentDashboard extends Component {
     state = { 
         error: null,
-        householdName: ''
+        householdName: '',
+        householdsList: []
     }
 
     static contextType = HouseholdContext
@@ -37,15 +39,33 @@ export default class ParentDashboard extends Component {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
-            .then(result => this.context.setHousehold(result))
-            .then(after => this.setState({householdName: ''}))
+            // .then(result => this.context.setHousehold(result))
+            .then(household => this.setState({householdsList: [...this.state.householdsList, household]}))
     }
-
+    componentDidMount() {
+        fetch(`${config.API_ENDPOINT}/households`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`
+            }
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+            .then(households => {
+                console.log(households)
+                this.setState({
+                    householdsList: households
+                })
+            })
+    }
     render() {
  
         const { error } = this.state
-        console.log(this.context)
-        console.log(this.state.householdName)
+        console.log(this.state.householdsList)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
@@ -58,11 +78,13 @@ export default class ParentDashboard extends Component {
                         <button className='submitHH' type='submit'>add</button>
                     </form>
                 </div>
-                <p> example: add household members</p>
+                    <h2>Add household members</h2>
+                    <AddMembers households={this.state.householdsList}/>
                 <div className='household-details container'>
                     ----------------------- HOUSEHOLD DETAILS ----------------------
-                    <p>Household for household1: SHY-MONKEY</p>
-                    <Link to='/task' style={{ textDecoration: 'none' }}>SEE {this.context.household.name} TASKS</Link>
+                    {this.state.householdsList.map((household, index) => {
+                        return <Link to={`/household/${household.id}`} key={index}><p>{household.name}</p></Link>
+                    })}
                 </div>
             </div>
         )
