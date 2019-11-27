@@ -1,3 +1,28 @@
+
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import HouseholdContext from '../../contexts/HouseHoldContext'
+import ApiService from '../../services/api-service.js'
+// import AddMembers from '../AddMembers/AddMembers'
+
+export default class ParentDashboard extends Component {
+    //     state = { 
+    //         error: null,
+    //         householdName: '',
+    //         householdsList: []
+    //     }
+    static contextType = HouseholdContext
+
+    componentDidMount() {
+        ApiService.getHouseholds()
+            .then(res => {
+                this.context.setHouseholds(res)
+            })
+            .catch(error => this.setState({
+                error: error
+            }))
+    }
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseHoldContext';
@@ -22,6 +47,7 @@ export default class ParentDashboard extends Component {
       )
   }
 
+
     handleAddMember = e => {
         e.preventDefault();
         let name = e.target.memberName.value;
@@ -29,41 +55,21 @@ export default class ParentDashboard extends Component {
         let password = e.target.memberPassword.value;
         let household_id = e.target.household.value;
         let newMember = {
-            name, 
-            username, 
+            name,
+            username,
             password,
             household_id,
         }
         ApiService.addMember(newMember, household_id)
             .then(res => {
-          this.context.addMember(res)
+                this.context.addMember(res)
                 //want to push to the context array with the added member. 
                 console.log(res)
             })
             .catch(error => console.log(error))
     }
-    
 
-  handleAddMember = e => {
-    e.preventDefault();
-    let name = e.target.memberName.value;
-    let username = e.target.username.value;
-    let password = e.target.memberPassword.value;
-    let household_id = e.target.household.value;
-    let newMember = {
-      name,
-      username,
-      password,
-      household_id,
-    };
-    ApiService.addMember(newMember)
-      .then(res => {
-        this.context.addMember(res);
-        //want to push to the context array with the added member.
-        console.log(res);
-      })
-      .catch(error => console.log(error));
-  };
+
 
   handleHouseholdSubmit = e => {
     e.preventDefault();

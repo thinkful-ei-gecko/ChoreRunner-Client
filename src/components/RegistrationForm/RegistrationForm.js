@@ -39,56 +39,56 @@ class RegistrationForm extends Component {
 
   render() {
     const { error } = this.state;
-    
+
     return (
       <div className='box'>
-      <form className='registration'
-        onSubmit={this.handleSubmit}
-      >
-        <div role='alert'>
-          {error && <p className='alertMsg' >{error}</p>}
-        </div>
-        <div className='formItem'>
-          <Label htmlFor='registration-name-input'>
-            Enter your name<Required />
-          </Label><br/>
-          <Input className='formBox'
-            ref={this.firstInput}
-            id='registration-name-input'
-            name='name'
-            required
-          />
-        </div>
-        <div className='formItem'>
-          <Label htmlFor='registration-username-input'>
-            Choose a username<Required />
-          </Label>
-          <Input className='formBox'
-            id='registration-username-input'
-            name='username'
-            required
-          />
-        </div>
-        <div className='formItem'>
-          <Label htmlFor='registration-password-input'>
-            Choose a password<Required />
-          </Label>
-          <Input className='formBox'
-            id='registration-password-input'
-            name='password'
-            type='password'
-            required
-          />
-        </div>
-        <footer className='formFooter'>
-          <Button type='submit' className='basicBtn'>
-            Sign up
+        <form className='registration'
+          onSubmit={this.handleSubmit}
+        >
+          <div role='alert'>
+            {error && <p className='alertMsg' >{error}</p>}
+          </div>
+          <div className='formItem'>
+            <Label htmlFor='registration-name-input'>
+              Enter your name<Required />
+            </Label>
+            <Input className='formBox'
+              ref={this.firstInput}
+              id='registration-name-input'
+              name='name'
+              required
+            />
+          </div>
+          <div className='formItem'>
+            <Label htmlFor='registration-username-input'>
+              Choose a username<Required />
+            </Label>
+            <Input className='formBox'
+              id='registration-username-input'
+              name='username'
+              required
+            />
+          </div>
+          <div className='formItem'>
+            <Label htmlFor='registration-password-input'>
+              Choose a password<Required />
+            </Label>
+            <Input className='formBox'
+              id='registration-password-input'
+              name='password'
+              type='password'
+              required
+            />
+          </div>
+          <footer className='formFooter'>
+            <Button type='submit' className='basicBtn'>
+              Sign up
           </Button>
-          {' '}
-          <br />
-          {/* <Link to='/login' className='already'>Already have an account?</Link> */}
-        </footer>
-      </form>
+            {' '}
+            <br />
+            {/* <Link to='/login' className='already'>Already have an account?</Link> */}
+          </footer>
+        </form>
       </div>
     )
   }
