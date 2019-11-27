@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseHoldContext';
-import AddMember from '../AddMember/AddMember';
+import AddMembers from '../AddMembers/AddMembers';
 import ApiService from '../../services/api-service.js';
 import './ParentDashboard.css'
 
@@ -19,7 +19,8 @@ export default class ParentDashboard extends Component {
         this.setState({
           error: error,
         })
-      );
+      )
+  }
 
     handleAddMember = e => {
         e.preventDefault();
@@ -72,7 +73,7 @@ export default class ParentDashboard extends Component {
         this.context.addHousehold(res)
       })
       .catch(error => console.log(error));
-  };
+  }
 
   renderOptions() {
     const { households } = this.context;
