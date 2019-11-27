@@ -21,7 +21,23 @@ export default class ParentDashboard extends Component {
     }
 
     handleAddMember = e => {
-        //PUT LOGIC AND API FETCH FOR THIS ENDPOINT.
+        e.preventDefault();
+        let name = e.target.memberName.value;
+        let username = e.target.username.value;
+        let password = e.target.memberPassword.value;
+        let household_id = e.target.household.value;
+        let newMember = {
+            name, 
+            username, 
+            password,
+            household_id,
+        }
+        ApiService.addMember(newMember)
+            .then(res => {
+                //want to set the context with the added member. 
+                console.log(res)
+            })
+            .catch(error => console.log(error))
     }
     
 
@@ -69,8 +85,14 @@ export default class ParentDashboard extends Component {
                          <label>Member Name
                             <input type="text" name="memberName"/>
                          </label>
+                         <label>Select a username
+                             <input type="text" name="username" />
+                         </label>
+                         <label>Set a password
+                            <input type="text" name="memberPassword" />
+                         </label>
                          <label>Select household
-                            <select name="househole">
+                            <select name="household">
                                 {this.renderOptions()}
                             </select>
                          </label>
