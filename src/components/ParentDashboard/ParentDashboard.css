@@ -1,0 +1,43 @@
+
+
+
+
+
+
+@media screen and (min-width:800px) {
+  .parent_dashboard {
+    width: 70%;
+    margin: 20px auto;
+  }
+
+  .add-household-form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .add-household-form label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+
+  .add-household-form input {
+    margin-top: 10px;
+  }
+
+  .add-household-form button {
+    width: 25%;
+    margin: 10px auto;
+    word-wrap: break-word;
+  }
+
+  .house_card {
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
+    margin: 10px auto;
+  }
+}
