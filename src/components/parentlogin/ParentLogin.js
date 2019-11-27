@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
+import './ParentLogin.css'
 
 export default class ParentLogin extends Component {
     static contextType = UserContext
@@ -37,8 +38,8 @@ export default class ParentLogin extends Component {
     render() {
         const { error } = this.state
         return (
-            <div>
-                <h2> parent login</h2>
+            <div className='parent-login container'>
+                <h2> Parent Login</h2>
                 <form className='parent-form-container' onSubmit={this.handleSubmit}>
                     <div role='alert'>
                         {error && <p>{error}</p>}
