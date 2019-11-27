@@ -1,25 +1,44 @@
-import config from '../config'
-import TokenService from './token-service'
+import config from '../config';
+import TokenService from './token-service';
 
 const ApiService = {
   postHousehold(householdName) {
-    console.log('inside api-service', householdName)
     let name = householdName;
-    fetch(`${config.API_ENDPOINT}/households`, {
+    return fetch(`${config.API_ENDPOINT}/households`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ name }) // req.body = {name: ["dunders"]}
-    })
-      .then(res =>
-        // console.log(res)
-        (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-      )
+      body: JSON.stringify({ name }), // req.body = {name: ["dunders"]}
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   },
-}
+
+  getHouseholds() {
+    return fetch(`${config.API_ENDPOINT}/users/households`, {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  addMember(newMember) {
+    return fetch(`${config.API_ENDPOINT}/members`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(newMember),
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+};
 
 export default ApiService;

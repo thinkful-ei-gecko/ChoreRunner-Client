@@ -1,88 +1,110 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
-import config from '../../config'
-import TokenService from '../../services/token-service'
+import ApiService from '../../services/api-service.js'
 import AddMembers from '../AddMembers/AddMembers'
 
 export default class ParentDashboard extends Component {
-    state = { 
-        error: null,
-        householdName: '',
-        householdsList: []
-    }
-
+//     state = { 
+//         error: null,
+//         householdName: '',
+//         householdsList: []
+//     }
     static contextType = HouseholdContext
 
-    updateHHname = (e) => {
-        this.setState({
-            householdName: e.target.value
+    componentDidMount() {
+        ApiService.getHouseholds()
+        .then(res => {
+            this.context.setHouseholds(res)
         })
+        .catch(error => this.setState({
+            error:error
+        }))
     }
+
+    handleAddMember = e => {
+        e.preventDefault();
+        let name = e.target.memberName.value;
+        let username = e.target.username.value;
+        let password = e.target.memberPassword.value;
+        let household_id = e.target.household.value;
+        let newMember = {
+            name, 
+            username, 
+            password,
+            household_id,
+        }
+        ApiService.addMember(newMember)
+            .then(res => {
+          this.context.addMember(res)
+                //want to push to the context array with the added member. 
+                console.log(res)
+            })
+            .catch(error => console.log(error))
+    }
+    
 
     handleHouseholdSubmit = (e) => {
         e.preventDefault();
-
-        let name = this.state.householdName
-
-        fetch(`${config.API_ENDPOINT}/households`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${TokenService.getAuthToken()}`
-            },
-            body: JSON.stringify({ name }) // req.body = {name: ["dunders"]}
+        let name = e.target.householdName.value
+        ApiService.postHousehold(name) 
+        .then(res => {//lets add it to the array in context so it will render. 
         })
-            .then(res =>
-                // console.log(res)
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-            // .then(result => this.context.setHousehold(result))
-            .then(household => this.setState({householdsList: [...this.state.householdsList, household]}))
+        .catch(error => console.log(error))
     }
-    componentDidMount() {
-        fetch(`${config.API_ENDPOINT}/households`, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${TokenService.getAuthToken()}`
-            }
-        })
-            .then(res =>
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-            .then(households => {
-                console.log(households)
-                this.setState({
-                    householdsList: households
-                })
+
+    renderOptions() {
+        const {households} = this.context;
+        return (
+            households.map(house => {
+                return (
+                    <option key={house.householdId} value={house.householdId}>{house.housename}</option>
+                )
             })
-    }
+        )
+
     render() {
- 
-        const { error } = this.state
+        const {households} = this.context
+        console.log(households)
         console.log(this.state.householdsList)
         return (
             <div>
                 <h2>PARENT DASHBOARD</h2>
                 <div className='add-household container'>
                     <p>add household</p>
-                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit}>
-                        
+                    <form className='add-household-form' onSubmit={this.handleHouseholdSubmit} style={styles}>
                         <label htmlFor='householdName'> ADD HOUSEHOLD</label>
-                        <input name='householdName' type='text' value={this.state.householdName} onChange={this.updateHHname} required ></input>
+                        <input name='householdName' type='text' required ></input>
                         <button className='submitHH' type='submit'>add</button>
                     </form>
                 </div>
-                    <h2>Add household members</h2>
-                    <AddMembers households={this.state.householdsList}/>
+                <p> example: add household members</p>
+                    {/* this is an example, but we really might want to move this
+                     into another component so that this page is clean
+                     
+                     Example add a family member...*/}
+                     <form className="add-household-form" onSubmit={this.handleAddMember} styles={styles}>
+                         <label>Member Name
+                            <input type="text" name="memberName" style={styles}/>
+                         </label>
+                         <label>Select a username
+                             <input type="text" name="username"style={styles} />
+                         </label>
+                         <label>Set a password
+                            <input type="text" name="memberPassword" style={styles} />
+                         </label>
+                         <label>Select household
+                            <select name="household" style={styles}>
+                                {this.renderOptions()}
+                            </select>
+                         </label>
+                         <button type="submit">Add Member</button>
+                     </form>
+
                 <div className='household-details container'>
-                    ----------------------- HOUSEHOLD DETAILS ----------------------
-                    {this.state.householdsList.map((household, index) => {
+                    <h2>Add household members</h2>
+                    <AddMembers />
+                    {this.context.households.map((household, index) => {
                         return <Link to={`/household/${household.id}`} key={index}><p>{household.name}</p></Link>
                     })}
                 </div>

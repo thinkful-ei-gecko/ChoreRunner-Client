@@ -2,10 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute'
 import PrivateRoute from './routes/PrivateRoute'
-import Landing from './components/landing/landing'
-import ParentLogin from './components/parentlogin/ParentLogin'
+import Landing from './components/Landing/Landing'
+import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
+import ParentLogin from './components/ParentLogin/ParentLogin'
 import Header from './components/Header/Header'
 import AddTask from './routes/AddTask/AddTask'
 import './App.css';
