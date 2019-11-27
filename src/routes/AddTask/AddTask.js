@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '../../config';
 import TokenService from '../../services/token-service';
+import TasksContext from '../../contexts/TasksContext'
 import ChoreApiService from '../../services/chore-api-service'
 
 export default class AddTask extends React.Component {
@@ -10,6 +11,8 @@ export default class AddTask extends React.Component {
     tasks: [],
     showForm: false,
   }
+
+  static contextType = TasksContext
 
   handleSubmit = e => {
     e.preventDefault();
@@ -61,7 +64,7 @@ export default class AddTask extends React.Component {
   }
 
   renderTasks = () => {
-    this.props.tasks.map((task, idx) => {
+    this.context.tasks.map((task, idx) => {
       let totalScore = task.points.reduce((a, b) => a + b)
       return <>
       <li>
@@ -80,12 +83,16 @@ export default class AddTask extends React.Component {
     // Delete request to remove completed task.
     // Post request to update points after task deletion
 
-    // const household_id = this.props.match.params.id;
-    // ChoreApiService.getTasks(household_id);
+    const { household_id } = this.props.match.params;
+    ChoreApiService.getTasks(household_id)
+      .then(res => this.context.setTasks(res))
+      .catch(this.context.setError)
+      console.log(household_id)
   }
 
   render() {
     console.log(this.state)
+    console.log(this.context.tasks = [])
     let display; 
     if(this.state.showForm) {
       display = <form onSubmit={this.handleSubmit}>
