@@ -23,7 +23,7 @@ function App() {
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           {/* <Route component={NotFoundPage} /> */}
-          <PublicRoute exact path={'/household/:id'} component={AddTask}/>
+          <PrivateRoute exact path={'/household/:id'} component={AddTask}/>
 
         </Switch>
       </main>
