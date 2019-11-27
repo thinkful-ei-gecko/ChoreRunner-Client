@@ -20,7 +20,7 @@ export default class AddMembers extends React.Component {
       password: this.state.password,
       household_id: this.state.household_id
     }
-    fetch(`${config.API_ENDPOINT}/${this.state.household_id}/members`, {
+    fetch(`${config.API_ENDPOINT}/households/${this.state.household_id}/members`, {
       method: 'POST',
       headers: {
           'content-type': 'application/json',
