@@ -6,6 +6,7 @@ const HouseholdContext = React.createContext({
   error: null,
   setHouseholds: () => {},
   addHousehold: () => {},
+  completeTask: () => {},
   setError: () => {},
   setTask: () => {},
   setTasks: () => {},
@@ -48,6 +49,13 @@ export class HouseholdProvider extends Component {
     this.setState({ tasks })
   }
 
+  completeTask = taskId => {
+    const newTasks = this.state.memberTasks.filter(
+      memberTasks => memberTasks.id !== taskId
+    );
+    this.setState({ memberTasks: newTasks });
+  };
+
   setError = error => {
     this.setState({error})
   }
@@ -65,6 +73,8 @@ export class HouseholdProvider extends Component {
       setError: this.setError,
       setTask: this.setTask,
       setTasks: this.setTasks,
+      completeTask: this.completeTask,
+      setError: this.setError
     };
     
     return (

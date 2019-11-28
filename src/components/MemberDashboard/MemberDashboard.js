@@ -4,8 +4,10 @@ import HouseholdContext from '../../contexts/HouseHoldContext';
 import ApiService from '../../services/api-service.js';
 
 
+
 export default class MemberDashboard extends Component  {
   static contextType = HouseholdContext;
+  
 
   componentDidMount() {
     ApiService.getMemberTasks()
@@ -13,9 +15,6 @@ export default class MemberDashboard extends Component  {
         this.context.setMemberTasks(res)
       })
       .catch(error => this.context.setError(error))
-    //Get the tasks and information about this member
-    //set context
-    //catch error
   }
 
 
@@ -23,12 +22,8 @@ export default class MemberDashboard extends Component  {
   //in a button component that will show "awaiting approval..etc."
   handleCompleted(id) {
     ApiService.completeTask(id)
-      .then(() => {
-        this.context.completeTask(id)
-      })
+      .then(this.context.completeTask(id))
       .catch(error => this.context.setError(error))
-    //call the api service to complete the task
-    //update the tasks context to show completed.
   }
 
 
@@ -44,7 +39,7 @@ export default class MemberDashboard extends Component  {
             <div className="points">
               <span>{task.points}</span>
             </div>
-            <button onClick={this.handleCompleted(task.id)}>Finished!</button>
+            <button onClick={() => {this.handleCompleted(task.id)}}>Finished!</button>
           </li>
         )
       })
@@ -57,7 +52,7 @@ export default class MemberDashboard extends Component  {
         <div className="leader_board">THE LEADERBOARD WILL DISPLAY HERE</div>
 
         <header className="_header">
-          <h2>MEMBERNAME HERE</h2>
+          <h2>Your chores</h2>
         </header>
         <div className="task_list">
           <ul>

@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
-import './ParentLogin.css'
 
-export default class ParentLogin extends Component {
+export default class MemberLogin extends Component {
+
     static contextType = UserContext
+
     state = { error: null }
 
     onLoginSuccess = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/parent-dashboard'
+        const destination = (location.state || {}).from || '/member-dashboard'
         history.push(destination)
       }
     
@@ -20,7 +21,7 @@ export default class ParentLogin extends Component {
 
         this.setState({ error: null })
 
-        AuthApiService.postLogin({
+        AuthApiService.postMemberLogin({
             username: username.value,
             password: password.value,
         })
@@ -38,8 +39,8 @@ export default class ParentLogin extends Component {
     render() {
         const { error } = this.state
         return (
-            <div className='parent-login container'>
-                <h2> Parent Login</h2>
+            <div>
+                <h2> Member login</h2>
                 <form className='parent-form-container' onSubmit={this.handleSubmit}>
                     <div role='alert'>
                         {error && <p>{error}</p>}

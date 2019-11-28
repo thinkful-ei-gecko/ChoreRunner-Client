@@ -9,6 +9,7 @@ import ParentDashboard from './components/ParentDashboard/ParentDashboard'
 import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
+import MemberLogin from './components/MemberLogin/MemberLogin'
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Switch>
           <Route exact path={'/'} component={Landing} />
           <PublicRoute exact path={'/login'} component={ParentLogin} />
+          <PublicRoute exact path={'/kidLogin'} component={MemberLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
