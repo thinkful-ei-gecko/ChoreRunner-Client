@@ -1,34 +1,10 @@
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import ApiService from '../../services/api-service.js'
-// import AddMembers from '../AddMembers/AddMembers'
-
-export default class ParentDashboard extends Component {
-    //     state = { 
-    //         error: null,
-    //         householdName: '',
-    //         householdsList: []
-    //     }
-    static contextType = HouseholdContext
-
-    componentDidMount() {
-        ApiService.getHouseholds()
-            .then(res => {
-                this.context.setHouseholds(res)
-            })
-            .catch(error => this.setState({
-                error: error
-            }))
-    }
-
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import HouseholdContext from '../../contexts/HouseHoldContext';
 import AddMembers from '../AddMembers/AddMembers';
-import ApiService from '../../services/api-service.js';
 import './ParentDashboard.css'
+
 
 export default class ParentDashboard extends Component {
 
