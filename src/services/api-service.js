@@ -51,6 +51,36 @@ const ApiService = {
     );
   },
 
+  getMembers(household_id) {
+    return fetch(`${config.API_ENDPOINT}/households/${household_id}/members`, {
+      method: 'GET',
+      headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+  getTasksForAll(household_id) {
+    return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
+      method: 'GET',
+      headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+  
   completeTask(id) {
     return fetch(`${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`, {
       method: 'DELETE',

@@ -81,7 +81,7 @@ export default class ParentDashboard extends Component {
       .catch(error => console.log(error));
   }
 
-  renderOptions() {
+  renderOptions = () => {
     const { households } = this.context;
     return households.map(house => {
       return (
@@ -92,10 +92,10 @@ export default class ParentDashboard extends Component {
     });
   }
 
-  renderHouseholds() {
+  renderHouseholds = () => {
     const { households } = this.context;
     console.log(households);
-    return households.map((household, index) => {
+    return households.map((household) => {
       return (
           <div key={household.householdId} className="house_card">
         <Link to={`/household/${household.id}`} >
@@ -105,8 +105,6 @@ export default class ParentDashboard extends Component {
       );
     });
   }
-
-
 
   render() {
     const { households } = this.context;
@@ -151,11 +149,10 @@ export default class ParentDashboard extends Component {
         {this.renderHouseholds()}
         </div>
 
- <div className='household-details container'>
-                    <h2>Add household members</h2>
-                        <AddMembers />
-                    
-                </div>
+        <div className='household-details container'>
+        <h2>Add household members</h2>
+          <AddMembers />
+        </div>
      </section>
     );
   }
