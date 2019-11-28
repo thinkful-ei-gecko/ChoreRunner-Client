@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ApiService from '../services/api-service';
 
 const HouseholdContext = React.createContext({
   households: [],
@@ -8,6 +7,10 @@ const HouseholdContext = React.createContext({
   setHouseholds: () => {},
   addHousehold: () => {},
   setError: () => {},
+  setTask: () => {},
+  setTasks: () => {},
+  task: '',
+  tasks: {}
 });
 
 export default HouseholdContext;
@@ -17,6 +20,8 @@ export class HouseholdProvider extends Component {
     households:[],
     memberTasks: [],
     error: null,
+    task: '',
+    tasks: {}
   };
 
   setHouseholds = households => {
@@ -35,6 +40,14 @@ export class HouseholdProvider extends Component {
     });
   }
 
+  setTask = task => {
+    this.setState({ task })
+  }
+
+  setTasks = tasks => {
+    this.setState({ tasks })
+  }
+
   setError = error => {
     this.setState({error})
   }
@@ -42,12 +55,16 @@ export class HouseholdProvider extends Component {
   render() {
     const value = {
       households: this.state.households,
+      task: this.state.task,
+      tasks: this.state.tasks,
       memberTasks: this.state.memberTasks,
       error: this.state.error,
       setHouseholds: this.setHouseholds,
       setMemberTasks: this.setMemberTasks,
       addHousehold: this.addHousehold,
-      setError: this.setError
+      setError: this.setError,
+      setTask: this.setTask,
+      setTasks: this.setTasks,
     };
     
     return (

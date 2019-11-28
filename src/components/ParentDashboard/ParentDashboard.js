@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseHoldContext';
-import AddMember from '../AddMember/AddMember';
+import AddMembers from '../AddMembers/AddMembers';
 import ApiService from '../../services/api-service.js';
 import './ParentDashboard.css'
 
@@ -20,27 +20,28 @@ export default class ParentDashboard extends Component {
           error: error,
         })
       );
+  }
 
-    handleAddMember = e => {
-        e.preventDefault();
-        let name = e.target.memberName.value;
-        let username = e.target.username.value;
-        let password = e.target.memberPassword.value;
-        let household_id = e.target.household.value;
-        let newMember = {
-            name, 
-            username, 
-            password,
-            household_id,
-        }
-        ApiService.addMember(newMember, household_id)
-            .then(res => {
-          this.context.addMember(res)
-                //want to push to the context array with the added member. 
-                console.log(res)
-            })
-            .catch(error => console.log(error))
+  handleAddMember = e => {
+    e.preventDefault();
+    let name = e.target.memberName.value;
+    let username = e.target.username.value;
+    let password = e.target.memberPassword.value;
+    let household_id = e.target.household.value;
+    let newMember = {
+        name, 
+        username, 
+        password,
+        household_id,
     }
+    ApiService.addMember(newMember, household_id)
+        .then(res => {
+      this.context.addMember(res)
+            //want to push to the context array with the added member. 
+            console.log(res)
+        })
+        .catch(error => console.log(error))
+  }
     
 
   handleAddMember = e => {
@@ -74,7 +75,7 @@ export default class ParentDashboard extends Component {
       .catch(error => console.log(error));
   };
 
-  renderOptions() {
+  renderOptions = () => {
     const { households } = this.context;
     return households.map(house => {
       return (
@@ -85,10 +86,10 @@ export default class ParentDashboard extends Component {
     });
   }
 
-  renderHouseholds() {
+  renderHouseholds = () => {
     const { households } = this.context;
     console.log(households);
-    return households.map((household, index) => {
+    return households.map((household) => {
       return (
           <div key={household.householdId} className="house_card">
         <Link to={`/household/${household.id}`} >
@@ -98,8 +99,6 @@ export default class ParentDashboard extends Component {
       );
     });
   }
-
-
 
   render() {
     const { households } = this.context;
@@ -144,11 +143,10 @@ export default class ParentDashboard extends Component {
         {this.renderHouseholds()}
         </div>
 
- <div className='household-details container'>
-                    <h2>Add household members</h2>
-                        <AddMembers />
-                    
-                </div>
+        <div className='household-details container'>
+        <h2>Add household members</h2>
+          <AddMembers />
+        </div>
      </section>
     );
   }

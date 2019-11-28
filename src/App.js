@@ -7,7 +7,7 @@ import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
 import Header from './components/Header/Header'
-import AddTask from './routes/AddTask/AddTask'
+import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import './App.css';
 
@@ -23,9 +23,9 @@ function App() {
           <PublicRoute exact path={'/login'} component={ParentLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
-          {/* <Route component={NotFoundPage} /> */}
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
-          <PrivateRoute exact path={'/household/:id'} component={AddTask}/>
+          <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
+          {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>
     </div>
