@@ -42,7 +42,7 @@ export default class ParentLogin extends Component {
                 <h2> Parent Login</h2>
                 <form className='parent-form-container' onSubmit={this.handleSubmit}>
                     <div role='alert'>
-                        {error && <p>{error}</p>}
+                        {error && <p>{error.error}</p>}
                     </div>
                     <div>
                         <label htmlFor='username'> Username</label>

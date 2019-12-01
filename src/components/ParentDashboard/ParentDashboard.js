@@ -83,13 +83,10 @@ export default class ParentDashboard extends Component {
   }
 
   render() {
-    const { households } = this.context;
-    console.log(households);
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
         <div className="add-household container">
-          <p>add household</p>
           <form
             className="add-household-form"
             onSubmit={this.handleHouseholdSubmit}
@@ -101,32 +98,11 @@ export default class ParentDashboard extends Component {
             </button>
           </form>
         </div>
-        <h2>Add household members</h2>
-        <form className="add-household-form" onSubmit={this.handleAddMember}>
-          <label>
-            Member Name
-            <input type="text" name="memberName" />
-          </label>
-          <label>
-            Select a username
-            <input type="text" name="username" />
-          </label>
-          <label>
-            Set a password
-            <input type="text" name="memberPassword" />
-          </label>
-          <label>
-            Select household
-            <select name="household">{this.renderOptions()}</select>
-          </label>
-          <button type="submit">Add Member</button>
-        </form>
         <div className="household_buttons">
-        {this.renderHouseholds()}
+          {this.renderHouseholds()}
         </div>
 
         <div className='household-details container'>
-        <h2>Add household members</h2>
           <AddMembers />
         </div>
      </section>

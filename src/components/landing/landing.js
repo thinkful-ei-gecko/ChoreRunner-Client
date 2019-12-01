@@ -17,14 +17,14 @@ export default class Landing extends Component {
 				<div className='img-placeholder'> IMAGE/VIDEO PLACEHOLDER</div>
 
 				<div className='button-container'>
-					<Link className='kid-button' tabIndex={1} style={{ textDecoration: 'none' }} to='/kigLogin'>I am a kid</Link>
+					<Link className='kid-button' tabIndex={1} style={{ textDecoration: 'none' }} to='/kidLogin'>I am a kid</Link>
 					<Link className='parent-button' tabIndex={2} style={{ textDecoration: 'none' }} to='/login'>I am a parent</Link>
 					<Link className='new-button' tabIndex={3} style={{ textDecoration: 'none' }} to='/register'>I am new</Link>
 				</div>
 
-                <Link tabIndex={1 } style={{ textDecoration: 'none' }} to='/kidLogin'>I am a kid</Link>
+                {/* <Link tabIndex={1 } style={{ textDecoration: 'none' }} to='/kidLogin'>I am a kid</Link>
                 <Link tabIndex={2 } style={{ textDecoration: 'none' }} to='/login'>I am a parent</Link>
-                <Link tabIndex={3 } style={{ textDecoration: 'none' }} to='/register'>I am new</Link>
+                <Link tabIndex={3 } style={{ textDecoration: 'none' }} to='/register'>I am new</Link> */}
 
 			</div>
 		)

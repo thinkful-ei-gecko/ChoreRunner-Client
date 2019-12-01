@@ -21,7 +21,7 @@ class Header extends Component {
           <Link
             style={{ textDecoration: 'none'}}
             onClick={this.handleLogoutClick}
-            to='/login'>
+            to='/'>
             Logout
           </Link>
         </nav>

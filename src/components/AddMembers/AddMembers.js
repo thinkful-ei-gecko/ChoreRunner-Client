@@ -62,20 +62,26 @@ export default class AddMembers extends React.Component {
 
   render() {
     const {households} = this.context
+    console.log(households);
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="member-name">Name</label>
-        <input type="text" id="member-name" required onChange={this.handleNameChange}></input>
-        <label htmlFor="household">Household</label>
-        <select type="text" id="assignee" required onChange={this.handleHouseholdChange}>
-          {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
-        </select>
-        <label htmlFor="child-username">Child username</label>
-        <input type="text" id="child-username" required onChange={this.handleChildUsernameChange}></input>
-        <label htmlFor="child-password">Child password</label>
-        <input type="password" id="child-password" required onChange={this.handleChildPasswordChange}></input>
-        <button type="submit">Add child</button>
-      </form>
+  
+        <div className="add-household container">
+        <h2>Add household members</h2>
+          <form onSubmit={this.handleSubmit}  className="add-household-form">
+            <label htmlFor="member-name">Name</label>
+            <input type="text" id="member-name" required onChange={this.handleNameChange}></input>
+            <label htmlFor="household">Household</label>
+            <select type="text" id="assignee" required onChange={this.handleHouseholdChange}>
+              {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
+            </select>
+            <label htmlFor="child-username">Child username</label>
+            <input type="text" id="child-username" required onChange={this.handleChildUsernameChange}></input>
+            <label htmlFor="child-password">Child password</label>
+            <input type="password" id="child-password" required onChange={this.handleChildPasswordChange}></input>
+            <button type="submit" className="submitHH">add</button>
+          </form>
+        </div>
+    
     )
   }
 }
