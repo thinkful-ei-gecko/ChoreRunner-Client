@@ -24,26 +24,26 @@ export default class ParentDashboard extends Component {
   }
 
 
-    handleAddMember = e => {
-        e.preventDefault();
-        let name = e.target.memberName.value;
-        let username = e.target.username.value;
-        let password = e.target.memberPassword.value;
-        let household_id = e.target.household.value;
-        let newMember = {
-            name,
-            username,
-            password,
-            household_id,
-        }
-        ApiService.addMember(newMember, household_id)
-            .then(res => {
-                this.context.addMember(res)
-                //want to push to the context array with the added member. 
-                console.log(res)
-            })
-            .catch(error => console.log(error))
+  handleAddMember = e => {
+    e.preventDefault();
+    let name = e.target.memberName.value;
+    let username = e.target.username.value;
+    let password = e.target.memberPassword.value;
+    let household_id = e.target.household.value;
+    let newMember = {
+      name,
+      username,
+      password,
+      household_id,
     }
+    ApiService.addMember(newMember, household_id)
+      .then(res => {
+        this.context.addMember(res)
+        //want to push to the context array with the added member. 
+        console.log(res)
+      })
+      .catch(error => console.log(error))
+  }
 
 
 
@@ -69,14 +69,15 @@ export default class ParentDashboard extends Component {
   }
 
   renderHouseholds = () => {
-    const { households } = this.context;
-    console.log(households);
+    const { households, deleteHousehold } = this.context;
     return households.map((household) => {
+      console.log(household.id);
       return (
-          <div key={household.householdId} className="house_card">
-        <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
-          <p >{household.name}</p>
-        </Link>
+        <div key={household.householdId} className="house_card">
+          <Link to={`/household/${household.id}`} style={{ textDecoration: 'none' }}>
+            <p >{household.name}</p>
+          </Link>
+          <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
         </div>
       );
     });
@@ -105,7 +106,7 @@ export default class ParentDashboard extends Component {
           {this.renderHouseholds()}
         </div>
 
-     </section>
+      </section>
     );
   }
 }
