@@ -105,6 +105,16 @@ const ApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
+
+  deleteTask(householdId, taskId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+    })
+  }
 };
 
 export default ApiService;
