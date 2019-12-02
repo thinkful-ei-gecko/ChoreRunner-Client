@@ -106,6 +106,19 @@ const ApiService = {
     );
   },
 
+
+  updateTask(household_id, reqBody) {
+    return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(reqBody)
+    }).then(res => 
+      !res.ok ? res.json().then(e => Promise.reject(e)) : console.log(res)
+    );
+
   deleteTask(householdId, taskId) {
     return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/${taskId}`, {
       method: 'DELETE',
@@ -114,6 +127,7 @@ const ApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }
     })
+
   }
 };
 
