@@ -52,13 +52,29 @@ const ApiService = {
     );
   },
 
-  getMemberTasks() {
-    return fetch(`${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`, {
+  editMember(updatedMember, householdId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members`, {
+      method: 'PATCH',
       headers: {
         'content-type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
+      body: JSON.stringify(updatedMember),
     }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  getMemberTasks() {
+    return fetch(
+      `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+      }
+    ).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
@@ -67,41 +83,39 @@ const ApiService = {
     return fetch(`${config.API_ENDPOINT}/households/${household_id}/members`, {
       method: 'GET',
       headers: {
-          'content-type': 'application/json',
-          'authorization': `bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   },
 
   getTasksForAll(household_id) {
     return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
       method: 'GET',
       headers: {
-          'content-type': 'application/json',
-          'authorization': `bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
-  
-  completeTask(id) {
-    return fetch(`${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`, {
-      method: 'DELETE',
-      headers: {
         'content-type': 'application/json',
-        Authorization: `bearer ${TokenService.getAuthToken()}`,
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({taskId: id})
     }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+
+  completeTask(id) {
+    return fetch(
+      `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
+      {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify({ taskId: id }),
+      }
+    ).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
@@ -129,6 +143,7 @@ const ApiService = {
     })
 
   }
+
 };
 
 export default ApiService;
