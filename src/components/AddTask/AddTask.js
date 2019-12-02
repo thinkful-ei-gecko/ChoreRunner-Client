@@ -2,6 +2,7 @@ import React from 'react';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import config from '../../config';
 import TokenService from '../../services/token-service';
+import './AddTask.css'
 
 export default class AddTask extends React.Component {
   state = {
@@ -83,7 +84,7 @@ export default class AddTask extends React.Component {
   render() {
     let display; 
     if(this.state.showForm) {
-      display = <form onSubmit={this.handleSubmit}>
+      display = <form onSubmit={this.handleSubmit} className='add-task-form'>
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" required onChange={this.handleTitleChange}></input>
       <label htmlFor="assignee">Task assigned to</label>

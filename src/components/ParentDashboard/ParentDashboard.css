@@ -6,20 +6,82 @@ font-family: 'Concert One', cursive;
 font-family: 'Electrolize', sans-serif; */
 
 
+.add-household-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-household-form input {
+  width: 270px;
+}
 
+.household_buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+.house_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  margin:10px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 23px;
+  padding: 10px;
+  background-color: rgb(158, 226, 0);
+  /* text-shadow: -1px -1px rgb(105, 90, 0), 1px 1px white; */
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 9px;
+  border: rgb(75, 107, 0) solid 1px;
+  box-shadow: 0 .3em rgb(75, 107, 0); 
+  cursor: pointer;
+}
 
+.house_card p{ 
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  color: rgb(75, 107, 0);
 
+}
 
+.add-member{
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-member p {
+  font-family: 'Press Start 2P', cursive;
+  color: rgb(255, 217, 0);
+  line-height: 25px;
+  margin: 0;
+}
 
 
 
 @media screen and (min-width:800px) {
-  .parent_dashboard {
-    width: 70%;
-    margin: 20px auto;
+
+  .add-household {
+    display: inline-block;
+    width: 50%;
+  }
+  .household-details{
+    display: inline-block;
+    width: 50%;
   }
 
-  .add-household-form {
+  /* .add-household-form {
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -34,20 +96,26 @@ font-family: 'Electrolize', sans-serif; */
 
   .add-household-form input {
     margin-top: 10px;
-  }
-
+  }  */
+/* 
   .add-household-form button {
     width: 25%;
     margin: 10px auto;
     word-wrap: break-word;
-  }
+  } */
 
-  .house_card {
+  /* .house_card {
     width: 30%;
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
     margin: 10px auto;
-  }
+  } */
 }
 
+@media screen and (min-width:1100px) { 
+  .parent_dashboard {
+    width: 70%;
+    margin: 20px auto;
+  }
+}

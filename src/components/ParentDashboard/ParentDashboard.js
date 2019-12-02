@@ -74,7 +74,7 @@ export default class ParentDashboard extends Component {
     return households.map((household) => {
       return (
           <div key={household.householdId} className="house_card">
-        <Link to={`/household/${household.id}`} >
+        <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
           <p >{household.name}</p>
         </Link>
         </div>
@@ -91,20 +91,20 @@ export default class ParentDashboard extends Component {
             className="add-household-form"
             onSubmit={this.handleHouseholdSubmit}
           >
-            <label htmlFor="householdName"> ADD HOUSEHOLD</label>
+            <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
             <input name="householdName" type="text" required></input>
             <button className="submitHH" type="submit">
               add
             </button>
           </form>
         </div>
+        <div className='household-details container'>
+          <AddMembers />
+        </div>
         <div className="household_buttons">
           {this.renderHouseholds()}
         </div>
 
-        <div className='household-details container'>
-          <AddMembers />
-        </div>
      </section>
     );
   }
