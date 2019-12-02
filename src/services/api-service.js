@@ -16,6 +16,18 @@ const ApiService = {
     );
   },
 
+  deleteHousehold(id) {
+    return fetch(`${config.API_ENDPOINT}/households/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : undefined
+    );
+  },
+
   getHouseholds() {
     return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
