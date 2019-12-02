@@ -16,6 +16,18 @@ const ApiService = {
     );
   },
 
+  deleteHousehold(id) {
+    return fetch(`${config.API_ENDPOINT}/households/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : undefined
+    );
+  },
+
   getHouseholds() {
     return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
@@ -94,6 +106,7 @@ const ApiService = {
     );
   },
 
+
   updateTask(household_id, reqBody) {
     return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
       method: 'PATCH',
@@ -105,6 +118,16 @@ const ApiService = {
     }).then(res => 
       !res.ok ? res.json().then(e => Promise.reject(e)) : console.log(res)
     );
+
+  deleteTask(householdId, taskId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+    })
+
   }
 };
 

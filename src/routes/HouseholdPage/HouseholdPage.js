@@ -26,9 +26,9 @@ export default class HouseholdPage extends Component {
     ApiService.getTasksForAll(household_id)
       .then(tasks => {
         this.context.setTasks(tasks)
-        console.log(this.context.tasks)
       })
   }
+
 
 
   handleTitleUpdate = (id) => {
@@ -69,19 +69,32 @@ export default class HouseholdPage extends Component {
       })
   }
 
+
+  handleTaskDelete = (task_id, member_id) => {
+    const household_id = this.props.match.params.id;
+    let tasks = this.context.tasks;
+    let memberTaskList = tasks[member_id];
+    let filteredTasks = memberTaskList.tasks.filter(task => {
+      return task.id !== task_id;
+    })
+    tasks[member_id].tasks = filteredTasks;
+    ApiService.deleteTask(household_id, task_id)
+      .then(() => this.context.setTasks(tasks))
+  }
+
   renderTasks = () => {
     let tasks = this.context.tasks;
-   
-    let data = Object.values(tasks);
+      let data = Object.values(tasks);
+      return data.map((member, index) => {
+        return (
+          <div key={index}>
+            <p>{member.name}</p>
+            <ul>
 
-    return data.map((member, index) => {
-      return (
-        <div key={index}>
-          <p>{member.name}</p>
-          <ul>
             {member.tasks.map(task => {
 
               return (
+
                 <li key={task.id}>
                   <button onClick={() => this.setState({editTitle: true})}>edit</button>
                    {
@@ -104,6 +117,10 @@ export default class HouseholdPage extends Component {
                     <span>points: {task.points}</span>
                   }
                   <button onClick={() => this.setState({editPts: true})}>edit</button>
+
+                <li key={task.id}>{task.title}&nbsp;<span>points: {task.points}</span>
+                <button onClick={() => this.handleTaskDelete(task.id, member.member_id)}>Delete</button>
+
                 </li>
               )
             })}

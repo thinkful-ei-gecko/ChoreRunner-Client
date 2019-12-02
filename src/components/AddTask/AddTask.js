@@ -69,6 +69,7 @@ export default class AddTask extends React.Component {
         allTasks[this.state.member_id].tasks.push({'id' : task.id, 'title' : task.title, 'points': task.points})
       } else {
         allTasks[this.state.member_id] = {
+          'member_id': this.state.member_id,
           'name' : memberName,
           'tasks' : [{'id' : task.id, 'title' : task.title, 'points': task.points}],
         }
