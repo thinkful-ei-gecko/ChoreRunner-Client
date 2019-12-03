@@ -75,6 +75,12 @@ export default class AddTask extends React.Component {
         }
       }
       this.context.setTasks(allTasks);
+      this.setState({
+        showForm: false,
+        title: '',
+        points: '',
+        member_id: '',
+      })
       }
     )
     .catch(e => {
@@ -87,13 +93,14 @@ export default class AddTask extends React.Component {
     if(this.state.showForm) {
       display = <form onSubmit={this.handleSubmit} className='add-task-form'>
       <label htmlFor="task-name">Task name</label>
-      <input type="text" id="task-name" required onChange={this.handleTitleChange}></input>
+      <input type="text" id="task-name" required onChange={this.handleTitleChange} value={this.state.title}></input>
       <label htmlFor="assignee">Task assigned to</label>
-      <select type="text" id="assignee" required onChange={this.handleAssigneeChange}>
+      <select type="text" id="assignee" required onChange={this.handleAssigneeChange} defaultValue="Select household member">
+        <option disabled>Select household member</option>
         {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
       </select>
       <label htmlFor="points">Points</label>
-      <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange}></input>
+      <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange} value={this.state.points}></input>
       <button type="submit">Add task</button>
     </form>
     } 
