@@ -1,13 +1,13 @@
 import React from 'react';
-import TokenService from '../../services/token-service';
-import config from '../../config';
-import HouseholdContext from '../../contexts/HouseHoldContext';
+//Got rid of unused imports. Delete this line when you merge!
 import ApiService from '../../services/api-service';
+import HouseHoldContext from '../../contexts/HouseHoldContext'
 
 export default class EditMember extends React.Component {
+  static contextType = HouseHoldContext
   state = {
-    id: '',
-    name: '',
+    id: this.props.member.member_id,
+    name: this.props.member.name,
     username: '',
     password: '',
     editing: false,
@@ -17,7 +17,7 @@ export default class EditMember extends React.Component {
     e.preventDefault();
     let household_id = this.props.household_id;
     let updatedMember = {
-      id: 9, //we need to be able to get the id from props or eslewhere.
+      id: this.state.id,
       name: this.state.name,
       username: this.state.username,
       password: this.state.password,
@@ -26,10 +26,12 @@ export default class EditMember extends React.Component {
     console.log('this is the hID', household_id);
 
     ApiService.editMember(updatedMember, household_id).then(res => {
-      console.log(res)
-      this.props.updateMember(res[0]);
+      let newMember = res[0]
+      console.log(newMember)
+      this.props.updateMember(newMember);
       this.setState({editing : false})
-    });
+    })
+    .catch(error => this.context.setError(error))
   };
 
   handleNameChange = e => {
@@ -68,27 +70,28 @@ export default class EditMember extends React.Component {
             type="text"
             id="member-name"
             value={this.state.name}
-            required
             onChange={this.handleNameChange}
+            required
           ></input>
           <label htmlFor="child-username">Child username</label>
           <input
             type="text"
             id="child-username"
             value={this.state.username}
-            required
             onChange={this.handleChildUsernameChange}
+            required
           ></input>
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"
             id="child-password"
-            required
             onChange={this.handleChildPasswordChange}
+            required
           ></input>
           <button type="submit" className="submitHH">
             submit changes
           </button>
+          {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>
     );

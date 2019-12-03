@@ -44,7 +44,7 @@ const ApiService = {
     return fetch(`${config.API_ENDPOINT}/households/${id}`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
@@ -74,6 +74,19 @@ const ApiService = {
       body: JSON.stringify(updatedMember),
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  deleteMember(member_id, householdId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({member_id:`${member_id}`}),
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : undefined
     );
   },
 
@@ -115,7 +128,6 @@ const ApiService = {
     );
   },
 
-
   completeTask(id) {
     return fetch(
       `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
@@ -137,57 +149,41 @@ const ApiService = {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify(updateHousehold)
-    })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
-  },
-  
-completeTask(id) {
-    return fetch(
-      `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
-      {
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json',
-          Authorization: `bearer ${TokenService.getAuthToken()}`,
-        },
-        body: JSON.stringify({ taskId: id }),
-      }
-    ).then(res =>
+      body: JSON.stringify(updateHousehold),
+    }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
+
+  //DELETED COMPLETETASK BECAUSE IT WAS DUPLICATED
 
   updateTask(household_id, reqBody) {
     return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify(reqBody)
-    }).then(res => 
+      body: JSON.stringify(reqBody),
+    }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : console.log(res)
     );
   },
 
   deleteTask(householdId, taskId) {
-    return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/${taskId}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
+    return fetch(
+      `${config.API_ENDPOINT}/households/${householdId}/tasks/${taskId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
       }
-    })
-
-  }
-
+    );
+  },
 };
 
 export default ApiService;
