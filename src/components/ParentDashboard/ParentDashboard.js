@@ -8,11 +8,20 @@ import './ParentDashboard.css'
 
 
 export default class ParentDashboard extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name: '',
+      editName: false
+    }
+  }
 
   static contextType = HouseholdContext;
 
-
   componentDidMount() {
+    //const { id } = this.props.match.params;
+
     ApiService.getHouseholds()
       .then(res => {
         this.context.setHouseholds(res);
@@ -22,31 +31,38 @@ export default class ParentDashboard extends Component {
           error: error,
         })
       )
+
+    // ApiService.getHousehold(id)
+    //   .then(res => {
+    //     this.setState({
+    //       name: res.name,
+    //       user_id: res.user_id
+    //     })
+    //   })
+    //   .catch(err => console.error(`${err.message}`))
   }
 
 
-    handleAddMember = e => {
-        e.preventDefault();
-        let name = e.target.memberName.value;
-        let username = e.target.username.value;
-        let password = e.target.memberPassword.value;
-        let household_id = e.target.household.value;
-        let newMember = {
-            name,
-            username,
-            password,
-            household_id,
-        }
-        ApiService.addMember(newMember, household_id)
-            .then(res => {
-                this.context.addMember(res)
-                //want to push to the context array with the added member. 
-                console.log(res)
-            })
-            .catch(error => console.log(error))
+  handleAddMember = e => {
+    e.preventDefault();
+    let name = e.target.memberName.value;
+    let username = e.target.username.value;
+    let password = e.target.memberPassword.value;
+    let household_id = e.target.household.value;
+    let newMember = {
+      name,
+      username,
+      password,
+      household_id,
     }
-
-
+    ApiService.addMember(newMember, household_id)
+      .then(res => {
+        this.context.addMember(res)
+        //want to push to the context array with the added member. 
+        //console.log(res)
+      })
+      .catch(error => console.log(error))
+  }
 
   handleHouseholdSubmit = e => {
     e.preventDefault();
@@ -56,6 +72,34 @@ export default class ParentDashboard extends Component {
         this.context.addHousehold(res)
       })
       .catch(error => console.log(error));
+  }
+
+  handleEditHouseholdName = householdId => {
+    //const { id } = this.props.match.params;
+    //console.log(householdId)
+    let name = this.state.name;
+    let user_id = this.state.user_id
+
+    const newHousehold = {
+      id: householdId,
+      name,
+      user_id
+    }
+
+    ApiService.editHouseholdName(householdId, newHousehold)
+      .then(() => this.context.updateHousehold)
+      .catch(this.context.setError)
+
+    ApiService.getHouseholds()
+      .then(res => this.context.setHouseholds(res))
+
+    this.setState({editName: false})
+  }
+
+  onChangeHandle = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   renderOptions = () => {
@@ -70,16 +114,32 @@ export default class ParentDashboard extends Component {
   }
 
   renderHouseholds = () => {
+    const { name } = this.state;
     const { households } = this.context;
-    console.log(households);
     return households.map((household) => {
       return (
           <div key={household.householdId} className="house_card">
         <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
           <p >{household.name}</p>
         </Link>
-        <EditHousehold />
-        <button>Edit</button>
+        <button onClick={() => this.setState({editName: true})}>Edit</button>
+        {
+          this.state.editName
+          ?
+          <span>
+            <button onClick={() => this.handleEditHouseholdName(household.id)}>Save</button>
+            <input 
+              className="update-household"
+              type="text"
+              name="name"
+              value={name}
+              placeholder={household.name}
+              onChange={this.onChangeHandle}
+            />
+          </span>
+          :
+          <span></span>
+        }
         </div>
       );
     });

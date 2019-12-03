@@ -34,7 +34,7 @@ export default class EditHousehold extends Component {
   }
 
   componentDidMount() {
-    //const { id } = this.props.match.params;
+    const { id } = this.props.match.params;
     console.log(this.props.match.params.id)
 
     ApiService.getHousehold(id)

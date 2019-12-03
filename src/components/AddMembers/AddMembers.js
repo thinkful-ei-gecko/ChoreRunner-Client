@@ -62,7 +62,7 @@ export default class AddMembers extends React.Component {
 
   render() {
     const { households } = this.context
-    console.log(households);
+    //console.log(households);
     return (
 
       <div className="add-member container">
