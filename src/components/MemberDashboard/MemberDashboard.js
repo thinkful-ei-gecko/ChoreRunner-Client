@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+//Removed Link because it was not being used. 
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import ApiService from '../../services/api-service.js';
 
