@@ -76,16 +76,24 @@ export default class ParentDashboard extends Component {
     }
 
     ApiService.editHouseholdName(householdId, newHousehold)
+      .then(res => this.context.setHouseholds(res))
       .catch(this.context.setError)
-    
-      this.setState({editName: false})
-      this.updateEverything()
+
+    this.setState({ editName: false })
+    // this.updateEverything()
   }
 
   updateEverything = () => {
 
     ApiService.getHouseholds()
-      .then(res => this.context.setHouseholds(res))
+      .then(res => {
+        this.context.setHouseholds(res);
+      })
+      .catch(error =>
+        this.setState({
+          error: error,
+        })
+      )
   }
 
   onChangeHandle = e => {
@@ -114,12 +122,15 @@ export default class ParentDashboard extends Component {
 
       return (
         <div key={household.id} className="house_card">
-        <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
-          <p >{household.name}</p>
-        </Link>
-        <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
-        <button onClick={() => this.setState({editName: true, id: household.id})}>Edit</button>
-        {/* {
+          <Link to={`/household/${household.id}`} style={{ textDecoration: 'none' }}>
+            <p >{household.name}</p>
+          </Link>
+          <div className='buttons-container'>
+            <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
+            <button onClick={() => this.setState({ editName: true, id: household.id })}>Edit</button>
+          </div>
+
+          {/* {
           this.state.editName
           ?
           <span>
@@ -144,7 +155,7 @@ export default class ParentDashboard extends Component {
   render() {
     const { households } = this.context;
     // console.log(this.state.id)
-    console.log('THIS IS CONTEXT ----',households)
+    console.log('THIS IS CONTEXT ----', households)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
@@ -166,22 +177,22 @@ export default class ParentDashboard extends Component {
         <div className="household_buttons">
           {this.renderHouseholds()}
           {
-      this.state.editName
-      ?
-      <span>
-        <input
-          className="update-household"
-          type="text"
-          name="name"
-          value={households.name}
-          placeholder="name"
-          onChange={this.onChangeHandle}
-        />
-        <button onClick={() => this.handleEditHouseholdName(this.state.id)}>Save</button>
-      </span>
-      :
-      <span></span>
-    }
+            this.state.editName
+              ?
+              <span>
+                <input
+                  className="update-household"
+                  type="text"
+                  name="name"
+                  value={households.name}
+                  placeholder="name"
+                  onChange={this.onChangeHandle}
+                />
+                <button onClick={() => this.handleEditHouseholdName(this.state.id)}>Save</button>
+              </span>
+              :
+              <span></span>
+          }
         </div>
 
       </section>

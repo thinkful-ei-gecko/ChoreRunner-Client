@@ -53,6 +53,11 @@ font-family: 'Electrolize', sans-serif; */
 
 }
 
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .add-member{
   margin: 20px 0;
   display: flex;
