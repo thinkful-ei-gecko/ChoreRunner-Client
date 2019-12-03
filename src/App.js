@@ -10,6 +10,7 @@ import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
+import EditHousehold from './components/EditHousehold/EditHousehold'
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
+          <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/>
           {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>

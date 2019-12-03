@@ -27,6 +27,18 @@ const ApiService = {
     );
   },
 
+  //Get an individual household based on /:id
+  getHousehold(id) {
+    return fetch(`${config.API_ENDPOINT}/households/${id}`, {
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
   addMember(newMember, householdId) {
     return fetch(`${config.API_ENDPOINT}/${householdId}/members`, {
       method: 'POST',
@@ -79,6 +91,22 @@ const ApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
+  },
+
+  editHouseholdName(id, updateHousehold) {
+    return fetch(`${config.API_ENDPOINT}/households/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(updateHousehold)
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : undefined
+    )
   },
   
   completeTask(id) {

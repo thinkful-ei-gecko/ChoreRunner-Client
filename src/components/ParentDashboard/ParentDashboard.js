@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import ApiService from '../../services/api-service.js'
 import AddMembers from '../AddMembers/AddMembers';
+import EditHousehold from '../EditHousehold/EditHousehold'
 import './ParentDashboard.css'
 
 
@@ -77,6 +78,8 @@ export default class ParentDashboard extends Component {
         <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
           <p >{household.name}</p>
         </Link>
+        <EditHousehold />
+        <button>Edit</button>
         </div>
       );
     });
