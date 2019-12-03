@@ -96,7 +96,6 @@ export default class HouseholdPage extends Component {
       let data = Object.values(tasks);
 
       return data.map((member, index) => {
-        console.log(this.state.membersList)
         return (
           <div key={index}>
             <p>{member.name}</p>
@@ -135,11 +134,11 @@ export default class HouseholdPage extends Component {
                     <span>points: {task.points}</span>
                   }
                   <button onClick={() => this.setState({editPts: true})}>edit</button>
-
-                <li key={task.id}>{task.title}&nbsp;<span>points: {task.points}</span>
-                <button onClick={() => this.handleTaskDelete(task.id, member.member_id)}>Delete</button>
-
+                  <button onClick={() => this.handleTaskDelete(task.id, member.member_id)}>Delete</button>
                 </li>
+                // <li key={task.id}>{task.title}&nbsp;<span>points: {task.points}</span>
+                 
+                // </li>
               )
             })}
           </ul>

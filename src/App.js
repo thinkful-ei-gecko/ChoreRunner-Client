@@ -28,6 +28,7 @@ function App() {
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
+          {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}
           {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>
