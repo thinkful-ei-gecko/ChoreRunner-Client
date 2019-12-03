@@ -3,14 +3,13 @@ import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute'
 import PrivateRoute from './routes/PrivateRoute'
 import Landing from './components/Landing/Landing'
-import ParentLogin from './components/parentlogin/ParentLogin'
+import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
 import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
-import EditMember from  './components/EditMember/EditMember'
 import './App.css';
 
 function App() {

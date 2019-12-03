@@ -21,7 +21,6 @@ export default class ParentDashboard extends Component {
   static contextType = HouseholdContext;
 
   componentDidMount() {
-    //const { id } = this.props.match.params;
 
     ApiService.getHouseholds()
       .then(res => {
@@ -32,10 +31,6 @@ export default class ParentDashboard extends Component {
           error: error,
         })
       )
-  }
-
-  componentWillMount() {
-    this.updateEverything()
   }
 
 
@@ -81,15 +76,14 @@ export default class ParentDashboard extends Component {
     }
 
     ApiService.editHouseholdName(householdId, newHousehold)
-      .then(() => this.context.updateHousehold)
       .catch(this.context.setError)
-
-    this.updateEverything()
-
-    this.setState({editName: false})
+    
+      this.setState({editName: false})
+      this.updateEverything()
   }
 
-  updateEverything() {
+  updateEverything = () => {
+
     ApiService.getHouseholds()
       .then(res => this.context.setHouseholds(res))
   }
@@ -117,8 +111,7 @@ export default class ParentDashboard extends Component {
     const { households, deleteHousehold } = this.context;
 
     return households.map((household) => {
-      //console.log(household.id);
-      console.log(household.id)
+
       return (
         <div key={household.id} className="house_card">
         <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
@@ -150,8 +143,8 @@ export default class ParentDashboard extends Component {
 
   render() {
     const { households } = this.context;
-    console.log(this.state.id)
-    console.log(households)
+    // console.log(this.state.id)
+    console.log('THIS IS CONTEXT ----',households)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
