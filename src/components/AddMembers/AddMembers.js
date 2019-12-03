@@ -8,12 +8,19 @@ export default class AddMembers extends React.Component {
     name: '',
     username: '',
     password: '',
-    household_id: ''
+    household_id: this.context.households.id || '', 
+    error: null
   }
   static contextType = HouseholdContext
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state.household_id)
+    if (this.state.household_id === '') {
+      this.setState({
+        error: "Please select a household"
+      })
+    }
     let newMember = {
       name: this.state.name,
       username: this.state.username,
@@ -33,7 +40,13 @@ export default class AddMembers extends React.Component {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-      .then(member => console.log('in addmember', member))
+      .then(member => this.setState({
+        name: '',
+        username: '',
+        password: '',
+        household_id: 'Select household',
+        error: null
+      }))
   }
 
   handleNameChange = e => {
@@ -62,24 +75,25 @@ export default class AddMembers extends React.Component {
 
   render() {
     const { households } = this.context
-    //console.log(households);
     return (
 
       <div className="add-member container">
         <p>ADD HOUSEHOLD MEMBERS:</p>
         <form onSubmit={this.handleSubmit} className="add-household-form">
           <label htmlFor="member-name">Name</label>
-          <input type="text" id="member-name" required onChange={this.handleNameChange}></input>
+          <input type="text" id="member-name" required onChange={this.handleNameChange} value={this.state.name}></input>
           <label htmlFor="household">Household</label>
-          <select type="text" id="assignee" required onChange={this.handleHouseholdChange}>
+          <select type="text" id="assignee" onChange={this.handleHouseholdChange} defaultValue="Select household" required>
+            <option disabled>Select household</option>
             {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
           </select>
           <label htmlFor="child-username">Child username</label>
-          <input type="text" id="child-username" required onChange={this.handleChildUsernameChange}></input>
+          <input type="text" id="child-username" required onChange={this.handleChildUsernameChange} value={this.state.username}></input>
           <label htmlFor="child-password">Child password</label>
-          <input type="password" id="child-password" required onChange={this.handleChildPasswordChange}></input>
+          <input type="password" id="child-password" required onChange={this.handleChildPasswordChange} value={this.state.password}></input>
           <button type="submit" className="submitHH">add</button>
         </form>
+        {<p>{this.state.error}</p>}
       </div>
 
     )
