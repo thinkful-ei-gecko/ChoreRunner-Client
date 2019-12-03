@@ -59,7 +59,7 @@ export default class ParentDashboard extends Component {
       .then(res => {
         this.context.addMember(res)
         //want to push to the context array with the added member. 
-        //console.log(res)
+        console.log(res)
       })
       .catch(error => console.log(error))
   }
@@ -114,14 +114,20 @@ export default class ParentDashboard extends Component {
   }
 
   renderHouseholds = () => {
+
     const { name } = this.state;
-    const { households } = this.context;
+
+    const { households, deleteHousehold } = this.context;
+
     return households.map((household) => {
+      console.log(household.id);
       return (
+
           <div key={household.householdId} className="house_card">
         <Link to={`/household/${household.id}`} style={{ textDecoration: 'none'}}>
           <p >{household.name}</p>
         </Link>
+        <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
         <button onClick={() => this.setState({editName: true})}>Edit</button>
         {
           this.state.editName
@@ -140,6 +146,7 @@ export default class ParentDashboard extends Component {
           :
           <span></span>
         }
+
         </div>
       );
     });
@@ -168,7 +175,7 @@ export default class ParentDashboard extends Component {
           {this.renderHouseholds()}
         </div>
 
-     </section>
+      </section>
     );
   }
 }

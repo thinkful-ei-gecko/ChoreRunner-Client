@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import ApiService from '../services/api-service';
 
 const HouseholdContext = React.createContext({
   households: [],
   memberTasks: [],
   error: null,
-  setHouseholds: () => {},
-  addHousehold: () => {},
-  completeTask: () => {},
   updateHousehold: () => {},
-  setError: () => {},
-  setTask: () => {},
-  setTasks: () => {},
+  setHouseholds: () => { },
+  addHousehold: () => { },
+  deleteHousehold: () => { },
+  completeTask: () => { },
+  setError: () => { },
+  setTask: () => { },
+  setTasks: () => { },
   task: '',
   tasks: {}
 });
@@ -19,7 +21,7 @@ export default HouseholdContext;
 
 export class HouseholdProvider extends Component {
   state = {
-    households:[],
+    households: [],
     memberTasks: [],
     error: null,
     task: '',
@@ -35,6 +37,15 @@ export class HouseholdProvider extends Component {
   addHousehold = newHousehold => {
     this.setHouseholds([...this.state.households, newHousehold]);
   };
+
+  deleteHousehold = (event, householdId) => {
+    event.preventDefault();
+    ApiService.deleteHousehold(householdId)
+      .then()
+      .catch(this.setError('Household could not be deleted.'))
+    const newHouseholds = this.state.households.filter(household => household.id !== householdId)
+    this.setHouseholds([...newHouseholds]);
+  }
 
   setMemberTasks = memberTasks => {
     this.setState({
@@ -69,7 +80,7 @@ export class HouseholdProvider extends Component {
   }
 
   setError = error => {
-    this.setState({error})
+    this.setState({ error })
   }
 
   render() {
@@ -82,6 +93,7 @@ export class HouseholdProvider extends Component {
       setHouseholds: this.setHouseholds,
       setMemberTasks: this.setMemberTasks,
       addHousehold: this.addHousehold,
+      deleteHousehold: this.deleteHousehold,
       setError: this.setError,
       setTask: this.setTask,
       setTasks: this.setTasks,
@@ -89,7 +101,7 @@ export class HouseholdProvider extends Component {
       updateHousehold: this.updateHousehold,
       setError: this.setError
     };
-    
+
     return (
       <HouseholdContext.Provider value={value}>
         {this.props.children}

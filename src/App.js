@@ -10,7 +10,7 @@ import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
-//import EditHousehold from './components/EditHousehold/EditHousehold'
+import EditMember from  './components/EditMember/EditMember'
 import './App.css';
 
 function App() {
