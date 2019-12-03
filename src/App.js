@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute'
 import PrivateRoute from './routes/PrivateRoute'
 import Landing from './components/Landing/Landing'
-import ParentLogin from './components/ParentLogin/ParentLogin'
+import ParentLogin from './components/parentlogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
 import Header from './components/Header/Header'
@@ -28,6 +28,7 @@ function App() {
           <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
+          {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}
           {/* <Route component={NotFoundPage} /> */}
         </Switch>
       </main>
