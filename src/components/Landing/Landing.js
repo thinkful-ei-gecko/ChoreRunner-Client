@@ -7,11 +7,26 @@ export default class Landing extends Component {
 		return (
 			<div className='landing'>
 				<h1>Chore Runner</h1>
+				<p className="tagline">The Smart Shared To-Do List</p>
 				<div className='header-background'>
-					<h2>About</h2>
+					<h2>Nobody's Perfect</h2>
 				</div>
 	
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+				<p>Is it done? Whose turn was it to do the dishes anyway? Didn't you ask her to finish that two days ago? How did you forget this?</p>
+
+				<p>Chores pile up around you like loud, hungry cats around an empty dish. You can only deal with one thing at a time. So you ask your family to step in. But delegating to them is a thankless, stressful job. There's also that one family member with constant amnesia and the other who remembers too much.</p>
+
+				<p>So you've decided that having a system in place will clear things up. Everyone has to get on board, which also means you have to bribe them. Sounds great, right?</p>
+
+				<p>ChoreRunner can help here. This app keeps track of the status of any given task and assigns it to whoever you want. It also creates incentives for the more reluctant members of your family by making it into a game.</p>
+
+				<h2>How it Works</h2>
+
+				<p>To get started, you sign up and set your households.  Your minions then create their accounts. Each member of the family can be assigned jobs. When they finish, they check it off themselves. If it's up to your standards, you confirm the item is complete.</p>
+
+				<p>Here comes the fun part! ChoreRunner has a reward system in place for completing chores. You can assign point values to tasks. For example, doing the dishes could be worth 5 points, mowing the lawn worth 10. Your family members can level up with enough points. A ranking board lets everyone see who is the most on top of their chores.</p>
+
+				<p>ChoreRunner will organize that busy to-do list into something a little more manageable. Everyone wants to help, so help them show you how!</p>
 
 				<div className='img-placeholder'>IMAGE/VIDEO PLACEHOLDER</div>
 				<div className='img-placeholder'> IMAGE/VIDEO PLACEHOLDER</div>

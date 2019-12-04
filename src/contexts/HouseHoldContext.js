@@ -5,7 +5,7 @@ const HouseholdContext = React.createContext({
   households: [],
   memberTasks: [],
   error: null,
-  updateHousehold: () => {},
+  updateHousehold: () => { },
   setHouseholds: () => { },
   addHousehold: () => { },
   deleteHousehold: () => { },
@@ -41,10 +41,12 @@ export class HouseholdProvider extends Component {
   deleteHousehold = (event, householdId) => {
     event.preventDefault();
     ApiService.deleteHousehold(householdId)
-      .then()
-      .catch(this.setError('Household could not be deleted.'))
-    const newHouseholds = this.state.households.filter(household => household.id !== householdId)
+      .then(
+        const newHouseholds = this.state.households.filter(household => household.id !== householdId)
     this.setHouseholds([...newHouseholds]);
+        )
+      .catch (this.setError('Household could not be deleted.'))
+
   }
 
   setMemberTasks = memberTasks => {

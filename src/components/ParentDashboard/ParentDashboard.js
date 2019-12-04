@@ -162,7 +162,9 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
+
             <input name="householdName" type="text" required ref={input => this.householdName = input}></input>
+
             <button className="submitHH" type="submit">
               add
             </button>
