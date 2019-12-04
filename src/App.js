@@ -10,7 +10,6 @@ import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
-//Deleted another unused import. Delete this line when you are merging. 
 import './App.css';
 
 function App() {

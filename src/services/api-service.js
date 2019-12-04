@@ -29,6 +29,7 @@ const ApiService = {
   },
 
   getHouseholds() {
+    console.log('in api-service gettting household')
     return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
         'content-type': 'application/json',
@@ -145,6 +146,7 @@ const ApiService = {
   },
 
   editHouseholdName(id, updateHousehold) {
+    console.log('in api edit household')
     return fetch(`${config.API_ENDPOINT}/households/${id}`, {
       method: 'PATCH',
       headers: {
