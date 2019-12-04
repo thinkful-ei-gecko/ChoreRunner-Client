@@ -7,25 +7,22 @@ export default class Leaderboard extends Component {
   static contextType = HouseholdContext;
 
   state = {
-    members: [
-      { name: 'Daniel', total_score: 45 },
-      { name: 'Kelley', total_score: 32 },
-    ],
+    members: [],
   };
 
-  // componentDidMount() {
-  //   ApiService.getMemberScores()
-  //     .then(res => {
-  //       this.setState({ members: res });
-  //     })
-  //     .catch(error => this.context.setError(error));
-  // }
+  componentDidMount() {
+    ApiService.getMemberScores()
+      .then(res => {
+        this.setState({ members: res });
+      })
+      .catch(error => this.context.setError(error));
+  }
 
   renderScores() {
     let members = this.state.members;
     return members.map(member => {
       return (
-        <li className="score_display">
+        <li key={member.id} className="score_display">
           <div className="name_col">
             <span>{member.name}</span>
           </div>
@@ -38,6 +35,7 @@ export default class Leaderboard extends Component {
   }
 
   render() {
+    console.log(this.state.members);
     return (
       <section className="leader_board">
         <h3>Leaderboard</h3>

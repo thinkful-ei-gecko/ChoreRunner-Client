@@ -29,7 +29,7 @@ const ApiService = {
   },
 
   getHouseholds() {
-    console.log('in api-service gettting household')
+    console.log('in api-service gettting household');
     return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
         'content-type': 'application/json',
@@ -66,14 +66,17 @@ const ApiService = {
   },
 
   editMember(updatedMember, householdId, memberId) {
-    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members/${memberId}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `bearer ${TokenService.getAuthToken()}`,
-      },
-      body: JSON.stringify(updatedMember),
-    }).then(res =>
+    return fetch(
+      `${config.API_ENDPOINT}/households/${householdId}/members/${memberId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify(updatedMember),
+      }
+    ).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
@@ -85,7 +88,7 @@ const ApiService = {
         'content-type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({member_id:`${member_id}`}),
+      body: JSON.stringify({ member_id: `${member_id}` }),
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : undefined
     );
@@ -101,6 +104,17 @@ const ApiService = {
         },
       }
     ).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  getMemberScores(household_id) {
+    return fetch(`${config.API_ENDPOINT}/households/household/scores`, {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
@@ -146,7 +160,7 @@ const ApiService = {
   },
 
   editHouseholdName(id, updateHousehold) {
-    console.log('in api edit household')
+    console.log('in api edit household');
     return fetch(`${config.API_ENDPOINT}/households/${id}`, {
       method: 'PATCH',
       headers: {
