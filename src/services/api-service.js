@@ -158,7 +158,7 @@ const ApiService = {
     return fetch(
       `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
       {
-        method: 'DELETE',
+        method: 'PATCH',
         headers: {
           'content-type': 'application/json',
           Authorization: `bearer ${TokenService.getAuthToken()}`,

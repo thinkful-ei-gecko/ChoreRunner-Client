@@ -190,6 +190,11 @@ export default class HouseholdPage extends Component {
     return (
       <div>
         <h2>Household page</h2>
+
+        <div>
+          This are tasks to be approved
+          <li>Task 1 <button>Approve</button></li>
+        </div>
         <TasksToApprove 
           household_id={this.props.match.params.id}
         />
