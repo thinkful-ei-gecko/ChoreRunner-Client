@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import ApiService from '../../services/api-service.js'
 import AddMembers from '../AddMembers/AddMembers';
-// import EditHousehold from '../EditHousehold/EditHousehold'
 import './ParentDashboard.css'
 
 
@@ -69,7 +68,8 @@ export default class ParentDashboard extends Component {
     let name = e.target.householdName.value;
     ApiService.postHousehold(name)
       .then(res => {
-        this.context.addHousehold(res)
+        this.context.addHousehold(res);
+        this.householdName.value = '';
       })
       .catch(error => console.log(error));
   }
@@ -120,7 +120,6 @@ export default class ParentDashboard extends Component {
     const { households, deleteHousehold } = this.context;
 
     return households.map((household) => {
-      console.log(household.id);
       return (
 
           <div key={household.householdId} className="house_card">
@@ -153,6 +152,7 @@ export default class ParentDashboard extends Component {
   }
 
   render() {
+    console.log(this.state.name)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
@@ -162,7 +162,9 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
-            <input name="householdName" type="text" onChange={this.handleHouseHoldNameChange} required></input>
+
+            <input name="householdName" type="text" required ref={input => this.householdName = input}></input>
+
             <button className="submitHH" type="submit">
               add
             </button>

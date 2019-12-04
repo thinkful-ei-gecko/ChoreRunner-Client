@@ -101,7 +101,7 @@ export class HouseholdProvider extends Component {
       setTasks: this.setTasks,
       completeTask: this.completeTask,
       updateHousehold: this.updateHousehold,
-      setError: this.setError
+      //Context set error was entered twice. Removed to clean up warnings. 
     };
 
     return (
