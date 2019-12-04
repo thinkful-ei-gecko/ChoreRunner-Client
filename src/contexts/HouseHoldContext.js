@@ -40,6 +40,7 @@ export class HouseholdProvider extends Component {
   deleteHousehold = (event, householdId) => {
     event.preventDefault();
     ApiService.deleteHousehold(householdId)
+
       .then( () => {
         const newHouseholds = this.state.households.filter(household => household.id !== householdId)
         this.setHouseholds([...newHouseholds]);

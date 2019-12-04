@@ -129,11 +129,36 @@ const ApiService = {
     );
   },
 
+  getTasksToApprove(householdId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/status?status=completed`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then(res => 
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  parentUpdateTaskStatus(taskId, householdId, newStatus) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/status/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({ newStatus })
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
   completeTask(id) {
     return fetch(
       `${config.API_ENDPOINT}/households/householdId/members/memberId/tasks`,
       {
-        method: 'DELETE',
+        method: 'PATCH',
         headers: {
           'content-type': 'application/json',
           Authorization: `bearer ${TokenService.getAuthToken()}`,
