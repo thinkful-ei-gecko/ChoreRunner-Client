@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import HouseholdContext from '../../contexts/HouseHoldContext'
 import ApiService from '../../services/api-service.js'
 import AddMembers from '../AddMembers/AddMembers';
-import EditHousehold from '../EditHousehold/EditHousehold'
+// import EditHousehold from '../EditHousehold/EditHousehold'
 import './ParentDashboard.css'
 
 
@@ -162,7 +162,7 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
-            <input name="householdName" type="text" required></input>
+            <input name="householdName" type="text" onChange={this.handleHouseHoldNameChange} required></input>
             <button className="submitHH" type="submit">
               add
             </button>
