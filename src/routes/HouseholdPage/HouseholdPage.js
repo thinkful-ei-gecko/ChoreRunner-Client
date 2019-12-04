@@ -3,6 +3,7 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import EditMember from '../../components/EditMember/EditMember';
+import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 
 export default class HouseholdPage extends Component {
   state = {
@@ -189,10 +190,14 @@ export default class HouseholdPage extends Component {
     return (
       <div>
         <h2>Household page</h2>
+
         <div>
           This are tasks to be approved
           <li>Task 1 <button>Approve</button></li>
         </div>
+        <TasksToApprove 
+          household_id={this.props.match.params.id}
+        />
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
