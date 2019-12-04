@@ -3,6 +3,7 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import EditMember from '../../components/EditMember/EditMember';
+import './HouseholdPage.css'
 
 export default class HouseholdPage extends Component {
   state = {
@@ -118,6 +119,7 @@ export default class HouseholdPage extends Component {
             updateMember={this.updateMembersList}
             member={member}
             household_id={this.props.match.params.id}
+            // handleDeleteMember={this.handleDeleteMember}
           />
           <button onClick={() => this.handleDeleteMember(member.member_id)}>
             Delete
@@ -127,10 +129,10 @@ export default class HouseholdPage extends Component {
               return (
                 <li key={task.id}>
                   <button onClick={() => this.setState({ editTitle: true })}>
-                    edit
+                    edit name
                   </button>
                   {this.state.editTitle ? (
-                    <span>
+                    <div className='title'>
                       <button onClick={() => this.handleTitleUpdate(task.id)}>
                         save
                       </button>
@@ -141,13 +143,13 @@ export default class HouseholdPage extends Component {
                           this.setState({ newTitle: e.target.value });
                         }}
                       />
-                    </span>
+                    </div>
                   ) : (
-                    <span>{task.title}&nbsp;</span>
+                    <div className='title'>{task.title}&nbsp;</div>
                   )}
 
                   {this.state.editPts ? (
-                    <span>
+                    <div className='points'>
                       points:{' '}
                       <input
                         className="update-points"
@@ -159,12 +161,12 @@ export default class HouseholdPage extends Component {
                       <button onClick={() => this.handlePointsUpdate(task.id)}>
                         save
                       </button>
-                    </span>
+                    </div>
                   ) : (
-                    <span>points: {task.points}</span>
+                    <div className='points'>points: {task.points}</div>
                   )}
                   <button onClick={() => this.setState({ editPts: true })}>
-                    edit
+                    edit points
                   </button>
                   <button
                     onClick={() =>
@@ -174,9 +176,6 @@ export default class HouseholdPage extends Component {
                     Delete
                   </button>
                 </li>
-                // <li key={task.id}>{task.title}&nbsp;<span>points: {task.points}</span>
-
-                // </li>
               );
             })}
           </ul>
@@ -187,7 +186,7 @@ export default class HouseholdPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='household-page-container'>
         <h2>Household page</h2>
         <AddTask
           members={this.state.membersList}

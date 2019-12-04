@@ -109,7 +109,7 @@ export default class AddTask extends React.Component {
     } 
     return (
       <div>
-        <button onClick={this.toggleForm}>Toggle Form</button>
+        <button onClick={this.toggleForm}>Add Member</button>
           {display}
       </div>
     )
