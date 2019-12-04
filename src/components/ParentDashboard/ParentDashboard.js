@@ -60,7 +60,8 @@ export default class ParentDashboard extends Component {
     let name = e.target.householdName.value;
     ApiService.postHousehold(name)
       .then(res => {
-        this.context.addHousehold(res)
+        this.context.addHousehold(res);
+        this.householdName.value = '';
       })
       .catch(error => console.log(error));
   }
@@ -153,9 +154,9 @@ export default class ParentDashboard extends Component {
   }
 
   render() {
+
     const { households } = this.context;
-    // console.log(this.state.id)
-    console.log('THIS IS CONTEXT ----', households)
+
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
@@ -165,7 +166,9 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
-            <input name="householdName" type="text" required></input>
+
+            <input name="householdName" type="text" required ref={input => this.householdName = input}></input>
+
             <button className="submitHH" type="submit">
               add
             </button>
