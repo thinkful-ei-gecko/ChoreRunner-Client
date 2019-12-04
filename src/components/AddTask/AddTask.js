@@ -63,6 +63,8 @@ export default class AddTask extends React.Component {
     .then((task) => {
       let memberName = this.props.members.filter(member =>
         parseInt(member.id) === parseInt(this.state.member_id)).pop().name
+      let userName = this.props.members.filter(member =>
+        parseInt(member.id) === parseInt(this.state.member_id)).pop().username
     
       const allTasks = this.context.tasks;
       if(allTasks[this.state.member_id]) {
@@ -71,6 +73,7 @@ export default class AddTask extends React.Component {
         allTasks[this.state.member_id] = {
           'member_id': this.state.member_id,
           'name' : memberName,
+          'username': userName,
           'tasks' : [{'id' : task.id, 'title' : task.title, 'points': task.points}],
         }
       }

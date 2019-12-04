@@ -16,15 +16,17 @@ export default class HouseholdPage extends Component {
   };
   static contextType = HouseholdContext;
 
-  updateMembersList(updatedMember) {
-    console.log(this.state.membersList);
+  updateMembersList = (updatedMember) => {
     let newMembers = this.state.membersList.map(member =>
       member.id !== updatedMember.id ? member : updatedMember
     );
     this.setState({
       membersList: newMembers,
     });
-    console.log(this.state.membersList);
+    let tasks = this.context.tasks;
+    tasks[updatedMember.id].name = updatedMember.name;
+    tasks[updatedMember.id].username = updatedMember.username;
+    this.context.setTasks(tasks);
   }
 
   deleteMember(id) {
@@ -42,8 +44,6 @@ export default class HouseholdPage extends Component {
     ApiService.getTasksForAll(household_id).then(tasks => {
       this.context.setTasks(tasks);
     });
-    console.log(this.state.membersList)
-    console.log(this.context.tasks)
   }
 
   handleTitleUpdate = id => {
@@ -109,7 +109,7 @@ export default class HouseholdPage extends Component {
     let data = Object.values(tasks);
 
     return data.map((member, index) => {
-      console.log(member.member_id)
+      console.log(member.name)
       return (
         <div key={index}>
           <p>{member.name}</p>

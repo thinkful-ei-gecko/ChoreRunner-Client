@@ -8,7 +8,7 @@ export default class EditMember extends React.Component {
   state = {
     id: this.props.member.member_id,
     name: this.props.member.name,
-    username: '',
+    username: this.props.member.username,
     password: '',
     editing: false,
   };
@@ -22,12 +22,9 @@ export default class EditMember extends React.Component {
       username: this.state.username,
       password: this.state.password,
     };
-    console.log('this is the newInfo', updatedMember);
-    console.log('this is the hID', household_id);
 
-    ApiService.editMember(updatedMember, household_id).then(res => {
+    ApiService.editMember(updatedMember, household_id, this.state.id).then(res => {
       let newMember = res[0]
-      console.log(newMember)
       this.props.updateMember(newMember);
       this.setState({editing : false})
     })
@@ -71,7 +68,6 @@ export default class EditMember extends React.Component {
             id="member-name"
             value={this.state.name}
             onChange={this.handleNameChange}
-            required
           ></input>
           <label htmlFor="child-username">Child username</label>
           <input
@@ -79,14 +75,12 @@ export default class EditMember extends React.Component {
             id="child-username"
             value={this.state.username}
             onChange={this.handleChildUsernameChange}
-            required
           ></input>
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"
             id="child-password"
             onChange={this.handleChildPasswordChange}
-            required
           ></input>
           <button type="submit" className="submitHH">
             submit changes

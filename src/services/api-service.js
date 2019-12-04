@@ -65,8 +65,8 @@ const ApiService = {
     );
   },
 
-  editMember(updatedMember, householdId) {
-    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members`, {
+  editMember(updatedMember, householdId, memberId) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members/${memberId}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
