@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 //Removed Link because it was not being used.
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import ApiService from '../../services/api-service.js';
+import './MemberDashboard.css'
 import Leaderboard from '../LeaderBoard/LeaderBoard';
+
 
 export default class MemberDashboard extends Component {
   static contextType = HouseholdContext;
@@ -52,9 +54,9 @@ export default class MemberDashboard extends Component {
           <Leaderboard />
         </div>
 
-        <header className="_header">
+        
           <h2>Your chores</h2>
-        </header>
+        
         <div className="task_list">
           <ul>{this.renderTasks()}</ul>
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
+import './MemberLogin.css'
 
 export default class MemberLogin extends Component {
 
@@ -39,7 +40,7 @@ export default class MemberLogin extends Component {
     render() {
         const { error } = this.state
         return (
-            <div>
+            <div className='parent-login'>
                 <h2> Member login</h2>
                 <form className='parent-form-container' onSubmit={this.handleSubmit}>
                     <div role='alert'>

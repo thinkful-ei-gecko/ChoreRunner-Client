@@ -60,8 +60,7 @@ export default class ParentDashboard extends Component {
     let name = e.target.householdName.value;
     ApiService.postHousehold(name)
       .then(res => {
-        this.context.addHousehold(res);
-        this.householdName.value = '';
+        this.context.addHousehold(res)
       })
       .catch(error => console.log(error));
   }
@@ -81,20 +80,6 @@ export default class ParentDashboard extends Component {
       .catch(this.context.setError)
 
     this.setState({ editName: false })
-    // this.updateEverything()
-  }
-
-  updateEverything = () => {
-
-    ApiService.getHouseholds()
-      .then(res => {
-        this.context.setHouseholds(res);
-      })
-      .catch(error =>
-        this.setState({
-          error: error,
-        })
-      )
   }
 
   onChangeHandle = e => {
@@ -130,33 +115,15 @@ export default class ParentDashboard extends Component {
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
             <button onClick={() => this.setState({ editName: true, id: household.id })}>Edit</button>
           </div>
-
-          {/* {
-          this.state.editName
-          ?
-          <span>
-            <input
-              className="update-household"
-              type="text"
-              name="name"
-              value={name}
-              placeholder={household.name}
-              onChange={this.onChangeHandle}
-            />
-            <button onClick={() => this.handleEditHouseholdName(household.id)}>Save</button>
-          </span>
-          :
-          <span></span>
-        } */}
         </div>
       );
     });
   }
 
   render() {
-
     const { households } = this.context;
-
+    // console.log(this.state.id)
+    console.log('THIS IS CONTEXT ----', households)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
@@ -166,9 +133,7 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
-
-            <input name="householdName" type="text" required ref={input => this.householdName = input}></input>
-
+            <input name="householdName" type="text" required></input>
             <button className="submitHH" type="submit">
               add
             </button>
@@ -197,7 +162,6 @@ export default class ParentDashboard extends Component {
               <span></span>
           }
         </div>
-
       </section>
     );
   }

@@ -1,0 +1,5 @@
+.memberDashboard{
+    height: 85vh;
+    padding-top: 15vh;
+    overflow-y: auto;
+}

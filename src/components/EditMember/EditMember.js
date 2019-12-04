@@ -85,6 +85,9 @@ export default class EditMember extends React.Component {
           <button type="submit" className="submitHH">
             submit changes
           </button>
+          {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>
+            Delete
+          </button> */}
           {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>

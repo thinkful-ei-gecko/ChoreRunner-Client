@@ -83,7 +83,7 @@ export default class AddMembers extends React.Component {
           <label htmlFor="member-name">Name</label>
           <input type="text" id="member-name" required onChange={this.handleNameChange} value={this.state.name}></input>
           <label htmlFor="household">Household</label>
-          <select type="text" id="assignee" onChange={this.handleHouseholdChange} defaultValue="Select household" required>
+          <select className='select-css' type="text" id="assignee" onChange={this.handleHouseholdChange} defaultValue="Select household" required>
             <option disabled>Select household</option>
             {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
           </select>
