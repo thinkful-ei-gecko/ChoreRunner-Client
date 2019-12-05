@@ -5,11 +5,11 @@ font-family: 'Concert One', cursive;
 font-family: 'Electrolize', sans-serif; */
 
 .parent-login {
-    height: 100vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 15vh;
 }
 .parent-login > h2 {
     color: rgb(255, 217, 0);

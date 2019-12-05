@@ -12,6 +12,8 @@ header {
     align-items: center;
     /* position: fixed; */
     width: 100%;
+    position: fixed;
+    background-color: rgba(86,74,216,1);
 }
 
 h1 > a{
