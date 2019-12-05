@@ -41,16 +41,16 @@ const ApiService = {
   },
 
   //Get an individual household based on /:id
-  getHousehold(id) {
-    return fetch(`${config.API_ENDPOINT}/households/${id}`, {
-      headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${TokenService.getAuthToken()}`,
-      },
-    }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-    );
-  },
+  // getHousehold(id) {
+  //   return fetch(`${config.API_ENDPOINT}/households/${id}`, {
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       authorization: `bearer ${TokenService.getAuthToken()}`,
+  //     },
+  //   }).then(res =>
+  //     !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+  //   );
+  // },
 
   addMember(newMember, householdId) {
     return fetch(`${config.API_ENDPOINT}/${householdId}/members`, {
@@ -155,14 +155,15 @@ const ApiService = {
     );
   },
 
-  parentUpdateTaskStatus(taskId, householdId, newStatus) {
+  parentUpdateTaskStatus(taskId, householdId, newStatus, points, memberId) {
+    let data = {newStatus, points, memberId};
     return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/status/${taskId}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ newStatus })
+      body: JSON.stringify(data)
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
