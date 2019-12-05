@@ -112,7 +112,6 @@ export default class HouseholdPage extends Component {
     let data = Object.values(tasks);
 
     return data.map((member, index) => {
-      console.log(member.name)
       return (
         <div key={index}>
           <p>{member.name}</p>
@@ -128,6 +127,9 @@ export default class HouseholdPage extends Component {
           </button>
           <ul>
             {member.tasks.map(task => {
+              if (task.title === null) {
+                return <p key={task.id + 1}>No tasks</p>
+              }
               return (
                 <li key={task.id}>
                   <button onClick={() => this.setState({ editTitle: true })}>
@@ -190,11 +192,6 @@ export default class HouseholdPage extends Component {
     return (
       <div className='household-page-container'>
         <h2>Household page</h2>
-
-        <div>
-          This are tasks to be approved
-          <li>Task 1 <button>Approve</button></li>
-        </div>
         <TasksToApprove 
           household_id={this.props.match.params.id}
         />
