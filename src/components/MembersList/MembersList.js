@@ -25,6 +25,7 @@ export default class MembersList extends Component {
     return (
       <div>
         {data.map((member, index) => {
+          console.log((member.tasks[0]));
           return (
             <div key={index}>
               <p>{member.name}</p>
@@ -38,8 +39,8 @@ export default class MembersList extends Component {
                 Delete
                 </button>
 
-              {!member.tasks === {}
-                ? <p>No tasks</p>
+              {(!member.tasks.length || member.tasks[0].title == null)
+                ? <p>There are no tasks</p>
                 : <TasksList
                   member={member}
                   editTitle={editTitle}

@@ -6,7 +6,6 @@ import MembersList from '../../components/MembersList/MembersList';
 import './HouseholdPage.css'
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 
-
 export default class HouseholdPage extends Component {
   state = {
     membersList: [],
@@ -33,40 +32,8 @@ export default class HouseholdPage extends Component {
   }
 
   componentDidMount() {
-    const household_id = this.props.match.params.id;
-    ApiService.getMembers(household_id).then(members => {
-      this.setState({
-        membersList: members,
-      });
-    });
-    ApiService.getTasksForAll(household_id).then(tasks => {
-      this.context.setTasks(tasks);
-    });
+    this.updateEverything();
   }
-
-  //Handles submission of new title/points
-  handleTitleUpdate = id => {
-    let reqBody = {
-      method: 'title',
-      id: id,
-      title: this.state.newTitle,
-    };
-
-    ApiService.updateTask(this.props.match.params, reqBody)
-      .then(after => this.setState({ editTitle: false }))
-      .then(after => this.updateEverything());
-  };
-  handlePointsUpdate = id => {
-    let reqBody = {
-      method: 'points',
-      id: id,
-      points: this.state.newPoints,
-    };
-
-    ApiService.updateTask(this.props.match.params, reqBody)
-      .then(after => this.setState({ editPts: false }))
-      .then(after => this.updateEverything());
-  };
 
   //----- Re-get the updated values so the page can be updated with the new values -----
   updateEverything = () => {
@@ -106,9 +73,14 @@ export default class HouseholdPage extends Component {
     tasks[member_id].tasks = filteredTasks;
     ApiService.deleteTask(household_id, task_id).then(() =>
       this.context.setTasks(tasks)
-    );
+    )
+      .then(() => {
+        this.updateMembersList();
+      })
+      .catch(error => this.context.setError(error));
   };
 
+  //Title input callbacks
   handleEditTitleClick = () => {
     this.setState({ editTitle: true });
   }
@@ -117,13 +89,38 @@ export default class HouseholdPage extends Component {
     this.setState({ newTitle: event.target.value })
   }
 
+  handleTitleUpdate = id => {
+    let reqBody = {
+      method: 'title',
+      id: id,
+      title: this.state.newTitle,
+    };
+
+    ApiService.updateTask(this.props.match.params, reqBody)
+      .then(after => this.setState({ editTitle: false }))
+      .then(after => this.updateEverything());
+  };
+
+  //Points input callbacks
   handleEditPointsClick = () => {
     this.setState({ editPts: true });
   }
 
   handlePointsChange = (event) => {
-    this.setState({ newPoints: event.target.value})
+    this.setState({ newPoints: event.target.value })
   }
+
+  handlePointsUpdate = id => {
+    let reqBody = {
+      method: 'points',
+      id: id,
+      points: this.state.newPoints,
+    };
+
+    ApiService.updateTask(this.props.match.params, reqBody)
+      .then(after => this.setState({ editPts: false }))
+      .then(after => this.updateEverything());
+  };
 
 
   render() {
@@ -139,6 +136,7 @@ export default class HouseholdPage extends Component {
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
+          updateEverything={this.props.updateEverything}
         />
         <MembersList
           tasks={tasks}
