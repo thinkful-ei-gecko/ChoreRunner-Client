@@ -16,10 +16,6 @@ const HouseholdContext = React.createContext({
   tasks: {}
 });
 
-const nullTask = {
-  
-}
-
 export default HouseholdContext;
 
 export class HouseholdProvider extends Component {
