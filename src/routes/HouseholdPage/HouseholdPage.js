@@ -44,6 +44,7 @@ export default class HouseholdPage extends Component {
     });
   }
 
+  //Handles submission of new title/points
   handleTitleUpdate = id => {
     let reqBody = {
       method: 'title',
@@ -150,8 +151,11 @@ export default class HouseholdPage extends Component {
           handleDeleteMember={this.handleDeleteMember}
           handleEditTitleClick={this.handleEditTitleClick}
           handleTitleChange={this.handleTitleChange}
+          handleTitleUpdate={this.handleTitleUpdate}
           handleEditPointsClick={this.handleEditPointsClick}
           handlePointsChange={this.handlePointsChange}
+          handlePointsUpdate={this.handlePointsUpdate}
+          handleTaskDelete={this.handleTaskDelete}
         />
       </div>
     );

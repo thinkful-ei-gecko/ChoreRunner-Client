@@ -11,46 +11,53 @@ export default class MembersList extends Component {
       editing,
       household_id,
       editTitle,
-      editPoints,
+      editPts,
       updateMembersList,
       handleDeleteMember,
       handleEditTitleClick,
       handleTitleChange,
-      handleEditPointsClick } = this.props;
+      handleTitleUpdate,
+      handleEditPointsClick,
+      handlePointsChange,
+      handlePointsUpdate,
+      handleTaskDelete } = this.props;
 
     return (
-      <ul>
-        {
-          data.map((member, index) => {
-            return (
-              <li key={index}>
-                <p>{member.name}</p>
-                <EditMember
-                  editing={editing}
-                  updateMembersList={updateMembersList}
-                  member={member}
-                  household_id={household_id}
-                />
-                <button onClick={() => handleDeleteMember(member.member_id)}>
-                  Delete
+      <div>
+        {data.map((member, index) => {
+          return (
+            <div key={index}>
+              <p>{member.name}</p>
+              <EditMember
+                editing={editing}
+                updateMembersList={updateMembersList}
+                member={member}
+                household_id={household_id}
+              />
+              <button onClick={() => handleDeleteMember(member.member_id)}>
+                Delete
                 </button>
 
-                {!member.tasks === {}
-                  ? <p>No tasks</p>
-                  : <TasksList
-                    member={member}
-                    editTitle={editTitle}
-                    editPoints={editPoints}
-                    handleEditTitleClick={this.handleEditTitleClick}
-                    handleTitleChange={this.handleTitleChange}
-                    handleEditPointsClick={this.handleEditPointsClick}
-                  />
-                }
-              </li>
-            );
-          })
+              {!member.tasks === {}
+                ? <p>No tasks</p>
+                : <TasksList
+                  member={member}
+                  editTitle={editTitle}
+                  editPts={editPts}
+                  handleEditTitleClick={handleEditTitleClick}
+                  handleTitleChange={handleTitleChange}
+                  handleTitleUpdate={handleTitleUpdate}
+                  handleEditPointsClick={handleEditPointsClick}
+                  handlePointsChange={handlePointsChange}
+                  handlePointsUpdate={handlePointsUpdate}
+                  handleTaskDelete={handleTaskDelete}
+                />
+              }
+            </div>
+          );
+        })
         }
-      </ul>
+      </div>
     )
   };
 }
