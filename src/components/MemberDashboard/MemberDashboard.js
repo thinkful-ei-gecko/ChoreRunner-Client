@@ -4,6 +4,7 @@ import HouseholdContext from '../../contexts/HouseHoldContext';
 import ApiService from '../../services/api-service.js';
 import './MemberDashboard.css'
 import Leaderboard from '../LeaderBoard/LeaderBoard';
+import Badge from '../Badge/Badge'
 
 
 export default class MemberDashboard extends Component {
@@ -53,8 +54,7 @@ export default class MemberDashboard extends Component {
         <div className="leaderboard_container">
           <Leaderboard />
         </div>
-
-        
+        <Badge />
           <h2>Your chores</h2>
         
         <div className="task_list">
