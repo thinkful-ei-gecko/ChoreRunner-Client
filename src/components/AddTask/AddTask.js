@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import config from '../../config';
 import TokenService from '../../services/token-service';
 import './AddTask.css'
 
-export default class AddTask extends Component {
+export default class AddTask extends React.Component {
   state = {
     showForm: false,
     title: '',
@@ -45,6 +45,7 @@ export default class AddTask extends Component {
       'household_id': household_id,
       'member_id': this.state.member_id
     }
+    
 
     fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
       method: 'POST',
@@ -54,65 +55,62 @@ export default class AddTask extends Component {
       },
       body: JSON.stringify(task)
     })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-      .then((task) => {
-        let memberName = this.props.members.filter(member =>
-          parseInt(member.id) === parseInt(this.state.member_id)).pop().name
-        let userName = this.props.members.filter(member =>
-          parseInt(member.id) === parseInt(this.state.member_id)).pop().username
-
-        const allTasks = this.context.tasks;
-        if (allTasks[this.state.member_id]) {
-          allTasks[this.state.member_id].tasks.push({ 'id': task.id, 'title': task.title, 'points': task.points })
-        } else {
-          allTasks[this.state.member_id] = {
-            'member_id': this.state.member_id,
-            'name': memberName,
-            'username': userName,
-            'tasks': [{ 'id': task.id, 'title': task.title, 'points': task.points }],
-          }
+    .then(res => 
+      (!res.ok)
+      ? res.json().then(e => Promise.reject(e))
+      : res.json()
+    )
+    .then((task) => {
+      let memberName = this.props.members.filter(member =>
+        parseInt(member.id) === parseInt(this.state.member_id)).pop().name
+      let userName = this.props.members.filter(member =>
+        parseInt(member.id) === parseInt(this.state.member_id)).pop().username
+    
+      const allTasks = this.context.tasks;
+      if(allTasks[this.state.member_id]) {
+        allTasks[this.state.member_id].tasks.push({'id' : task.id, 'title' : task.title, 'points': task.points})
+      } else {
+        allTasks[this.state.member_id] = {
+          'member_id': this.state.member_id,
+          'name' : memberName,
+          'username': userName,
+          'tasks' : [{'id' : task.id, 'title' : task.title, 'points': task.points}],
         }
-        return { task, allTasks };
+      }
+      this.context.setTasks(allTasks);
+      this.setState({
+        showForm: false,
+        title: '',
+        points: '',
+        member_id: '',
       })
-      .then(addedTasks => {
-        this.context.setTasks(addedTasks.allTasks);
-        this.setState({
-          showForm: false,
-          title: '',
-          points: '',
-          member_id: '',
-        })
-        this.props.updateEverything();
-      })
-      .catch(e => {
-        console.error({ e })
-      })
+      }
+    )
+    .catch(e => {
+      console.error({e})
+    })
   }
 
   render() {
-    let display;
-    if (this.state.showForm) {
+    let display; 
+    if(this.state.showForm) {
       display = <form onSubmit={this.handleSubmit} className='add-task-form'>
-        <label htmlFor="task-name">Task name</label>
-        <input type="text" id="task-name" required onChange={this.handleTitleChange} value={this.state.title}></input>
-        <label htmlFor="assignee">Task assigned to</label>
-        <select type="text" id="assignee" required onChange={this.handleAssigneeChange} defaultValue="Select household member">
-          <option disabled>Select household member</option>
-          {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
-        </select>
-        <label htmlFor="points">Points</label>
-        <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange} value={this.state.points}></input>
-        <button type="submit">Add task</button>
-      </form>
-    }
+      <label htmlFor="task-name">Task name</label>
+      <input type="text" id="task-name" required onChange={this.handleTitleChange} value={this.state.title}></input>
+      <label htmlFor="assignee">Task assigned to</label>
+      <select type="text" id="assignee" required onChange={this.handleAssigneeChange} defaultValue="Select household member">
+        <option disabled>Select household member</option>
+        {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
+      </select>
+      <label htmlFor="points">Points</label>
+      <input type="number" id="points" min="1" max="100" required onChange={this.handlePointsChange} value={this.state.points}></input>
+      <button type="submit">Add task</button>
+    </form>
+    } 
     return (
       <div>
         <button onClick={this.toggleForm}>Add a new task</button>
-        {display}
+          {display}
       </div>
     )
   }
