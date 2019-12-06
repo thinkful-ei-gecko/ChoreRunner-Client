@@ -32,11 +32,6 @@ export default class HouseholdPage extends Component {
     this.context.setTasks(tasks);
   }
 
-  deleteMember(id) {
-    let newMembers = this.state.membersList.filter(member => member.id !== id);
-    this.setState({ membersList: newMembers });
-  }
-
   componentDidMount() {
     const household_id = this.props.match.params.id;
     ApiService.getMembers(household_id).then(members => {
@@ -90,7 +85,13 @@ export default class HouseholdPage extends Component {
     console.log(this.context.tasks)
     const household_id = this.props.match.params.id;
     ApiService.deleteMember(id, household_id)
-      .then(() => this.deleteMember(id))
+      .then(() => {
+        let newMembers = this.state.membersList.filter(member => member.id !== id);
+        this.setState({ membersList: newMembers });
+        let tasks = this.context.tasks;
+        delete tasks[id];
+        this.context.setTasks(tasks);
+      })
       .catch(error => this.context.setError(error));
   }
 
