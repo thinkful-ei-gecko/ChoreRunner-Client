@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
-import EditMember from '../../components/EditMember/EditMember';
+import MembersList from '../../components/MembersList/MembersList';
 import './HouseholdPage.css'
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 
@@ -108,99 +108,53 @@ export default class HouseholdPage extends Component {
     );
   };
 
-  renderTasks = () => {
-    let tasks = this.context.tasks;
-    let data = Object.values(tasks);
+  handleEditTitleClick = () => {
+    this.setState({ editTitle: true });
+  }
 
-    return data.map((member, index) => {
-      return (
-        <div key={index}>
-          <p>{member.name}</p>
-          <EditMember
-            editing={this.state.editing}
-            updateMember={this.updateMembersList}
-            member={member}
-            household_id={this.props.match.params.id}
-          />
-          <button onClick={() => this.handleDeleteMember(member.member_id)}>
-            Delete
-          </button>
-          <ul>
-            {!member.tasks.length
-            ? <p>No tasks</p>
-            :
-            member.tasks.map(task => {
-              return (
-                <li key={task.id}>
-                  <button onClick={() => this.setState({ editTitle: true })}>
-                    edit name
-                  </button>
-                  {this.state.editTitle ? (
-                    <div className='title'>
-                      <button onClick={() => this.handleTitleUpdate(task.id)}>
-                        save
-                      </button>
-                      <input
-                        className="update-title"
-                        placeholder={task.title}
-                        onChange={e => {
-                          this.setState({ newTitle: e.target.value });
-                        }}
-                      />
-                    </div>
-                  ) : (
-                   <div className='title'>{task.title}&nbsp;</div>
-                  )}
+  handleTitleChange = (event) => {
+    this.setState({ newTitle: event.target.value })
+  }
 
-                  {this.state.editPts ? (
-                    <div className='points'>
-                      points:{' '}
-                      <input
-                        className="update-points"
-                        placeholder={task.points}
-                        onChange={e => {
-                          this.setState({ newPoints: e.target.value });
-                        }}
-                      />
-                      <button onClick={() => this.handlePointsUpdate(task.id)}>
-                        save
-                      </button>
-                    </div>
-                  ) : (
-                    <div className='points'>points: {task.points}</div>
-                  )}
-                  <button onClick={() => this.setState({ editPts: true })}>
-                    edit points
-                  </button>
-                  <button
-                    onClick={() =>
-                      this.handleTaskDelete(task.id, member.member_id)
-                    }
-                  >
-                    Delete
-                  </button>
-                </li>
-            );
-            })}
-          </ul>
-        </div>
-      );
-    });
-  };
+  handleEditPointsClick = () => {
+    this.setState({ editPts: true });
+  }
+
+  handlePointsChange = (event) => {
+    this.setState({ newPoints: event.target.value})
+  }
+
 
   render() {
+    const { tasks } = this.context;
+    const data = Object.values(tasks);
+
     return (
       <div className='household-page-container'>
         <h2>Household page</h2>
-        <TasksToApprove 
+        <TasksToApprove
           household_id={this.props.match.params.id}
         />
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
         />
-        <section>{this.renderTasks()}</section>
+        <MembersList
+          tasks={tasks}
+          data={data}
+          editing={this.state.editing}
+          household_id={this.props.match.params.id}
+          editTitle={this.state.editTitle}
+          editPts={this.state.editPts}
+          updateMembersList={this.updateMembersList}
+          handleDeleteMember={this.handleDeleteMember}
+          handleEditTitleClick={this.handleEditTitleClick}
+          handleTitleChange={this.handleTitleChange}
+          handleEditPointsClick={this.handleEditPointsClick}
+          handlePointsChange={this.handlePointsChange}
+        />
       </div>
     );
   }
 }
+
