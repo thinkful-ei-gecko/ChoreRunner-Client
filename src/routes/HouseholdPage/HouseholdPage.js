@@ -121,16 +121,15 @@ export default class HouseholdPage extends Component {
             updateMember={this.updateMembersList}
             member={member}
             household_id={this.props.match.params.id}
-            // handleDeleteMember={this.handleDeleteMember}
           />
           <button onClick={() => this.handleDeleteMember(member.member_id)}>
             Delete
           </button>
           <ul>
-            {member.tasks.map(task => {
-              if (task.title === null) {
-                return <p key={task.id + 1}>No tasks</p>
-              }
+            {!member.tasks.length
+            ? <p>No tasks</p>
+            :
+            member.tasks.map(task => {
               return (
                 <li key={task.id}>
                   <button onClick={() => this.setState({ editTitle: true })}>
@@ -150,7 +149,7 @@ export default class HouseholdPage extends Component {
                       />
                     </div>
                   ) : (
-                    <div className='title'>{task.title}&nbsp;</div>
+                   <div className='title'>{task.title}&nbsp;</div>
                   )}
 
                   {this.state.editPts ? (
@@ -181,7 +180,7 @@ export default class HouseholdPage extends Component {
                     Delete
                   </button>
                 </li>
-              );
+            );
             })}
           </ul>
         </div>
