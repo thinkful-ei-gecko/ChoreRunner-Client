@@ -25,7 +25,6 @@ export default class MembersList extends Component {
     return (
       <div>
         {data.map((member, index) => {
-          console.log((member.tasks[0]));
           return (
             <div key={index}>
               <p>{member.name}</p>
@@ -42,6 +41,7 @@ export default class MembersList extends Component {
               {(!member.tasks.length || member.tasks[0].title == null)
                 ? <p>There are no tasks</p>
                 : <TasksList
+                  tasks={tasks}
                   member={member}
                   editTitle={editTitle}
                   editPts={editPts}

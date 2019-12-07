@@ -76,10 +76,10 @@ export default class AddTask extends Component {
             'tasks': [{ 'id': task.id, 'title': task.title, 'points': task.points }],
           }
         }
-        return { task, allTasks };
+        return allTasks;
       })
-      .then(addedTasks => {
-        this.context.setTasks(addedTasks.allTasks);
+      .then(allTasks => {
+        this.context.setTasks(allTasks);
         this.setState({
           showForm: false,
           title: '',

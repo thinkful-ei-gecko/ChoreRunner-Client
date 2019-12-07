@@ -136,7 +136,7 @@ export default class HouseholdPage extends Component {
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
-          updateEverything={this.props.updateEverything}
+          updateEverything={this.updateEverything}
         />
         <MembersList
           tasks={tasks}

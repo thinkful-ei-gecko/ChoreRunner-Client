@@ -15,6 +15,9 @@ export default class Task extends Component {
       handlePointsUpdate,
       handleTaskDelete} = this.props;
 
+      console.log(task.id);
+
+
     return (
       <li key={task.id}>
         <button onClick={() => handleEditTitleClick()}>

@@ -5,6 +5,7 @@ export default class TasksList extends Component {
 
   render() {
     const {
+      tasks,
       member,
       editTitle,
       editPts,
@@ -16,32 +17,29 @@ export default class TasksList extends Component {
       handlePointsUpdate,
       handleTaskDelete } = this.props;
 
-    if (!member.tasks.length || member.tasks[0].title == null) {
-      return <p>There are no tasks</p>
-    } else {
-      return (
-
-        <ul className="householdpage-member-task-list">
-          {member.tasks.map(task => {
-            return (
-              <Task
-                member={member}
-                task={task}
-                editTitle={editTitle}
-                editPts={editPts}
-                handleEditTitleClick={handleEditTitleClick}
-                handleTitleChange={handleTitleChange}
-                handleTitleUpdate={handleTitleUpdate}
-                handleEditPointsClick={handleEditPointsClick}
-                handlePointsChange={handlePointsChange}
-                handlePointsUpdate={handlePointsUpdate}
-                handleTaskDelete={handleTaskDelete}
-              />
-            )
-          })
-          }
-        </ul>
-      )
-    };
-  }
+    return (
+      <ul className="householdpage-member-task-list">
+        {member.tasks.map(task => {
+          return (
+            <Task
+              tasks={tasks}
+              member={member}
+              task={task}
+              key={task.id}
+              editTitle={editTitle}
+              editPts={editPts}
+              handleEditTitleClick={handleEditTitleClick}
+              handleTitleChange={handleTitleChange}
+              handleTitleUpdate={handleTitleUpdate}
+              handleEditPointsClick={handleEditPointsClick}
+              handlePointsChange={handlePointsChange}
+              handlePointsUpdate={handlePointsUpdate}
+              handleTaskDelete={handleTaskDelete}
+            />
+          )
+        })
+        }
+      </ul>
+    )
+  };
 };
