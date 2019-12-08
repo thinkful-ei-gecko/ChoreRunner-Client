@@ -15,6 +15,7 @@ export default class ParentDashboard extends Component {
       household: [],
       editName: false,
       id: null,
+      members: {}
     }
   }
 
@@ -31,8 +32,18 @@ export default class ParentDashboard extends Component {
           error: error,
         })
       )
-  }
 
+    ApiService.getMembersAndHouseholds()
+    .then(res => {
+      console.log('api res', res)
+      this.setState({members: res});
+    })
+    .catch(error =>
+      this.setState({
+        error: error,
+      })
+    )
+  }
 
   handleAddMember = e => {
     e.preventDefault();
@@ -48,9 +59,7 @@ export default class ParentDashboard extends Component {
     }
     ApiService.addMember(newMember, household_id)
       .then(res => {
-        this.context.addMember(res)
-        //want to push to the context array with the added member. 
-        console.log(res)
+        this.context.addMember(res) //doesn't exist in the context
       })
       .catch(error => console.log(error))
   }
@@ -88,22 +97,8 @@ export default class ParentDashboard extends Component {
     })
   }
 
-  renderOptions = () => {
-    const { households } = this.context;
-    return households.map(house => {
-      return (
-        <option key={house.householdId} value={house.householdId}>
-          {house.housename}
-        </option>
-      );
-    });
-  }
-
-
   renderHouseholds = () => {
-    const { name } = this.state;
     const { households, deleteHousehold } = this.context;
-
     return households.map((household) => {
 
       return (
@@ -115,6 +110,13 @@ export default class ParentDashboard extends Component {
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
             <button onClick={() => this.setState({ editName: true, id: household.id })}>Edit</button>
           </div>
+          {this.state.members && this.state.members[household.id] ?
+          <ul>
+            {this.state.members[household.id].members.map(member => {
+              return <li key={member.id}>{member.name}</li>
+            })} 
+          </ul>
+          : null}
         </div>
       );
     });
@@ -122,8 +124,6 @@ export default class ParentDashboard extends Component {
 
   render() {
     const { households } = this.context;
-    // console.log(this.state.id)
-    console.log('THIS IS CONTEXT ----', households)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>

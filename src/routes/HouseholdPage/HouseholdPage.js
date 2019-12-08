@@ -126,10 +126,10 @@ export default class HouseholdPage extends Component {
             Delete
           </button>
           <ul>
-            {!member.tasks.length
-            ? <p>No tasks</p>
-            :
-            member.tasks.map(task => {
+            {member.tasks.map(task => {
+              // !member.tasks.length
+              //   ? <p>No tasks</p>
+              //   :
               return (
                 <li key={task.id}>
                   <button onClick={() => this.setState({ editTitle: true })}>
@@ -180,7 +180,7 @@ export default class HouseholdPage extends Component {
                     Delete
                   </button>
                 </li>
-            );
+                );
             })}
           </ul>
         </div>
