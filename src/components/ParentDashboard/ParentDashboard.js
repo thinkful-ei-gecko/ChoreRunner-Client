@@ -101,7 +101,6 @@ export default class ParentDashboard extends Component {
 
 
   renderHouseholds = () => {
-    const { name } = this.state;
     const { households, deleteHousehold } = this.context;
 
     return households.map((household) => {
