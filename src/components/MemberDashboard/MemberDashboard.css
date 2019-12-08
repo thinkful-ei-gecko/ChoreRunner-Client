@@ -3,3 +3,19 @@
     padding-top: 15vh;
     overflow-y: auto;
 }
+
+.task_list li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.task_list p {
+    max-width: 300px;
+}
+
+.task_list li button {
+    font-size: 17px;
+}
