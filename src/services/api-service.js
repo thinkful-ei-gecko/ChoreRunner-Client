@@ -171,6 +171,7 @@ const ApiService = {
 
   parentUpdateTaskStatus(taskId, householdId, newStatus, points, memberId) {
     let data = {newStatus, points, memberId};
+    console.log(' inside parent update', data, taskId)
     return fetch(`${config.API_ENDPOINT}/households/${householdId}/tasks/status/${taskId}`, {
       method: 'PATCH',
       headers: {
@@ -201,7 +202,7 @@ const ApiService = {
 
   getBadge() {
     return fetch(
-      `${config.API_ENDPOINT}/households/household/test`, {
+      `${config.API_ENDPOINT}/members`, {
         headers: {
           'content-type': 'application/json',
           Authorization : `bearer ${TokenService.getAuthToken()}`,

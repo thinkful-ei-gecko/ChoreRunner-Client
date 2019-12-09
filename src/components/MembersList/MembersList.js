@@ -34,7 +34,7 @@ export default class MembersList extends Component {
                 member={member}
                 household_id={household_id}
               />
-              <button onClick={() => handleDeleteMember(member.member_id)}>
+              <button onClick={() => handleDeleteMember(member.member_id, household_id)}>
                 Delete
                 </button>
 

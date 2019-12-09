@@ -49,7 +49,7 @@ export default class AddMembers extends React.Component {
       password: this.state.password,
       household_id: this.state.household_id
     }
-    if(isValid) {
+    // if(isValid) {
       fetch(`${config.API_ENDPOINT}/households/${this.state.household_id}/members`, {
         method: 'POST',
         headers: {
@@ -74,7 +74,7 @@ export default class AddMembers extends React.Component {
         this.props.handleRenderUpdate(member);
       })
       document.getElementById("add-household-form").reset();
-     }))
+     //}
   }
 
 

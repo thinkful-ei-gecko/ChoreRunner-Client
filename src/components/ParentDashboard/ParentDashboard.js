@@ -45,6 +45,7 @@ export default class ParentDashboard extends Component {
   }
 
   handleRenderAfterAddMember = res => {
+    console.log('THIS IS MEMBERS',this.state.members)
     let members = this.state.members;
     members[res.household_id].members =
       [...members[res.household_id].members, {'name': res.name, 'id' : res.id}]

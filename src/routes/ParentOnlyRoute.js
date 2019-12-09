@@ -10,7 +10,7 @@ export default function ParentOnlyRoute({ component, ...props }) {
       render={componentProps => (
         <UserContext.Consumer>
           {userContext =>
-            !!userContext.user.id && userContext.user.type === 'user'
+            !!userContext.user.id //&& userContext.user.type === 'user'
               ? <Component {...componentProps} />
               : (
                 <Redirect

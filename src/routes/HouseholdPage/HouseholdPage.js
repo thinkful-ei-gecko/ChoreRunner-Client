@@ -49,10 +49,10 @@ export default class HouseholdPage extends Component {
     });
   };
 
-  handleDeleteMember(id) {
-    console.log(this.state.membersList)
-    console.log(this.context.tasks)
-    const household_id = this.props.match.params.id;
+  handleDeleteMember = (id, household_id) => {
+    // console.log(this.state.membersList)
+    console.log(household_id)
+    // const household_id = this.props.match.params.id;
     ApiService.deleteMember(id, household_id)
       .then(() => {
         let newMembers = this.state.membersList.filter(member => member.id !== id);
@@ -127,6 +127,7 @@ export default class HouseholdPage extends Component {
   render() {
     const { tasks } = this.context;
     const data = Object.values(tasks);
+    
 
     return (
       <div className='household-page-container'>

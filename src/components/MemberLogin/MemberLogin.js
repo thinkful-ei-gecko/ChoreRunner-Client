@@ -68,7 +68,7 @@ export default class MemberLogin extends Component {
 
     this.setState({ error: null })
 
-    if(isValid) {
+   // if(isValid) {
       AuthApiService.postMemberLogin({
         username: username.value,
         password: password.value,
@@ -83,7 +83,7 @@ export default class MemberLogin extends Component {
         this.setState({ error: res.error })
       })
       document.getElementById("member-login").reset();
-    }
+   // }
 
   }
   render() {

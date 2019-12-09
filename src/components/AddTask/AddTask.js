@@ -86,6 +86,7 @@ export default class AddTask extends React.Component {
           }
         }
         this.context.setTasks(allTasks);
+        this.props.updateEverything();
         this.setState({
           showForm: false,
           title: '',

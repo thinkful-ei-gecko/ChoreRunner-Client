@@ -8,6 +8,7 @@ export default class Badge extends Component {
     levelInfo: {},
   };
 
+  
   componentDidMount() {
     ApiService.getBadge().then(res => {
       this.setState({ levelInfo: res });

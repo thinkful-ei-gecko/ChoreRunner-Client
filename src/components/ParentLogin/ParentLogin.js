@@ -66,7 +66,7 @@ export default class ParentLogin extends Component {
 
     this.setState({ error: null })
 
-    if(isValid) {
+    // if(isValid) {
       AuthApiService.postLogin({
         username: username.value,
         password: password.value,
@@ -80,7 +80,7 @@ export default class ParentLogin extends Component {
       .catch(res => {
         this.setState({ error: res.error })
       })
-    }
+    //}
   }
   render() {
     const { username, password, error } = this.state

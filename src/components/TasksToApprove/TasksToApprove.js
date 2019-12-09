@@ -20,12 +20,11 @@ export default class TasksToApprove extends React.Component {
   handleUpdateTaskStatus = (taskId, householdId, status, points, memberId) => {
     ApiService.parentUpdateTaskStatus(taskId, householdId, status, points, memberId)
       .then(result => {
-        let updatedTasksToApprove = this.state.tasks.filter(task => task.id !== result[0].id)
+        let updatedTasksToApprove = this.state.tasks.filter(task => task.id !== taskId)
         this.setState({
           tasks: updatedTasksToApprove
         })
         let tasks = this.context.tasks;
-        console.log(tasks)
         if (status === 'approved') {
           let memberTaskList = tasks[memberId];
           let filteredTasks = memberTaskList.tasks.filter(task => {
