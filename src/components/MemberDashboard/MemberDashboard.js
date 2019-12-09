@@ -51,14 +51,18 @@ export default class MemberDashboard extends Component {
   render() {
     return (
       <section className="memberDashboard">
-        <div className="leaderboard_container">
-          <Leaderboard />
-        </div>
-        <Badge />
-          <h2>Your chores</h2>
-        
-        <div className="task_list">
-          <ul>{this.renderTasks()}</ul>
+        <div className='member-container'>
+          <div className="leaderboard_container">
+            <Leaderboard />
+          </div>
+          <Badge />
+          <div className='chores-container'>
+            <h2>chore-llenges</h2>
+
+            <div className="task_list">
+              <ul>{this.renderTasks()}</ul>
+            </div>
+          </div>
         </div>
       </section>
     );

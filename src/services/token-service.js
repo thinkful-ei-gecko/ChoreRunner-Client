@@ -9,6 +9,12 @@ const TokenService = {
   saveAuthToken(token) {
     window.localStorage.setItem(config.TOKEN_KEY, token)
   },
+  saveType(type) {
+    window.localStorage.setItem(config.TYPE, type)
+  },
+  clearType(){
+    window.localStorage.removeItem(config.TYPE)
+  },
   getAuthToken() {
     return window.localStorage.getItem(config.TOKEN_KEY)
   },

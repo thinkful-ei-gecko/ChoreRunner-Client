@@ -46,6 +46,7 @@ export default class MemberLogin extends Component {
       passwordError = 'Password must contain one upper case, lower case, number and special character';
     }
 
+
     if(passwordError || usernameError) {
       this.setState({ validateError: { passwordError, usernameError } })
       return false;
