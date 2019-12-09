@@ -35,23 +35,6 @@ export default class AddTask extends React.Component {
     return true;
   }
 
-  // handleTitleChange = e => {
-  //   this.setState({
-  //     title: e.target.value,
-  //   })
-  // }
-
-  // handlePointsChange = e => {
-  //   this.setState({
-  //     points: e.target.value,
-  //   })
-  // }
-
-  // handleAssigneeChange = e => {
-  //   this.setState({
-  //     member_id: e.target.value,
-  //   })
-  // }
 
   toggleForm = () => {
     const formToggle = !this.state.showForm
@@ -68,6 +51,7 @@ export default class AddTask extends React.Component {
       'household_id': household_id,
       'member_id': this.state.member_id
     }
+
     
     if(isValid) {
       fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
@@ -82,6 +66,7 @@ export default class AddTask extends React.Component {
         (!res.ok)
         ? res.json().then(e => Promise.reject(e))
         : res.json()
+
       )
       .then((task) => {
         let memberName = this.props.members.filter(member =>
@@ -134,10 +119,11 @@ export default class AddTask extends React.Component {
       <button type="submit">Add task</button>
     </form>
     } 
+
     return (
       <div>
         <button onClick={this.toggleForm}>Add a new task</button>
-          {display}
+        {display}
       </div>
     )
   }
