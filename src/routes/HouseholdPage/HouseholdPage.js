@@ -3,6 +3,7 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import MembersList from '../../components/MembersList/MembersList';
+import EditMember from '../../components/EditMember/EditMember';
 import './HouseholdPage.css'
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 
@@ -73,7 +74,7 @@ export default class HouseholdPage extends Component {
     tasks[member_id].tasks = filteredTasks;
     ApiService.deleteTask(household_id, task_id).then(() =>
       this.context.setTasks(tasks)
-    )
+      )
       .then(() => {
         this.updateMembersList();
       })
@@ -130,7 +131,7 @@ export default class HouseholdPage extends Component {
     return (
       <div className='household-page-container'>
         <h2>Household page</h2>
-        <TasksToApprove
+        <TasksToApprove 
           household_id={this.props.match.params.id}
         />
         <AddTask
@@ -159,4 +160,3 @@ export default class HouseholdPage extends Component {
     );
   }
 }
-
