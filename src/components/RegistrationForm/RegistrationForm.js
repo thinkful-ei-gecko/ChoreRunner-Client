@@ -18,7 +18,6 @@ class RegistrationForm extends Component {
     validateError: {
       nameError: '',
       usernameError: '',
-      passwordError:'',
     }
   }
 
@@ -31,14 +30,11 @@ class RegistrationForm extends Component {
   }
 
   validateForm = () => {
-    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
-    const { password } = this.state;
     let name = this.state.name.trim();
     let userName = this.state.username.trim()
-    const allLetters = /[a-zA-Z]+\D/;
+    const allLetters = /[a-zA-Z]+\d/;
 
     let usernameError = '';
-    let passwordError = '';
     let nameError = '';
 
     //Validates the persons name
@@ -62,23 +58,9 @@ class RegistrationForm extends Component {
     if(userName.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
-    
-    //Validates the password
-    if (password.length < 5) {
-      passwordError = 'Password be longer than 8 characters';
-    }
-    if (password.length > 20) {
-      passwordError = 'Password be less than 72 characters';
-    }
-    if (password.startsWith(' ') || password.endsWith(' ')) {
-      passwordError = 'Password must not start or end with empty spaces';
-    }
-    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
-      passwordError = 'Password must contain one upper case, lower case, number and special character';
-    }
 
-    if(passwordError || usernameError || nameError) {
-      this.setState({ validateError: { passwordError, usernameError, nameError } })
+    if(usernameError || nameError) {
+      this.setState({ validateError: { usernameError, nameError } })
       return false;
     }
     return true;
@@ -113,7 +95,7 @@ class RegistrationForm extends Component {
 
   render() {
     const { name, username, password, error } = this.state;
-    const { nameError, usernameError, passwordError } = this.state.validateError;
+    const { nameError, usernameError } = this.state.validateError;
 
     return (
       <div className='box'>
@@ -121,7 +103,7 @@ class RegistrationForm extends Component {
           onSubmit={this.handleSubmit}
         >
           <div role='alert'>
-            {error && <p className='alertMsg' >{error}</p>}
+            {error && <p className='alertMsg'>{error}</p>}
           </div>
           <div className='formItem'>
             <Label htmlFor='registration-name-input'>
@@ -135,7 +117,9 @@ class RegistrationForm extends Component {
               onChange={this.onChangeHandle}
               required
             />
-            <div className="valid-error">{nameError}</div>
+            <div role="alert">
+              <p className='alertMsg'>{nameError}</p>
+            </div>
           </div>
           <div className='formItem'>
             <Label htmlFor='registration-username-input'>
@@ -148,7 +132,7 @@ class RegistrationForm extends Component {
               onChange={this.onChangeHandle}
               required
             />
-            <div className="valid-error">{usernameError}</div>
+            <div role="alert">{usernameError}</div>
           </div>
           <div className='formItem'>
             <Label htmlFor='registration-password-input'>
@@ -162,7 +146,7 @@ class RegistrationForm extends Component {
               onChange={this.onChangeHandle}
               required
             />
-            <div className="valid-error">{passwordError}</div>
+            {/* <div className="valid-error">{passwordError}</div> */}
           </div>
           <footer className='formFooter'>
             <Button type='submit' className='basicBtn'>

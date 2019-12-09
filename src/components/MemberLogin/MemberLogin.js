@@ -94,9 +94,9 @@ export default class MemberLogin extends Component {
       <div className='parent-login'>
         <h2> Member login</h2>
         <form className='parent-form-container' id="member-login" onSubmit={this.handleSubmit}>
-          <div role='alert'>
+          {/* <div role='alert'>
             {error && <p>{error}</p>}
-          </div>
+          </div> */}
           <div>
             <label htmlFor='username'> Username</label>
             <input name='username' type='text' onChange={this.onChangeHandle} value={username} required ></input>
@@ -105,7 +105,9 @@ export default class MemberLogin extends Component {
           <div>
             <label htmlFor='password'> Password</label>
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
-            <div className="valid-error">{passwordError}</div>
+            <div role='alert'>
+              {error && <p>{error}</p>}
+            </div>
           </div>
           <button type='submit'>login</button>
         </form>

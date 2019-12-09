@@ -10,19 +10,44 @@ export default class AddMembers extends React.Component {
     password: '',
     household_id: this.context.households.id || '', 
     error: null,
-    nameError: ''
+    validateError: {
+      usernameError: '',
+      passwordError:'',
+    }
   }
   static contextType = HouseholdContext
 
   validate = () => {
-    let nameError = '';
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
+    const { password } = this.state;
+    let username = this.state.username.trim()
+    let usernameError = '';
+    let passwordError = '';
 
-    if(this.state.name.length <= 3) {
-      nameError = 'Please enter more characters'
+    // Validates child's username
+    if(username.length <= 6) {
+      usernameError = 'Please enter more characters';
+    }
+    if(username.length > 50) {
+      usernameError = 'Your name must be less than 50 characters';
     }
 
-    if(nameError) {
-      this.setState({ nameError })
+    //Validates the password
+    if (password.length <= 7) {
+      passwordError = 'Password be longer than 8 characters';
+    }
+    if (password.length > 20) {
+      passwordError = 'Password be less than 72 characters';
+    }
+    if (password.startsWith(' ') || password.endsWith(' ')) {
+      passwordError = 'Password must not start or end with empty spaces';
+    }
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
+      passwordError = 'Password must contain one upper case, lower case, number and special character';
+    }
+
+    if(usernameError || passwordError) {
+      this.setState({ validateError: { usernameError, passwordError } })
       return false;
     }
     return true;
@@ -49,7 +74,7 @@ export default class AddMembers extends React.Component {
       password: this.state.password,
       household_id: this.state.household_id
     }
-    // if(isValid) {
+    if(isValid) {
       fetch(`${config.API_ENDPOINT}/households/${this.state.household_id}/members`, {
         method: 'POST',
         headers: {
@@ -73,14 +98,14 @@ export default class AddMembers extends React.Component {
         })
         this.props.handleRenderUpdate(member);
       })
-      document.getElementById("add-household-form").reset();
-     //}
+      //document.getElementById("add-household-form").reset();
+    }
   }
 
 
   render() {
     const { households } = this.context
-    const nameError = this.state.nameError;
+    const { usernameError, passwordError } = this.state.validateError;
     return (
 
       <div className="add-member container">
@@ -88,7 +113,7 @@ export default class AddMembers extends React.Component {
         <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
           <label htmlFor="member-name">Name</label>
           <input type="text" id="member-name" name="name" required onChange={this.onChangeHandle} value={this.state.name}></input>
-          <div className="valid-error">{nameError}</div>
+
           <label htmlFor="household">Household</label>
           <select className='select-css' type="text" id="assignee" name="household_id" onChange={this.onChangeHandle} defaultValue="Select household" required>
             <option disabled>Select household</option>
@@ -96,8 +121,14 @@ export default class AddMembers extends React.Component {
           </select>
           <label htmlFor="child-username">Child username</label>
           <input type="text" id="child-username" name="username" required onChange={this.onChangeHandle} value={this.state.username}></input>
+          <div role="alert">
+            <p className='alertMsg'>{usernameError}</p>
+          </div>
           <label htmlFor="child-password">Child password</label>
           <input type="password" id="child-password" name="password" required onChange={this.onChangeHandle} value={this.state.password}></input>
+          <div role="alert">
+            <p className='alertMsg'>{passwordError}</p>
+          </div>
           <button type="submit" className="submitHH">add</button>
         </form>
         {<p>{this.state.error}</p>}
