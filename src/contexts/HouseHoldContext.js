@@ -13,7 +13,7 @@ const HouseholdContext = React.createContext({
   setTask: () => { },
   setTasks: () => { },
   task: '',
-  tasks: {}
+  tasks: {},
 });
 
 export default HouseholdContext;
@@ -24,7 +24,7 @@ export class HouseholdProvider extends Component {
     memberTasks: [],
     error: null,
     task: '',
-    tasks: {}
+    tasks: {},
   };
 
   setHouseholds = households => {
@@ -87,10 +87,9 @@ export class HouseholdProvider extends Component {
       setError: this.setError,
       setTask: this.setTask,
       setTasks: this.setTasks,
-      completeTask: this.completeTask
-
+      completeTask: this.completeTask,
     };
-
+    
     return (
       <HouseholdContext.Provider value={value}>
         {this.props.children}
