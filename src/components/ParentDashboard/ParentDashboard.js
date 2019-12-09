@@ -46,13 +46,14 @@ export default class ParentDashboard extends Component {
 
   handleRenderAfterAddMember = res => {
     console.log('THIS IS MEMBERS',this.state.members)
-    let members = this.state.members;
-    members[res.household_id].members =
-      [...members[res.household_id].members, {'name': res.name, 'id' : res.id}]
-    this.setState({
-      members: members
-    })
-     
+    if (this.state.members[res.household_id]) {
+      let members = this.state.members;
+      members[res.household_id].members =
+        [...members[res.household_id].members, {'name': res.name, 'id' : res.id}]
+      this.setState({
+        members: members
+      })
+    }  
   }
 
   handleHouseholdSubmit = e => {

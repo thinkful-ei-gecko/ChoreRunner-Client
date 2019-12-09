@@ -74,7 +74,7 @@ export default class ParentLogin extends Component {
       .then(res => {
         username.value = ''
         password.value = ''
-        this.context.processLogin(res.authToken)
+        this.context.processLogin(res.authToken, res.type)
         this.onLoginSuccess()
       })
       .catch(res => {
