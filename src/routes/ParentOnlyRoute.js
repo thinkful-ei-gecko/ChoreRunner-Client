@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import UserContext from '../contexts/UserContext'
+import NotFoundPage from '../components/NotFoundPage/NotFoundPage'
 
 export default function ParentOnlyRoute({ component, ...props }) {
   const Component = component
@@ -13,12 +14,7 @@ export default function ParentOnlyRoute({ component, ...props }) {
             !!userContext.user.id && userContext.user.type === 'user'
               ? <Component {...componentProps} />
               : (
-                <Redirect
-                  to={{
-                    pathname: userContext.user.idle ? '/login' : '/register',
-                    state: { from: componentProps.location },
-                  }}
-                />
+                <NotFoundPage />
               )
           }
         </UserContext.Consumer>

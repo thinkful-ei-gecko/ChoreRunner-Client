@@ -12,6 +12,7 @@ import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
+import NotFoundPage from './components/NotFoundPage/NotFoundPage'
 import './App.css';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
       </header>
       <main>
         <Switch>
-          <Route exact path={'/'} component={Landing} />
+          <PublicRoute exact path={'/'} component={Landing} />
           <PublicRoute exact path={'/login'} component={ParentLogin} />
           <PublicRoute exact path={'/kidLogin'} component={MemberLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
@@ -31,7 +32,7 @@ function App() {
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
           {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}
-          {/* <Route component={NotFoundPage} /> */}
+          <Route component={NotFoundPage} />
         </Switch>
       </main>
     </div>

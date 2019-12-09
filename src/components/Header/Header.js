@@ -40,11 +40,9 @@ class Header extends Component {
   }
 
   render() {
-    let display
-    if (this.props.location.pathname !== '/member-dashboard') {
-      display = <h1>
+    let display = <h1>
         {TokenService.hasAuthToken() ? (
-          <Link to='/parent-dashboard' style={{ textDecoration: 'none' }}>
+          <Link to={this.context.user.type === 'user' ? '/parent-dashboard' : '/member-dashboard'} style={{ textDecoration: 'none' }}>
             ChoreRunner
         </Link>
         ) : (
@@ -53,14 +51,9 @@ class Header extends Component {
         </Link>
           )}
       </h1>
-    }
+
     return (
       <>
-        {/* <h1>
-          <Link to='/' style={{ textDecoration: 'none'}}>
-            ChoreRunner
-          </Link>
-        </h1> */}
         {display}
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
