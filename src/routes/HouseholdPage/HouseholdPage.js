@@ -3,9 +3,14 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import MembersList from '../../components/MembersList/MembersList';
-import EditMember from '../../components/EditMember/EditMember';
 import './HouseholdPage.css'
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
+
+/*
+Alex Edits:
+- I grouped some of the methods together for legibility.
+- In state, I changed boolean 'editing' to 'editMember' for consistency and added a toggleEditMember callback.
+*/
 
 export default class HouseholdPage extends Component {
   state = {
@@ -14,23 +19,11 @@ export default class HouseholdPage extends Component {
     task: '',
     newPoints: '',
     newTitle: '',
+    editMember: false,
     editPts: false,
     editTitle: false,
   };
   static contextType = HouseholdContext;
-
-  updateMembersList = (updatedMember) => {
-    let newMembers = this.state.membersList.map(member =>
-      member.id !== updatedMember.id ? member : updatedMember
-    );
-    this.setState({
-      membersList: newMembers,
-    });
-    let tasks = this.context.tasks;
-    tasks[updatedMember.id].name = updatedMember.name;
-    tasks[updatedMember.id].username = updatedMember.username;
-    this.context.setTasks(tasks);
-  }
 
   componentDidMount() {
     this.updateEverything();
@@ -48,6 +41,26 @@ export default class HouseholdPage extends Component {
       this.context.setTasks(tasks);
     });
   };
+
+  //Member callbacks
+  updateMembersList = (updatedMember) => {
+    let newMembers = this.state.membersList.map(member =>
+      member.id !== updatedMember.id ? member : updatedMember
+    );
+    this.setState({
+      membersList: newMembers,
+    });
+    let tasks = this.context.tasks;
+    tasks[updatedMember.id].name = updatedMember.name;
+    tasks[updatedMember.id].username = updatedMember.username;
+    this.context.setTasks(tasks);
+  }
+
+  toggleEditMember = () => {
+    console.log('toggle firing')
+    this.setState({ editMember: !this.state.editMember })
+    console.log(this.state.editMember)
+  }
 
   handleDeleteMember = (id, household_id) => {
     // console.log(this.state.membersList)
@@ -74,14 +87,14 @@ export default class HouseholdPage extends Component {
     tasks[member_id].tasks = filteredTasks;
     ApiService.deleteTask(household_id, task_id).then(() =>
       this.context.setTasks(tasks)
-      )
+    )
       .then(() => {
         this.updateMembersList();
       })
       .catch(error => this.context.setError(error));
   };
 
-  //Title input callbacks
+  //Task Title input callbacks
   handleEditTitleClick = () => {
     this.setState({ editTitle: true });
   }
@@ -102,7 +115,7 @@ export default class HouseholdPage extends Component {
       .then(after => this.updateEverything());
   };
 
-  //Points input callbacks
+  //Task Points input callbacks
   handleEditPointsClick = () => {
     this.setState({ editPts: true });
   }
@@ -127,12 +140,12 @@ export default class HouseholdPage extends Component {
   render() {
     const { tasks } = this.context;
     const data = Object.values(tasks);
-    
+
 
     return (
       <div className='household-page-container'>
         <h2>Household page</h2>
-        <TasksToApprove 
+        <TasksToApprove
           household_id={this.props.match.params.id}
         />
         <AddTask
@@ -143,11 +156,12 @@ export default class HouseholdPage extends Component {
         <MembersList
           tasks={tasks}
           data={data}
-          editing={this.state.editing}
           household_id={this.props.match.params.id}
+          editMember={this.state.editMember}
           editTitle={this.state.editTitle}
           editPts={this.state.editPts}
           updateMembersList={this.updateMembersList}
+          toggleEditMember={this.toggleEditMember}
           handleDeleteMember={this.handleDeleteMember}
           handleEditTitleClick={this.handleEditTitleClick}
           handleTitleChange={this.handleTitleChange}
