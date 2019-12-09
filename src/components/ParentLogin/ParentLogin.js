@@ -78,6 +78,7 @@ export default class ParentLogin extends Component {
         this.onLoginSuccess()
       })
       .catch(res => {
+        console.log(res.error)
         this.setState({ error: res.error })
       })
     //}
@@ -100,7 +101,7 @@ export default class ParentLogin extends Component {
           <div>
             <label htmlFor='password'>Password</label>
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
-            <div className="valid-error">{passwordError}</div>
+            {error && <div className="valid-error">{error}</div>}
           </div>
           <button type='submit'>login</button>
         </form>
