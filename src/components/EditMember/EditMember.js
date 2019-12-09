@@ -10,7 +10,7 @@ export default class EditMember extends React.Component {
     name: this.props.member.name,
     username: this.props.member.username,
     password: '',
-    editing: false,
+    editMember: this.props.editMember,
     nameError: '',
   };
 
@@ -23,11 +23,11 @@ export default class EditMember extends React.Component {
   validate = () => {
     let nameError = '';
 
-    if(this.state.name.length <= 3) {
+    if (this.state.name.length <= 3) {
       nameError = 'Please enter more characters'
     }
 
-    if(nameError) {
+    if (nameError) {
       this.setState({ nameError })
       return false;
     }
@@ -36,6 +36,7 @@ export default class EditMember extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { toggleEditMember, updateMembersList } = this.props;
     let isValid = this.validate();
     let household_id = this.props.household_id;
     let updatedMember = {
@@ -45,13 +46,17 @@ export default class EditMember extends React.Component {
       password: this.state.password,
     };
 
-    if(isValid) {
+    if (isValid) {
       ApiService.editMember(updatedMember, household_id, this.state.id).then(res => {
         let newMember = res[0]
-        this.props.updateMember(newMember);
-        this.setState({editing : false})
+        return newMember
       })
-      .catch(error => this.context.setError(error))
+        //I added the return and this 'then' to ensure the component rerenders with the new info.
+        .then(newMember => {
+          updateMembersList(newMember)
+          toggleEditMember()
+        })
+        .catch(error => this.context.setError(error))
       document.getElementById("add-household-form").reset();
     }
 
@@ -76,8 +81,9 @@ export default class EditMember extends React.Component {
   // };
 
   renderFormButton() {
+    const { toggleEditMember } = this.props;
     return (
-      <button onClick={() => this.setState({ editing: true })}>
+      <button onClick={() => toggleEditMember()}>
         Edit Member
       </button>
     );
@@ -128,11 +134,11 @@ export default class EditMember extends React.Component {
   render() {
     return (
       <>
-        {this.state.editing === true ? (
+        {!!this.props.editMember ? (
           <>{this.renderForm()}</>
         ) : (
-          <>{this.renderFormButton()}</>
-        )}
+            <>{this.renderFormButton()}</>
+          )}
       </>
     );
   }

@@ -8,11 +8,12 @@ export default class MembersList extends Component {
     const {
       tasks,
       data,
-      editing,
+      editMember,
       household_id,
       editTitle,
       editPts,
       updateMembersList,
+      toggleEditMember,
       handleDeleteMember,
       handleEditTitleClick,
       handleTitleChange,
@@ -29,8 +30,9 @@ export default class MembersList extends Component {
             <div key={index}>
               <p>{member.name}</p>
               <EditMember
-                editing={editing}
+                editMember={editMember}
                 updateMembersList={updateMembersList}
+                toggleEditMember={toggleEditMember}
                 member={member}
                 household_id={household_id}
               />
