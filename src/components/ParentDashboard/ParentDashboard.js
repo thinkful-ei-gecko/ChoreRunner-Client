@@ -46,6 +46,7 @@ export default class ParentDashboard extends Component {
 
   handleRenderAfterAddMember = res => {
     console.log('THIS IS MEMBERS',this.state.members)
+    console.log('this is new member', res)
     if (this.state.members[res.household_id]) {
       let members = this.state.members;
       members[res.household_id].members =
@@ -53,7 +54,13 @@ export default class ParentDashboard extends Component {
       this.setState({
         members: members
       })
-    }  
+    } else {
+      let members = this.state.members;
+      members[res.household_id] = {'household_id': res.household_id, 'members': [{'name': res.name, 'id': res.id}]}
+      this.setState({
+        members: members
+      })
+    }
   }
 
   handleHouseholdSubmit = e => {
@@ -62,6 +69,7 @@ export default class ParentDashboard extends Component {
     ApiService.postHousehold(name)
       .then(res => {
         this.context.addHousehold(res)
+        this.householdName.value = '';
       })
       .catch(error => console.log(error));
   }
@@ -125,7 +133,7 @@ export default class ParentDashboard extends Component {
             onSubmit={this.handleHouseholdSubmit}
           >
             <label htmlFor="householdName"> ADD HOUSEHOLD:</label>
-            <input name="householdName" type="text" required></input>
+            <input name="householdName" type="text" required ref={input => this.householdName = input}></input>
             <button className="submitHH" type="submit">
               add
             </button>
