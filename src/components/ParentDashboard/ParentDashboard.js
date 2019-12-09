@@ -15,6 +15,7 @@ export default class ParentDashboard extends Component {
       household: [],
       editName: false,
       id: null,
+      members: {}
     }
   }
 
@@ -31,28 +32,26 @@ export default class ParentDashboard extends Component {
           error: error,
         })
       )
+
+    ApiService.getMembersAndHouseholds()
+    .then(res => {
+      this.setState({members: res});
+    })
+    .catch(error =>
+      this.setState({
+        error: error,
+      })
+    )
   }
 
-
-  handleAddMember = e => {
-    e.preventDefault();
-    let name = e.target.memberName.value;
-    let username = e.target.username.value;
-    let password = e.target.memberPassword.value;
-    let household_id = e.target.household.value;
-    let newMember = {
-      name,
-      username,
-      password,
-      household_id,
-    }
-    ApiService.addMember(newMember, household_id)
-      .then(res => {
-        this.context.addMember(res)
-        //want to push to the context array with the added member. 
-        console.log(res)
-      })
-      .catch(error => console.log(error))
+  handleRenderAfterAddMember = res => {
+    let members = this.state.members;
+    members[res.household_id].members =
+      [...members[res.household_id].members, {'name': res.name, 'id' : res.id}]
+    this.setState({
+      members: members
+    })
+     
   }
 
   handleHouseholdSubmit = e => {
@@ -88,22 +87,8 @@ export default class ParentDashboard extends Component {
     })
   }
 
-  renderOptions = () => {
-    const { households } = this.context;
-    return households.map(house => {
-      return (
-        <option key={house.householdId} value={house.householdId}>
-          {house.housename}
-        </option>
-      );
-    });
-  }
-
-
   renderHouseholds = () => {
-    const { name } = this.state;
     const { households, deleteHousehold } = this.context;
-
     return households.map((household) => {
 
       return (
@@ -115,6 +100,13 @@ export default class ParentDashboard extends Component {
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
             <button onClick={() => this.setState({ editName: true, id: household.id })}>Edit</button>
           </div>
+          {this.state.members && this.state.members[household.id] ?
+          <ul>
+            {this.state.members[household.id].members.map(member => {
+              return <li key={member.id}>{member.name}</li>
+            })} 
+          </ul>
+          : null}
         </div>
       );
     });
@@ -122,8 +114,6 @@ export default class ParentDashboard extends Component {
 
   render() {
     const { households } = this.context;
-    // console.log(this.state.id)
-    console.log('THIS IS CONTEXT ----', households)
     return (
       <section className="parent_dashboard">
         <h2>PARENT DASHBOARD</h2>
@@ -140,7 +130,7 @@ export default class ParentDashboard extends Component {
           </form>
         </div>
         <div className='household-details container'>
-          <AddMembers />
+          <AddMembers handleRenderUpdate={this.handleRenderAfterAddMember}/>
         </div>
         <div className="household_buttons">
           {this.renderHouseholds()}
