@@ -10,18 +10,91 @@ class RegistrationForm extends Component {
     onRegistrationSuccess: () => { }
   }
 
-  state = { error: null }
+  state = {
+    name: '',
+    username: '',
+    password: '',
+    error: null,
+    validateError: {
+      nameError: '',
+      usernameError: '',
+      passwordError:'',
+    }
+  }
 
   firstInput = React.createRef()
 
+  onChangeHandle = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  validateForm = () => {
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
+    const { password } = this.state;
+    let name = this.state.name.trim();
+    let userName = this.state.username.trim()
+    const allLetters = /[a-zA-Z]+\D/;
+
+    let usernameError = '';
+    let passwordError = '';
+    let nameError = '';
+
+    //Validates the persons name
+		if (name.length === 0) {
+			nameError = 'Input field cannot be empty';
+		}
+		if (name.length < 6) {
+			nameError = 'Please enter a name that is at least 6 characters long';
+    }
+    if (!allLetters.test(name)) {
+      nameError = 'Name must include only alphabetical letters';
+    }
+    if(name.length > 50) {
+      nameError = 'Your name must be less than 50 characters';
+    }
+  
+    //Validates the username
+    if(userName.length <= 5) {
+      usernameError = 'Please enter more characters'
+    }
+    if(userName.length > 50) {
+      usernameError = 'Your name must be less than 50 characters';
+    }
+    
+    //Validates the password
+    if (password.length < 5) {
+      passwordError = 'Password be longer than 8 characters';
+    }
+    if (password.length > 20) {
+      passwordError = 'Password be less than 72 characters';
+    }
+    if (password.startsWith(' ') || password.endsWith(' ')) {
+      passwordError = 'Password must not start or end with empty spaces';
+    }
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
+      passwordError = 'Password must contain one upper case, lower case, number and special character';
+    }
+
+    if(passwordError || usernameError || nameError) {
+      this.setState({ validateError: { passwordError, usernameError, nameError } })
+      return false;
+    }
+    return true;
+  }
+
   handleSubmit = ev => {
     ev.preventDefault()
+    const isValid = this.validateForm();
     const { name, username, password } = ev.target
-    AuthApiService.postUser({
-      name: name.value,
-      username: username.value,
-      password: password.value,
-    })
+
+    if(isValid) {
+      AuthApiService.postUser({
+        name: name.value,
+        username: username.value,
+        password: password.value,
+      })
       .then(user => {
         name.value = ''
         username.value = ''
@@ -31,6 +104,7 @@ class RegistrationForm extends Component {
       .catch(res => {
         this.setState({ error: res.error })
       })
+    }
   }
 
   componentDidMount() {
@@ -38,7 +112,8 @@ class RegistrationForm extends Component {
   }
 
   render() {
-    const { error } = this.state;
+    const { name, username, password, error } = this.state;
+    const { nameError, usernameError, passwordError } = this.state.validateError;
 
     return (
       <div className='box'>
@@ -56,8 +131,11 @@ class RegistrationForm extends Component {
               ref={this.firstInput}
               id='registration-name-input'
               name='name'
+              value={name}
+              onChange={this.onChangeHandle}
               required
             />
+            <div className="valid-error">{nameError}</div>
           </div>
           <div className='formItem'>
             <Label htmlFor='registration-username-input'>
@@ -66,8 +144,11 @@ class RegistrationForm extends Component {
             <Input className='formBox'
               id='registration-username-input'
               name='username'
+              value={username}
+              onChange={this.onChangeHandle}
               required
             />
+            <div className="valid-error">{usernameError}</div>
           </div>
           <div className='formItem'>
             <Label htmlFor='registration-password-input'>
@@ -77,13 +158,16 @@ class RegistrationForm extends Component {
               id='registration-password-input'
               name='password'
               type='password'
+              value={password}
+              onChange={this.onChangeHandle}
               required
             />
+            <div className="valid-error">{passwordError}</div>
           </div>
           <footer className='formFooter'>
             <Button type='submit' className='basicBtn'>
               Sign up
-          </Button>
+            </Button>
             {' '}
             <br />
             {/* <Link to='/login' className='already'>Already have an account?</Link> */}
