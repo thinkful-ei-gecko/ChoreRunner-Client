@@ -35,7 +35,6 @@ export default class ParentDashboard extends Component {
 
     ApiService.getMembersAndHouseholds()
     .then(res => {
-      console.log('api res', res)
       this.setState({members: res});
     })
     .catch(error =>
@@ -45,23 +44,14 @@ export default class ParentDashboard extends Component {
     )
   }
 
-  handleAddMember = e => {
-    e.preventDefault();
-    let name = e.target.memberName.value;
-    let username = e.target.username.value;
-    let password = e.target.memberPassword.value;
-    let household_id = e.target.household.value;
-    let newMember = {
-      name,
-      username,
-      password,
-      household_id,
-    }
-    ApiService.addMember(newMember, household_id)
-      .then(res => {
-        this.context.addMember(res) //doesn't exist in the context
-      })
-      .catch(error => console.log(error))
+  handleRenderAfterAddMember = res => {
+    let members = this.state.members;
+    members[res.household_id].members =
+      [...members[res.household_id].members, {'name': res.name, 'id' : res.id}]
+    this.setState({
+      members: members
+    })
+     
   }
 
   handleHouseholdSubmit = e => {
@@ -140,7 +130,7 @@ export default class ParentDashboard extends Component {
           </form>
         </div>
         <div className='household-details container'>
-          <AddMembers />
+          <AddMembers handleRenderUpdate={this.handleRenderAfterAddMember}/>
         </div>
         <div className="household_buttons">
           {this.renderHouseholds()}

@@ -15,7 +15,6 @@ export default class AddMembers extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.household_id)
     if (this.state.household_id === '') {
       this.setState({
         error: "Please select a household"
@@ -40,13 +39,16 @@ export default class AddMembers extends React.Component {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-      .then(member => this.setState({
+      .then(member => {
+        this.setState({
         name: '',
         username: '',
         password: '',
         household_id: 'Select household',
         error: null
-      }))
+        })
+        this.props.handleRenderUpdate(member);
+      })
   }
 
   handleNameChange = e => {
