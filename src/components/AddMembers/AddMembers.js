@@ -63,40 +63,20 @@ export default class AddMembers extends React.Component {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-      .then(member => this.setState({
+      .then(member => {
+        this.setState({
         name: '',
         username: '',
         password: '',
         household_id: 'Select household',
         error: null
-      }))
+        })
+        this.props.handleRenderUpdate(member);
+      })
       document.getElementById("add-household-form").reset();
-    }
+     }))
   }
 
-  // handleNameChange = e => {
-  //   this.setState({
-  //     name: e.target.value
-  //   })
-  // }
-
-  // handleHouseholdChange = e => {
-  //   this.setState({
-  //     household_id: e.target.value
-  //   })
-  // }
-
-  // handleChildUsernameChange = e => {
-  //   this.setState({
-  //     username: e.target.value
-  //   })
-  // }
-
-  // handleChildPasswordChange = e => {
-  //   this.setState({
-  //     password: e.target.value
-  //   })
-  // }
 
   render() {
     const { households } = this.context
