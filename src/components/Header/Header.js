@@ -55,17 +55,17 @@ class Header extends Component {
       </h1>
     }
     return (
-      <header>
-        <h1>
+      <>
+        {/* <h1>
           <Link to='/' style={{ textDecoration: 'none'}}>
             ChoreRunner
           </Link>
-        </h1>
+        </h1> */}
         {display}
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
-      </header>
+      </>
     );
   }
 }

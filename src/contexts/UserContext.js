@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthApiService from '../services/auth-api-service'
 import TokenService from '../services/token-service'
 import IdleService from '../services/idle-service'
+import config from '../config'
 
 const UserContext = React.createContext({
   user: {},
@@ -18,7 +19,7 @@ export default UserContext
 export class UserProvider extends Component {
   constructor(props) {
     super(props)
-    const state = { user: {}, error: null }
+    const state = { user: {}, error: null}
 
     const jwtPayload = TokenService.parseAuthToken()
 
@@ -27,6 +28,7 @@ export class UserProvider extends Component {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
+        type: window.localStorage.getItem(config.TYPE)
       }
 
     this.state = state;
@@ -60,13 +62,15 @@ export class UserProvider extends Component {
     this.setState({ user })
   }
 
-  processLogin = authToken => {
+  processLogin = (authToken, type) => {
     TokenService.saveAuthToken(authToken)
+    TokenService.saveType(type)
     const jwtPayload = TokenService.parseAuthToken()
     this.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
       username: jwtPayload.sub,
+      type: type
     })
     IdleService.regiserIdleTimerResets()
     TokenService.queueCallbackBeforeExpiry(() => {
@@ -76,6 +80,7 @@ export class UserProvider extends Component {
 
   processLogout = () => {
     TokenService.clearAuthToken()
+    TokenService.clearType()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({})

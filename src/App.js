@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import PublicRoute from './routes/PublicRoute'
 import PrivateRoute from './routes/PrivateRoute'
+import ParentOnlyRoute from './routes/ParentOnlyRoute'
 import Landing from './components/Landing/Landing'
 import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
@@ -13,10 +15,11 @@ import MemberLogin from './components/MemberLogin/MemberLogin'
 import './App.css';
 
 function App() {
+  const HeaderWithRouter = withRouter(Header)
   return (
     <div className="App">
       <header>
-        <Header />
+        <HeaderWithRouter />
       </header>
       <main>
         <Switch>
@@ -24,7 +27,7 @@ function App() {
           <PublicRoute exact path={'/login'} component={ParentLogin} />
           <PublicRoute exact path={'/kidLogin'} component={MemberLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
-          <PrivateRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
+          <ParentOnlyRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
           {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}

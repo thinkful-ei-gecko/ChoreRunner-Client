@@ -23,11 +23,12 @@ export default class ParentLogin extends Component {
         AuthApiService.postLogin({
             username: username.value,
             password: password.value,
+            type: 'user'
         })
             .then(res => {
                 username.value = ''
                 password.value = ''
-                this.context.processLogin(res.authToken)
+                this.context.processLogin(res.authToken, res.type)
                 this.onLoginSuccess()
             })
             .catch(res => {

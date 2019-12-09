@@ -98,7 +98,7 @@ export default class AddTask extends React.Component {
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" required onChange={this.handleTitleChange} value={this.state.title}></input>
       <label htmlFor="assignee">Task assigned to</label>
-      <select type="text" id="assignee" required onChange={this.handleAssigneeChange} defaultValue="Select household member">
+      <select className='select-css' type="text" id="assignee" required onChange={this.handleAssigneeChange} defaultValue="Select household member">
         <option disabled>Select household member</option>
         {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
       </select>

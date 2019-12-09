@@ -25,11 +25,13 @@ export default class MemberLogin extends Component {
         AuthApiService.postMemberLogin({
             username: username.value,
             password: password.value,
+            type: 'member'
         })
             .then(res => {
+                console.log(res)
                 username.value = ''
                 password.value = ''
-                this.context.processLogin(res.authToken)
+                this.context.processLogin(res.authToken, res.type)
                 this.onLoginSuccess()
             })
             .catch(res => {

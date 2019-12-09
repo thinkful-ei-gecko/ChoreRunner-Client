@@ -1,9 +1,53 @@
 .memberDashboard{
+    position: relative;
     height: 85vh;
     padding-top: 15vh;
     overflow-y: auto;
+    background-image: url("../../images/ChoreRunner.png");
+    background-size: cover;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    animation: house 15s linear infinite;
+
 }
 
+.chores-container{
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 60%;
+    margin: auto;
+}
+.chores-container p, .chores-container span {
+    color: white;
+    font-size: 30px;
+}
+.chores-container h2 {
+    padding-top: 20px;
+    color: rgb(255, 217, 0);
+    font-size: 20px;
+    text-shadow: none;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.member-container{
+    position: absolute;
+    width: 100%;
+}
+
+@keyframes house{
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+/* .background-img{
+    background-image: url("../../images/ChoreRunner.png");
+    background-size: cover;
+    height: 100vh;
+} */
 .task_list li {
     list-style: none;
     display: flex;
@@ -18,4 +62,5 @@
 
 .task_list li button {
     font-size: 17px;
+    width: 175px;
 }
