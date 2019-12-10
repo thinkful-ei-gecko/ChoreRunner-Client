@@ -10,7 +10,6 @@ export default class AddTask extends React.Component {
     title: '',
     points: '',
     member_id: '',
-    titleError: '',
   }
   static contextType = HouseholdContext;
 
@@ -20,22 +19,6 @@ export default class AddTask extends React.Component {
     })
   }
 
-  validate = () => {
-    let titleError = ''
-    
-    if(this.state.title.length <= 3) {
-      titleError = 'Please enter more characters'
-    }
-
-    if(titleError) {
-      this.setState({ titleError })
-      return false;
-    }
-
-    return true;
-  }
-
-
   toggleForm = () => {
     const formToggle = !this.state.showForm
     this.setState({ showForm: formToggle })
@@ -43,7 +26,6 @@ export default class AddTask extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let isValid = this.validate();
     const household_id = this.props.household_id;
     let task = {
       'title': this.state.title,
@@ -52,8 +34,6 @@ export default class AddTask extends React.Component {
       'member_id': this.state.member_id
     }
 
-    
-    if(isValid) {
       fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
         method: 'POST',
         headers: {
@@ -98,18 +78,14 @@ export default class AddTask extends React.Component {
       .catch(e => {
         console.error({e})
       })
-      document.getElementById("add-task-form").reset();
-    }
   }
 
   render() {
-    let titleValidate = this.state.titleError
     let display; 
     if(this.state.showForm) {
       display = <form onSubmit={this.handleSubmit} id="add-task-form" className='add-task-form'>
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" name="title" required onChange={this.onChangeHandle} value={this.state.title}></input>
-      <div className="valid-error">{titleValidate}</div>
       <label htmlFor="assignee">Task assigned to</label>
       <select type="text" id="assignee" name="member_id" required onChange={this.onChangeHandle} defaultValue="Select household member">
         <option disabled>Select household member</option>

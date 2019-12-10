@@ -2,6 +2,22 @@ import config from '../config';
 import TokenService from './token-service';
 
 const ApiService = {
+  addHouseholdMember(householdId, newMember) {
+    return fetch(`${config.API_ENDPOINT}/households/${householdId}/members`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(newMember)
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+  },
+
   postHousehold(householdName) {
     let name = householdName;
     return fetch(`${config.API_ENDPOINT}/households`, {
