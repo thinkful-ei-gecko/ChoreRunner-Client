@@ -9,7 +9,7 @@ export default class TasksToApprove extends React.Component {
   }
   static contextType = HouseholdContext;
   componentDidMount() {
-    ApiService.getTasksToApprove(this.props.household_id)
+    ApiService.getTasksToApprove(this.props.householdId)
       .then(result => {
         this.setState({
           tasks: result
@@ -31,19 +31,31 @@ export default class TasksToApprove extends React.Component {
             return task.id !== taskId;
           });
           tasks[memberId].tasks = filteredTasks;
+          tasks[memberId].total_score += points;
+          this.context.setTasks(tasks)
+        } 
+        if (status === 'assigned') {
+          tasks[memberId].tasks.map(task => {
+            if (task.id === taskId) {
+              task.status = 'assigned'}
+          })
           this.context.setTasks(tasks)
         }
       })
   }
 
   render() {
-    const householdId = this.props.household_id;
+    const { householdId, memberId } = this.props;
     return (
-      <section>
-        {this.state.tasks.map(task => 
-          <li key={task.id}>{task.title}
+      <section className="tasks-to-approve">
+        <h3>Tasks to approve</h3>
+        {this.state.tasks.map(task => {
+          if (task.member_id === memberId) {
+            return <li key={task.id}><span>{task.title}</span>&nbsp;<span>points: {task.points}</span>
             <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>Approve</button>
-            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>Return</button></li>)}
+            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>Return</button></li>
+          }
+        })}
       </section>
     )
   }

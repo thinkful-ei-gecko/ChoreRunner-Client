@@ -20,6 +20,7 @@ export default class TasksList extends Component {
     return (
       <ul className="householdpage-member-task-list">
         {member.tasks.map(task => {
+          if (task.status === 'assigned') {
           return (
             <Task
               tasks={tasks}
@@ -37,6 +38,7 @@ export default class TasksList extends Component {
               handleTaskDelete={handleTaskDelete}
             />
           )
+          }
         })
         }
       </ul>

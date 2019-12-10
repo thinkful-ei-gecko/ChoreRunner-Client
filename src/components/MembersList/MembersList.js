@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import EditMember from '../EditMember/EditMember';
 import TasksList from '../TasksList/TasksList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 
 export default class MembersList extends Component {
 
@@ -28,19 +31,23 @@ export default class MembersList extends Component {
         {data.map((member, index) => {
           return (
             <div key={index}>
-              <p>{member.name}</p>
-              <EditMember
-                editMember={editMember}
-                updateMembersList={updateMembersList}
-                toggleEditMember={toggleEditMember}
-                member={member}
-                household_id={household_id}
-              />
-              <button onClick={() => handleDeleteMember(member.member_id, household_id)}>
-                Delete
-                </button>
-
-              {(!member.tasks.length || member.tasks[0].title == null)
+              <section className="member-card">
+                <div className="delete-edit-name">
+                  <h3 className="member-name">{member.name}</h3>
+                  <EditMember
+                    editMember={editMember}
+                    updateMembersList={updateMembersList}
+                    toggleEditMember={toggleEditMember}
+                    member={member}
+                    household_id={household_id}
+                  />
+                  <button onClick={() => handleDeleteMember(member.member_id, household_id)}>
+                  <FontAwesomeIcon icon={faTrashAlt} size="2x" color="red"/>
+                  </button>
+                </div>
+              <p>Total score: {member.total_score}</p>
+              <TasksToApprove householdId={household_id} memberId={member.member_id}/>
+              {(!member.tasks.length || member.tasks[0].title == null || member.tasks[0].status == 'completed')
                 ? <p>There are no tasks</p>
                 : <TasksList
                   tasks={tasks}
@@ -56,6 +63,7 @@ export default class MembersList extends Component {
                   handleTaskDelete={handleTaskDelete}
                 />
               }
+               </section>
             </div>
           );
         })

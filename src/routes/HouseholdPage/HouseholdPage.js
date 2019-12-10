@@ -3,14 +3,7 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import MembersList from '../../components/MembersList/MembersList';
-import './HouseholdPage.css'
-import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
-
-/*
-Alex Edits:
-- I grouped some of the methods together for legibility.
-- In state, I changed boolean 'editing' to 'editMember' for consistency and added a toggleEditMember callback.
-*/
+import './HouseholdPage.css';
 
 export default class HouseholdPage extends Component {
   state = {
@@ -43,7 +36,7 @@ export default class HouseholdPage extends Component {
   };
 
   //Member callbacks
-  updateMembersList = (updatedMember) => {
+  updateMembersList = updatedMember => {
     let newMembers = this.state.membersList.map(member =>
       member.id !== updatedMember.id ? member : updatedMember
     );
@@ -54,28 +47,30 @@ export default class HouseholdPage extends Component {
     tasks[updatedMember.id].name = updatedMember.name;
     tasks[updatedMember.id].username = updatedMember.username;
     this.context.setTasks(tasks);
-  }
+  };
 
   toggleEditMember = () => {
-    console.log('toggle firing')
-    this.setState({ editMember: !this.state.editMember })
-    console.log(this.state.editMember)
-  }
+    console.log('toggle firing');
+    this.setState({ editMember: !this.state.editMember });
+    console.log(this.state.editMember);
+  };
 
   handleDeleteMember = (id, household_id) => {
     // console.log(this.state.membersList)
-    console.log(household_id)
+    console.log(household_id);
     // const household_id = this.props.match.params.id;
     ApiService.deleteMember(id, household_id)
       .then(() => {
-        let newMembers = this.state.membersList.filter(member => member.id !== id);
+        let newMembers = this.state.membersList.filter(
+          member => member.id !== id
+        );
         this.setState({ membersList: newMembers });
         let tasks = this.context.tasks;
         delete tasks[id];
         this.context.setTasks(tasks);
       })
       .catch(error => this.context.setError(error));
-  }
+  };
 
   handleTaskDelete = (task_id, member_id) => {
     const household_id = this.props.match.params.id;
@@ -85,9 +80,8 @@ export default class HouseholdPage extends Component {
       return task.id !== task_id;
     });
     tasks[member_id].tasks = filteredTasks;
-    ApiService.deleteTask(household_id, task_id).then(() =>
-      this.context.setTasks(tasks)
-    )
+    ApiService.deleteTask(household_id, task_id)
+      .then(() => this.context.setTasks(tasks))
       .then(() => {
         this.updateMembersList();
       })
@@ -97,11 +91,11 @@ export default class HouseholdPage extends Component {
   //Task Title input callbacks
   handleEditTitleClick = () => {
     this.setState({ editTitle: true });
-  }
+  };
 
-  handleTitleChange = (event) => {
-    this.setState({ newTitle: event.target.value })
-  }
+  handleTitleChange = event => {
+    this.setState({ newTitle: event.target.value });
+  };
 
   handleTitleUpdate = id => {
     let reqBody = {
@@ -118,11 +112,11 @@ export default class HouseholdPage extends Component {
   //Task Points input callbacks
   handleEditPointsClick = () => {
     this.setState({ editPts: true });
-  }
+  };
 
-  handlePointsChange = (event) => {
-    this.setState({ newPoints: event.target.value })
-  }
+  handlePointsChange = event => {
+    this.setState({ newPoints: event.target.value });
+  };
 
   handlePointsUpdate = id => {
     let reqBody = {
@@ -136,23 +130,26 @@ export default class HouseholdPage extends Component {
       .then(after => this.updateEverything());
   };
 
+  handleResetScores = () => {
+    let household_id = this.props.match.params.id;
+    ApiService.resetScores(household_id)
+      .then(res => console.log(res))
+      .catch(error => this.context.setError(error));
+  };
 
   render() {
     const { tasks } = this.context;
     const data = Object.values(tasks);
 
-
     return (
-      <div className='household-page-container'>
+      <div className="household-page-container">
         <h2>Household page</h2>
-        <TasksToApprove
-          household_id={this.props.match.params.id}
-        />
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
           updateEverything={this.updateEverything}
         />
+        <button onClick={this.handleResetScores}>Reset All Scores</button>
         <MembersList
           tasks={tasks}
           data={data}

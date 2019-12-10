@@ -1,7 +1,8 @@
 import React from 'react';
-//Got rid of unused imports. Delete this line when you merge!
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
@@ -84,7 +85,7 @@ export default class EditMember extends React.Component {
     const { toggleEditMember } = this.props;
     return (
       <button onClick={() => toggleEditMember()}>
-        Edit Member
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="green"/>
       </button>
     );
   }
@@ -93,7 +94,7 @@ export default class EditMember extends React.Component {
     let nameError = this.state.nameError;
     return (
       <div className="add-member container">
-        <p>Edit Member</p>
+        <p>Edit member</p>
         <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
           <label htmlFor="member-name">Name</label>
           <input
