@@ -62,6 +62,7 @@ export default class AddTask extends React.Component {
             'member_id': this.state.member_id,
             'name' : memberName,
             'username': userName,
+            'total_score': 0,
             'tasks' : [{'id' : task.id, 'title' : task.title, 'points': task.points}],
           }
         }

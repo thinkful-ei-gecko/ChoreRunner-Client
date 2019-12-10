@@ -4,13 +4,6 @@ import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import MembersList from '../../components/MembersList/MembersList';
 import './HouseholdPage.css';
-import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
-
-/*
-Alex Edits:
-- I grouped some of the methods together for legibility.
-- In state, I changed boolean 'editing' to 'editMember' for consistency and added a toggleEditMember callback.
-*/
 
 export default class HouseholdPage extends Component {
   state = {
@@ -151,7 +144,6 @@ export default class HouseholdPage extends Component {
     return (
       <div className="household-page-container">
         <h2>Household page</h2>
-        <TasksToApprove household_id={this.props.match.params.id} />
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
