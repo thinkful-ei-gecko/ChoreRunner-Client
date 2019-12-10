@@ -3,8 +3,8 @@ import AddTask from '../../components/AddTask/AddTask';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import MembersList from '../../components/MembersList/MembersList';
-import './HouseholdPage.css'
-import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
+import './HouseholdPage.css';
+
 
 /*
 Alex Edits:
@@ -145,9 +145,6 @@ export default class HouseholdPage extends Component {
     return (
       <div className='household-page-container'>
         <h2>Household page</h2>
-        <TasksToApprove
-          household_id={this.props.match.params.id}
-        />
         <AddTask
           members={this.state.membersList}
           household_id={this.props.match.params.id}
