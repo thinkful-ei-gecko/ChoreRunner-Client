@@ -28,7 +28,7 @@ export default class Leaderboard extends Component {
             <span>{member.name}</span>
           </div>
           <div className="score_col">
-            <span>{member.total_score}</span>
+            <span className="score">{member.total_score}</span>
           </div>
         </li>
       );
@@ -51,7 +51,7 @@ export default class Leaderboard extends Component {
             <span>Score</span>
           </div>
         </div>
-        <ol>{this.renderScores()}</ol>
+        <ol className="rankings">{this.renderScores()}</ol>
       </section>
     );
   }

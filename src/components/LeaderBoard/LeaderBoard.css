@@ -9,9 +9,8 @@
 .leader_board {
   text-align: center;
   padding: 10px;
-  border:  2px solid black;
+  border: 2px solid black;
 }
-
 
 .headerRow {
   width: auto;
@@ -46,23 +45,48 @@
   /* margin-left: auto; */
 }
 
-.ol {
+.rankings {
   margin: 0 auto;
 }
 
+.rankings li:nth-child(-n+3):before {
+  content: '';
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: -65px;
+  background-image: url('../../images/FirstCup.png');
+}
 
-/* ol { */
-/*   width: 100%; */
-/* } */
+
+.rankings li:nth-child(1):before {
+  background-image: url('../../images/FirstCup.png');
+}
+
+.rankings li:nth-child(2):before {
+  background-image: url('../../images/SecondCup.png');
+}
+
+.rankings li:nth-child(3):before {
+  background-image: url('../../images/ThirdCup.png');
+}
+
+.rankings li:nth-child(-n+3) .score {
+  display: block;
+}
+
+
 .name_col {
   width: 80%;
   text-align: center;
   margin: 0 auto;
   float: left;
+  word-wrap: break-word;
 }
 
 .score_col {
   width: 20%;
   float: right;
 }
-
