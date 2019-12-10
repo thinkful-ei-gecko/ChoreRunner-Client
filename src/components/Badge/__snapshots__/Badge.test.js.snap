@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge component testing renders UI as expected 1`] = `
+<section
+  className="levelInfo"
+>
+  <div
+    className="badge"
+  />
+  <div
+    className="level"
+  >
+    Level: 
+  </div>
+  <div
+    className="totalScore"
+  >
+    Total Score: 
+  </div>
+  <div
+    className="NextLevel"
+  >
+    To next level: 
+  </div>
+</section>
+`;
+
+exports[`Badge component testing renders empty given no tabs 1`] = `
+<section
+  className="levelInfo"
+>
+  <div
+    className="badge"
+  />
+  <div
+    className="level"
+  >
+    Level: 
+  </div>
+  <div
+    className="totalScore"
+  >
+    Total Score: 
+  </div>
+  <div
+    className="NextLevel"
+  >
+    To next level: 
+  </div>
+</section>
+`;

@@ -32,7 +32,6 @@ class RegistrationForm extends Component {
   validateForm = () => {
     let name = this.state.name.trim();
     let userName = this.state.username.trim()
-    const allLetters = /[a-zA-Z]+\d/;
 
     let usernameError = '';
     let nameError = '';
@@ -41,12 +40,6 @@ class RegistrationForm extends Component {
 		if (name.length === 0) {
 			nameError = 'Input field cannot be empty';
 		}
-		if (name.length < 6) {
-			nameError = 'Please enter more than 6 characters';
-    }
-    if (!allLetters.test(name)) {
-      nameError = 'Name must include only alphabetical letters';
-    }
     if(name.length > 50) {
       nameError = 'Your name must be less than 50 characters';
     }
