@@ -118,7 +118,7 @@ class RegistrationForm extends Component {
               required
             />
             <div role="alert">
-              <p className='alertMsg'>{nameError}</p>
+              {nameError}
             </div>
           </div>
           <div className='formItem'>
