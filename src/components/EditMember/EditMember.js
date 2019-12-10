@@ -12,6 +12,7 @@ export default class EditMember extends React.Component {
     username: this.props.member.username,
     password: '',
     editMember: this.props.editMember,
+    editing: false,
     nameError: '',
   };
 
@@ -135,7 +136,7 @@ export default class EditMember extends React.Component {
   render() {
     return (
       <>
-        {!!this.props.editMember ? (
+        {!!this.state.editing ? (
           <>{this.renderForm()}</>
         ) : (
             <>{this.renderFormButton()}</>
