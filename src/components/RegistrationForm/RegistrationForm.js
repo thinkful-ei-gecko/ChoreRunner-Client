@@ -42,7 +42,7 @@ class RegistrationForm extends Component {
 			nameError = 'Input field cannot be empty';
 		}
 		if (name.length < 6) {
-			nameError = 'Please enter a name that is at least 6 characters long';
+			nameError = 'Please enter more than 6 characters';
     }
     if (!allLetters.test(name)) {
       nameError = 'Name must include only alphabetical letters';
@@ -52,8 +52,8 @@ class RegistrationForm extends Component {
     }
   
     //Validates the username
-    if(userName.length <= 5) {
-      usernameError = 'Please enter more characters'
+    if(userName.length < 6) {
+      usernameError = 'Please enter more than 6 characters'
     }
     if(userName.length > 50) {
       usernameError = 'Your name must be less than 50 characters';

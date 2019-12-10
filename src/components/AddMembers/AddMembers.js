@@ -1,6 +1,4 @@
 import React from 'react';
-import TokenService from '../../services/token-service';
-import config from '../../config';
 import ApiService from '../../services/api-service'
 import HouseholdContext from '../../contexts/HouseHoldContext';
 
@@ -13,35 +11,29 @@ export default class AddMembers extends React.Component {
     error: null,
     validateError: {
       usernameError: '',
-      passwordError:'',
+      householdError: ''
     }
   }
   static contextType = HouseholdContext
 
   validate = () => {
-    const { password } = this.state;
     let username = this.state.username.trim()
+    let household = this.state.household_id
     let usernameError = '';
-    let passwordError = '';
+    let householdError = '';
 
     // Validates child's username
     if(username.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
 
-    //Validates the password
-    if (password.length <= 3) {
-      passwordError = 'Password must be 4 characters or more';
-    }
-    if (password.length >= 11) {
-      passwordError = 'Password be less than 10 characters';
-    }
-    if (password.startsWith(' ') || password.endsWith(' ')) {
-      passwordError = 'Password must not start or end with empty spaces';
+    //Validates Select Household
+    if(household === '') {
+      householdError = 'Please select a household'
     }
 
-    if(usernameError || passwordError) {
-      this.setState({ validateError: { usernameError, passwordError } })
+    if(usernameError || householdError) {
+      this.setState({ validateError: { usernameError, householdError } })
       return false;
     }
     return true;
@@ -57,12 +49,12 @@ export default class AddMembers extends React.Component {
     e.preventDefault();
     let isValid = this.validate();
     const householdId = this.state.household_id
-    console.log(householdId)
-    if (householdId === '') {
-      this.setState({
-        error: "Please select a household"
-      })
-    }
+    
+    // if (householdId === '') {
+    //   this.setState({
+    //     error: "Please select a household"
+    //   })
+    // }
     let newMember = {
       name: this.state.name,
       username: this.state.username,
@@ -94,8 +86,8 @@ export default class AddMembers extends React.Component {
       })
         this.props.handleRenderUpdate(member);
       })
-      .catch(res => this.setState({ error: res.error, household_id: '' }))
-      document.getElementById("add-household-form").reset();
+      .catch(res => this.setState({ error: res.error }))
+      console.log(householdId)
     }
   }
 
@@ -103,17 +95,13 @@ export default class AddMembers extends React.Component {
   render() {
     const { households } = this.context
     const { error } = this.state;
-    const { usernameError, passwordError } = this.state.validateError;
+    const { usernameError, householdError } = this.state.validateError;
     return (
-
       <div className="add-member container">
         <p>ADD HOUSEHOLD MEMBERS:</p>
         <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
           <label htmlFor="member-name">Name</label>
           <input type="text" id="member-name" name="name" required onChange={this.onChangeHandle} value={this.state.name}></input>
-          {/* <div role='alert'>
-            {error && <p className='alertMsg'>{error}</p>}
-          </div> */}
           <label htmlFor="household">Household</label>
           <select className='select-css' type="text" id="assignee" name="household_id" onChange={this.onChangeHandle} defaultValue="Select household" required>
             <option disabled>Select household</option>
@@ -121,22 +109,14 @@ export default class AddMembers extends React.Component {
           </select>
           <label htmlFor="child-username">Child username</label>
           <input type="text" id="child-username" name="username" required onChange={this.onChangeHandle} value={this.state.username}></input>
-          {/* <div role="alert">
-            <p className='alertMsg'>{usernameError || error}</p>
-          </div> */}
           <label htmlFor="child-password">Child password</label>
           <input type="password" id="child-password" name="password" required onChange={this.onChangeHandle} value={this.state.password}></input>
           <div role="alert">
-            <p className='alertMsg'>{error}</p>
-            <p className='alertMsg'>{usernameError}</p>
-            <p className='alertMsg'>{passwordError}</p>
+            <p className='alertMsg'>{error || householdError || usernameError}</p>
           </div>
-          {/* {<><p>{error}</p><p>{usernameError}</p><p>{passwordError}</p></>} */}
           <button type="submit" className="submitHH">add</button>
         </form>
-        
       </div>
-
     )
   }
 }
