@@ -1,4 +1,9 @@
+
 /* this is in the wrong spot */
+
+body {
+  font-size: 1em;
+}
 
 .leaderboard_container {
   background: rgba(0, 0, 0, 0.7);
@@ -47,9 +52,24 @@
   margin: 10px auto;
 }
 
+.leader_board-grid {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr)
+}
+
 .rankings {
-  width: 80%;
+  /* width: 80%; */
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+  list-style:none;
   margin: 0 auto;
+  font-size: .75em;
+}
+
+.rankings li {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .rankings li:nth-child(-n+3):before {
@@ -59,13 +79,13 @@
   width: 25px;
   background-size: contain;
   background-repeat: no-repeat;
-  margin-left: -65px;
   background-image: url('../../ImgAssets/ChoreRunner.png');
 }
 
 
 .rankings li:nth-child(1):before {
   background-image: url('../../ImgAssets/FirstCup.png');
+  width: 25px;
 }
 
 .rankings li:nth-child(2):before {
@@ -92,4 +112,8 @@
 .score_col {
   width: 20%;
   float: right;
+}
+
+@media only screen and (max-width: 320px) {
+
 }
