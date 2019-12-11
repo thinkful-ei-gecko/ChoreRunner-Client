@@ -97,19 +97,19 @@ export default class AddMembers extends React.Component {
     const { error } = this.state;
     const { usernameError, householdError } = this.state.validateError;
     return (
-      <div className="add-member container">
+      <div id="add-member" className="add-member container">
         <p>ADD HOUSEHOLD MEMBERS:</p>
         <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
           <label htmlFor="member-name">Name</label>
           <input type="text" id="member-name" name="name" required onChange={this.onChangeHandle} value={this.state.name}></input>
           <label htmlFor="household">Household</label>
           <select className='select-css' type="text" id="assignee" name="household_id" onChange={this.onChangeHandle} defaultValue="Select household" required>
-            <option disabled>Select household</option>
+            <option disabled>Select Household</option>
             {households.map((hh, index) => <option key={index} value={hh.id}>{hh.name}</option>)}
           </select>
-          <label htmlFor="child-username">Child username</label>
+          <label htmlFor="child-username">Member Username</label>
           <input type="text" id="child-username" name="username" required onChange={this.onChangeHandle} value={this.state.username}></input>
-          <label htmlFor="child-password">Child password</label>
+          <label htmlFor="child-password">Member Password</label>
           <input type="password" id="child-password" name="password" required onChange={this.onChangeHandle} value={this.state.password}></input>
           <div role="alert">
             <p className='alertMsg'>{error || householdError || usernameError}</p>

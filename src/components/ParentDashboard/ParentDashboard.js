@@ -13,9 +13,10 @@ export default class ParentDashboard extends Component {
     this.state = {
       name: '',
       household: [],
-      editHousehold: false,
+      editingHousehold: false,
       editName: '',
       editId: '',
+      submitFeedback: '',
       members: {}
     }
   }
@@ -47,25 +48,14 @@ export default class ParentDashboard extends Component {
 
   //Boolean check for if there are households
   hasHouseholds = () => this.context.households.length !== 0;
-  
-  //Boolean check for if there are members
-  hasMembers = () => this.state.members === {};
 
   //Returns appropriate feedback if the user has no households.
   renderUserFeedback() {
-    const {households } = this.context;
-    const {members} = this.state;
-    console.log('households ', households)
-    console.log('members', members)
-    console.log('Has households? ', this.hasHouseholds())
-    console.log('Has members? ', this.hasMembers())
+    const { households } = this.context;
     if (!this.hasHouseholds()) {
       return (<p>To get started, use the Add Households form to create a household (Maybe you have more than one!).</p>)
-    }
-    if (this.hasHouseholds() && !this.hasMembers()) {
-      return (<p>It looks like you have Households, but no members assigned. Use the Add Members form to populate each household with your family members.</p>)
-    } else if (this.hasHouseholds() && this.hasMembers()) {
-      return (<p>Click on a Household to begin assigning tasks to family members!</p>)
+    } else {
+      return (<p>Add Members to households using the form below, or click on a Household to begin assigning tasks to family members!</p>)
     }
   }
 
@@ -99,25 +89,36 @@ export default class ParentDashboard extends Component {
     let name = e.target.householdName.value;
     ApiService.postHousehold(name)
       .then(res => {
+        //Set form feedback to show successful household add and clear add input.
         this.context.addHousehold(res)
+        this.setState({ submitFeedback: `${this.householdName.value} Household Added! Now Add Members!` })
+        clearInterval()
         this.householdName.value = '';
         this.render();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        //Set form feedback to error on failure
+        this.setState({ submitFeedback: error });
+        console.log(error)
+      });
   }
 
   //Toggles whether or not to show the household form.
   toggleEditHousehold = () => {
-    this.setState({ editHousehold: !this.state.editHousehold })
-    this.render()
+    this.setState({ editingHousehold: !this.state.editingHousehold })
   }
 
   //Sets data of household being edited.
-  onEditHouseholdClick = household => {
+  handleEditHouseholdClick = household => {
+    console.log('Before: ', this.state.editName, this.state.editId);
     this.setState({ editName: household.name, editId: household.id })
+    console.log('After: ', this.state.editName, this.state.editId);
+
+    this.toggleEditHousehold();
+    this.render();
   }
 
-  //Clears edit form
+  //Clears edit form state
   clearEditHousehold = () => {
     this.setState({ name: '', editName: '', editId: '' })
   }
@@ -141,49 +142,31 @@ export default class ParentDashboard extends Component {
     this.toggleEditHousehold();
   }
 
-
-  renderEditHousehold = () => {
-    const { households } = this.context;
-    return (
-      <span>
-        <input
-          className="update-household"
-          type="text"
-          name="name"
-          value={households.name}
-          placeholder="name"
-          onChange={this.onChangeHandle}
-        />
-        <button onClick={() => this.handleEditHouseholdName(this.state.id)}>Save</button>
-      </span>
-    )
-  }
-
-  //Show household edit button
-  renderEditHouseholdButton() {
-    return (
-      <button
-        onClick={this.toggleEditHousehold}>
-        Edit
-      </button>
-    )
-  }
-
   renderHouseholds = () => {
     const { households, deleteHousehold } = this.context;
     return households.map((household) => {
+      console.log(household.id)
+      if (household.id === this.state.editId) {console.log('It me boo')}
       return (
         <div key={household.id} className="house_card">
+          {/*TODO: move textDecoration to css and remove from style*/}
           <Link to={`/household/${household.id}`} style={{ textDecoration: 'none' }}>
             <p >{household.name}</p>
           </Link>
+          <Link to={`/household/${household.id}`}>See Dashboard</Link>
           <div className='buttons-container'>
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
             {
               //If editing and this household is the one being edited, render form, otherwise render the button.
-              this.state.editHousehold && household.id === this.state.editId
-                ? this.renderEditHousehold()
-                : this.renderEditHouseholdButton()
+              this.state.editingHousehold && household.id === this.state.editId
+                ? <EditHouseholdInput
+                 household={household}
+                 onChangeHandle={this.onChangeHandle}
+                 />
+                : <EditHouseholdButton
+                  household={household}
+                  handleEditHouseholdClick={this.handleEditHouseholdClick}
+                />
             }
           </div>
           {this.state.members && this.state.members[household.id] ?
@@ -193,7 +176,7 @@ export default class ParentDashboard extends Component {
               })}
             </ul>
             : <p>
-              It looks like this household has no members yet! Use the Add Members form to populate each household with your family members.
+              It looks like this household has no members yet! <a href={'#add-member'}>Add Members</a>.
               </p>}
         </div>
       );
@@ -219,6 +202,13 @@ export default class ParentDashboard extends Component {
             <button className="submitHH" type="submit">
               Add New Household
             </button>
+            {/*Shows success feedback when household submitted successfully*/}
+            {!!this.state.submitFeedback
+              ? < div className="household-add-form-feedback">
+                {this.state.submitFeedback}
+              </div>
+              : null
+            }
           </form>
         </div>
         <div className='household-details container'>
@@ -227,7 +217,36 @@ export default class ParentDashboard extends Component {
         <div className="household_buttons">
           {this.renderHouseholds()}
         </div>
-      </section>
+      </section >
     );
   }
+}
+
+//Household edit input takes callback and household as props.
+function EditHouseholdInput(props) {
+  const { household, onChangeHandle, handleEditHouseholdName } = this.props;
+  return (
+    <span>
+      <input
+        className="update-household"
+        type="text"
+        name="name"
+        value={household.name}
+        placeholder="name"
+        onChange={onChangeHandle}
+      />
+      <button onClick={() => handleEditHouseholdName(this.state.editId)}>Save</button>
+    </span>
+  )
+}
+
+//Household edit button takes callback and household as props
+function EditHouseholdButton() {
+  const { household, handleEditHouseholdClick } = this.props;
+  return (
+    <button
+      onClick={() => handleEditHouseholdClick(household)}>
+      Edit
+    </button>
+  )
 }
