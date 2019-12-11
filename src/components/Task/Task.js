@@ -39,10 +39,12 @@ export default class Task extends Component {
           </div>
         ) : (
             <div className='title'>
-            <span>{task.title}&nbsp;</span>
-            <button onClick={() => handleEditTitleClick()}>
-              <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
-            </button>
+              <div className='content'> 
+                <span>{task.title}&nbsp;</span>
+                <button onClick={() => handleEditTitleClick()}>
+                  <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+                </button>
+              </div>
             </div>
           )}
       

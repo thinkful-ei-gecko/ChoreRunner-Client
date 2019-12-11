@@ -76,8 +76,8 @@ export default class EditMember extends React.Component {
 
   renderFormButton() {
     return (
-      <button onClick={() => this.toggleEditMember()}>
-        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="green"/>
+      <button className='pen-button' onClick={() => this.toggleEditMember()}>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="grey"/>
       </button>
     );
   }

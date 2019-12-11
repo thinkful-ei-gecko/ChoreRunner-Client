@@ -4,6 +4,7 @@ import TasksList from '../TasksList/TasksList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
+import './MembersList.css'
 
 export default class MembersList extends Component {
 
@@ -47,14 +48,16 @@ export default class MembersList extends Component {
                   member={member}
                   household_id={household_id}
                 />
-                <button onClick={() => handleDeleteMember(member.member_id, household_id)}>
-                <FontAwesomeIcon icon={faTrashAlt} size="2x" color="red"/>
-                </button>
+                
+                  <button className='trash-button' onClick={() => handleDeleteMember(member.member_id, household_id)}>
+                  <FontAwesomeIcon icon={faTrashAlt} size="2x" color="grey"/>
+                  </button>
+             
               </div>
             <p>Total score: {member.total_score}</p>
             {!completed.length ?
             <section className="tasks-to-approve">
-            <h3>Tasks to approve</h3>
+            <h3>Completed Tasks</h3>
             <p>There are no tasks</p>
             </section>
             :
