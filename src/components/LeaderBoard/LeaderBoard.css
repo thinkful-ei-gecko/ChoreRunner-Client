@@ -57,20 +57,20 @@
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: -65px;
-  background-image: url('../../ImgAssets/ChoreRunner.png');
+  background-image: url('../../images/FirstCup.png');
 }
 
 
 .rankings li:nth-child(1):before {
-  background-image: url('../../ImgAssets/FirstCup.png');
+  background-image: url('../../images/FirstCup.png');
 }
 
 .rankings li:nth-child(2):before {
-  background-image: url('../../ImgAssets/SecondCup.png');
+  background-image: url('../../images/SecondCup.png');
 }
 
 .rankings li:nth-child(3):before {
-  background-image: url('../../ImgAssets/ThirdCup.png');
+  background-image: url('../../images/ThirdCup.png');
 }
 
 .rankings li:nth-child(-n+3) .score {

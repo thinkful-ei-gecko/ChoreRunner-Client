@@ -1,23 +1,19 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.member.member_id,
-      name: this.props.member.name,
-      username: this.props.member.username,
-      password: '',
-      editMember: this.props.editMember,
-      nameError: '',
-    };
-  }
-
+  state = {
+    id: this.props.member.member_id,
+    name: this.props.member.name,
+    username: this.props.member.username,
+    password: '',
+    editMember: this.props.editMember,
+    nameError: '',
+  };
 
   onChangeHandle = (e) => {
     this.setState({
@@ -29,7 +25,7 @@ export default class EditMember extends React.Component {
     let nameError = '';
 
     if (this.state.name.length <= 3) {
-      nameError = 'Please enter 4 characters or more'
+      nameError = 'Please enter more characters'
     }
 
     if (nameError) {
@@ -64,7 +60,26 @@ export default class EditMember extends React.Component {
         .catch(error => this.context.setError(error))
       document.getElementById("add-household-form").reset();
     }
+
   };
+
+  // handleNameChange = e => {
+  //   this.setState({
+  //     name: e.target.value,
+  //   });
+  // };
+
+  // handleChildUsernameChange = e => {
+  //   this.setState({
+  //     username: e.target.value,
+  //   });
+  // };
+
+  // handleChildPasswordChange = e => {
+  //   this.setState({
+  //     password: e.target.value,
+  //   });
+  // };
 
   renderFormButton() {
     const { toggleEditMember } = this.props;
