@@ -15,7 +15,10 @@ export default class EditMember extends React.Component {
       password: '',
       editMember: this.props.editMember,
       showForm: false,
-      nameError: '',
+      validateError: {
+        nameError: '',
+        usernameError: ''
+      }
     };
   }
 
@@ -33,14 +36,21 @@ export default class EditMember extends React.Component {
   }
 
   validate = () => {
+    let username = this.state.username.trim()
     let nameError = '';
+    let usernameError = '';
 
-    if (this.state.name.length <= 3) {
-      nameError = 'Please enter 4 characters or more'
+    if (this.state.name.length <= 2) {
+      nameError = 'Please enter 3 characters or more'
     }
 
-    if (nameError) {
-      this.setState({ nameError })
+    // Validates child's username
+    if(username.length > 50) {
+      usernameError = 'Your name must be less than 50 characters';
+    }
+
+    if (nameError || usernameError) {
+      this.setState({ validateError: { usernameError, nameError }})
       return false;
     }
     return true;
@@ -82,7 +92,7 @@ export default class EditMember extends React.Component {
   }
 
   renderForm() {
-    let nameError = this.state.nameError;
+    const { usernameError, nameError } = this.state.validateError;
     return (
       <div className="add-member container">
         <p>Edit member</p>
@@ -104,6 +114,7 @@ export default class EditMember extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandle}
           ></input>
+          <div className="valid-error">{usernameError}</div>
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"

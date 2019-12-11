@@ -50,11 +50,6 @@ export default class AddMembers extends React.Component {
     let isValid = this.validate();
     const householdId = this.state.household_id
     
-    // if (householdId === '') {
-    //   this.setState({
-    //     error: "Please select a household"
-    //   })
-    // }
     let newMember = {
       name: this.state.name,
       username: this.state.username,
@@ -62,19 +57,6 @@ export default class AddMembers extends React.Component {
       household_id: householdId
     }
     if(isValid) {
-      // fetch(`${config.API_ENDPOINT}/households/${this.state.household_id}/members`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'content-type': 'application/json',
-      //     'authorization': `bearer ${TokenService.getAuthToken()}`
-      //   },
-      //   body: JSON.stringify(newMember)
-      // })
-      // .then(res =>
-      //   (!res.ok)
-      //     ? res.json().then(e => Promise.reject(e))
-      //     : res.json()
-      // )
       ApiService.addHouseholdMember(householdId, newMember)
       .then(member => {
         this.setState({
@@ -88,9 +70,9 @@ export default class AddMembers extends React.Component {
       })
       .catch(res => this.setState({ error: res.error }))
       console.log(householdId)
+      this.setState({ error: 'Success!'})
     }
   }
-
 
   render() {
     const { households } = this.context
@@ -112,7 +94,7 @@ export default class AddMembers extends React.Component {
           <label htmlFor="child-password">Child password</label>
           <input type="password" id="child-password" name="password" required onChange={this.onChangeHandle} value={this.state.password}></input>
           <div role="alert">
-            <p className='alertMsg'>{error || householdError || usernameError}</p>
+            {<p className='alertMsg'>{error || householdError || usernameError}</p>}
           </div>
           <button type="submit" className="submitHH">add</button>
         </form>
