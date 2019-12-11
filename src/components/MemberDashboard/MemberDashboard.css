@@ -1,4 +1,78 @@
-.memberDashboard{
+.memberDashboard {
+  position: relative;
+  height: 85vh;
+  padding-top: 15vh;
+  overflow-y: auto;
+  background-image: url('../../ImgAssets/ChoreRunner.png');
+  background-size: cover;
+  background-position: 0 0;
+  background-repeat: repeat;
+  animation: house 45s linear infinite;
+}
+
+.chores-container {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  width: 90%;
+  margin: auto;
+  padding-bottom: 20px;
+}
+.chores-container p,
+.chores-container span {
+  color: white;
+  font-size: 30px;
+}
+.chores-container h2 {
+  padding-top: 20px;
+  color: rgb(255, 217, 0);
+  font-size: 20px;
+  text-shadow: none;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.member-container {
+  position: absolute;
+  width: 100%;
+}
+
+@keyframes house {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -13690px 0;
+  }
+}
+
+/* .background-img{
+    background-image: url("../../images/ChoreRunner.png");
+    background-size: cover;
+    height: 100vh;
+} */
+
+.task_list ul {
+    padding: 0;
+}
+.task_list li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 
+
+.task_list p {
+  max-width: 300px;
+}
+
+.task_list li button {
+  margin: 15px auto;
+  font-size: 17px;
+  width: 175px;
+}
+
+@media screen and (min-width: 450px) {
+  .memberDashboard {
     position: relative;
     height: 85vh;
     padding-top: 15vh;
@@ -8,59 +82,67 @@
     background-position: 0 0;
     background-repeat: repeat;
     animation: house 45s linear infinite;
+  }
 
-}
-
-.chores-container{
+  .chores-container {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
-    width: 60%;
+    width: 80%;
     margin: auto;
-}
-.chores-container p, .chores-container span {
+  }
+  .chores-container p,
+  .chores-container span {
     color: white;
     font-size: 30px;
-}
-.chores-container h2 {
+  }
+  .chores-container h2 {
     padding-top: 20px;
     color: rgb(255, 217, 0);
     font-size: 20px;
     text-shadow: none;
     font-family: 'Press Start 2P', cursive;
-}
+  }
 
-.member-container{
+  .member-container {
     position: absolute;
     width: 100%;
-}
+  }
 
-@keyframes house{
+  @keyframes house {
     from {
-        background-position: 0 0;
+      background-position: 0 0;
     }
     to {
-        background-position: -13690px 0;
+      background-position: -13690px 0;
     }
-}
+  }
 
-/* .background-img{
-    background-image: url("../../images/ChoreRunner.png");
-    background-size: cover;
-    height: 100vh;
-} */
-.task_list li {
+  /* .background-img{
+        background-image: url("../../images/ChoreRunner.png");
+        background-size: cover;
+        height: 100vh;
+    } */
+  .task_list li {
+    width: 90%;
+    margin: 0 auto;
     list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.task_list p {
-    max-width: 300px;
-}
+  .task_list p {
+    text-align: left;
+    max-width: 200px;
+  }
 
-.task_list li button {
+  .points {
+      margin: 0 20px;
+  }
+
+  .task_list li button {
     font-size: 17px;
     width: 175px;
+  }
 }
