@@ -57,10 +57,10 @@ export default class TasksToApprove extends React.Component {
               return <li key={task.id}>
                 <div className="title"><span>{task.title}</span></div>
                 <div className="points"><span>points: {task.points}</span></div>
-                <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
+                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
                   <FontAwesomeIcon icon={faThumbsUp} size="lg" color="green"/>
                 </button>
-                <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
+                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
                   <FontAwesomeIcon icon={faThumbsDown} size="lg" color="green"/>
                 </button>
               </li>
