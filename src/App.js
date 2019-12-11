@@ -13,6 +13,7 @@ import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
 import NotFoundPage from './components/NotFoundPage/NotFoundPage'
+import './normalize.css';
 import './App.css';
 
 function App() {
