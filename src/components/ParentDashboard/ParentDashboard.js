@@ -14,10 +14,10 @@ export default class ParentDashboard extends Component {
       name: '',
       household: [],
       editingHousehold: false,
-      editName: '',
-      editId: '',
-      submitFeedback: '',
-      members: {}
+      editName: false,
+      id: null,
+      members: {},
+      submitFeedback: ''
     }
   }
 
@@ -109,19 +109,19 @@ export default class ParentDashboard extends Component {
   }
 
   //Sets data of household being edited.
-  handleEditHouseholdClick = household => {
-    console.log('Before: ', this.state.editName, this.state.editId);
-    this.setState({ editName: household.name, editId: household.id })
-    console.log('After: ', this.state.editName, this.state.editId);
+  // handleEditHouseholdClick = household => {
+  //   console.log('Before: ', this.state.editName, this.state.editId);
+  //   this.setState({ editName: household.name, editId: household.id })
+  //   console.log('After: ', this.state.editName, this.state.editId);
 
-    this.toggleEditHousehold();
-    this.render();
-  }
+  //   this.toggleEditHousehold();
+  //   this.render();
+  // }
 
   //Clears edit form state
-  clearEditHousehold = () => {
-    this.setState({ name: '', editName: '', editId: '' })
-  }
+  // clearEditHousehold = () => {
+  //   this.setState({ name: '', editName: '', editId: '' })
+  // }
 
   handleEditHouseholdName = householdId => {
     let name = this.state.name;
@@ -137,9 +137,13 @@ export default class ParentDashboard extends Component {
       .then(res => this.context.setHouseholds(res))
       .catch(this.context.setError)
 
-    //Clear data and remove form.
-    this.clearEditHousehold();
-    this.toggleEditHousehold();
+    this.setState({ editName: false })
+  }
+
+  onChangeHandle = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   renderHouseholds = () => {
@@ -156,7 +160,8 @@ export default class ParentDashboard extends Component {
           <Link to={`/household/${household.id}`}>See Dashboard</Link>
           <div className='buttons-container'>
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>
-            {
+            <button onClick={() => this.setState({ editName: true, id: household.id })}>Edit</button>
+            {/* {
               //If editing and this household is the one being edited, render form, otherwise render the button.
               this.state.editingHousehold && household.id === this.state.editId
                 ? <EditHouseholdInput
@@ -167,7 +172,7 @@ export default class ParentDashboard extends Component {
                   household={household}
                   handleEditHouseholdClick={this.handleEditHouseholdClick}
                 />
-            }
+            } */}
           </div>
           {this.state.members && this.state.members[household.id] ?
             <ul>
@@ -184,7 +189,7 @@ export default class ParentDashboard extends Component {
   }
 
   render() {
-    // const { households } = this.context;
+    const { households } = this.context;
     return (
       <section className="parent_dashboard">
         <div className="parent_dashboard-feedback">
@@ -216,37 +221,54 @@ export default class ParentDashboard extends Component {
         </div>
         <div className="household_buttons">
           {this.renderHouseholds()}
+          {
+            this.state.editName
+              ?
+              <span>
+                <input
+                  className="update-household"
+                  type="text"
+                  name="name"
+                  value={households.name}
+                  placeholder="name"
+                  onChange={this.onChangeHandle}
+                />
+                <button onClick={() => this.handleEditHouseholdName(this.state.id)}>Save</button>
+              </span>
+              :
+              <span></span>
+          }
         </div>
       </section >
     );
   }
 }
 
-//Household edit input takes callback and household as props.
-function EditHouseholdInput(props) {
-  const { household, onChangeHandle, handleEditHouseholdName } = this.props;
-  return (
-    <span>
-      <input
-        className="update-household"
-        type="text"
-        name="name"
-        value={household.name}
-        placeholder="name"
-        onChange={onChangeHandle}
-      />
-      <button onClick={() => handleEditHouseholdName(this.state.editId)}>Save</button>
-    </span>
-  )
-}
+// //Household edit input takes callback and household as props.
+// function EditHouseholdInput(props) {
+//   const { household, onChangeHandle, handleEditHouseholdName } = this.props;
+//   return (
+//     <span>
+//       <input
+//         className="update-household"
+//         type="text"
+//         name="name"
+//         value={household.name}
+//         placeholder="name"
+//         onChange={onChangeHandle}
+//       />
+//       <button onClick={() => handleEditHouseholdName(this.state.editId)}>Save</button>
+//     </span>
+//   )
+// }
 
-//Household edit button takes callback and household as props
-function EditHouseholdButton() {
-  const { household, handleEditHouseholdClick } = this.props;
-  return (
-    <button
-      onClick={() => handleEditHouseholdClick(household)}>
-      Edit
-    </button>
-  )
-}
+// //Household edit button takes callback and household as props
+// function EditHouseholdButton() {
+//   const { household, handleEditHouseholdClick } = this.props;
+//   return (
+//     <button
+//       onClick={() => handleEditHouseholdClick(household)}>
+//       Edit
+//     </button>
+//   )
+// }
