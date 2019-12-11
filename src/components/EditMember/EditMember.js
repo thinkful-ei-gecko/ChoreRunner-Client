@@ -14,10 +14,17 @@ export default class EditMember extends React.Component {
       username: this.props.member.username,
       password: '',
       editMember: this.props.editMember,
+      showForm: false,
       nameError: '',
     };
   }
 
+  toggleEditMember = () => {
+    this.setState({
+      editMember: !this.state.editMember
+    })
+    this.setState({showForm: !this.state.showForm})
+  }
 
   onChangeHandle = (e) => {
     this.setState({
@@ -41,7 +48,7 @@ export default class EditMember extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { toggleEditMember, updateMembersList } = this.props;
+    const { updateMembersList } = this.props;
     let isValid = this.validate();
     let household_id = this.props.household_id;
     let updatedMember = {
@@ -59,7 +66,7 @@ export default class EditMember extends React.Component {
         //I added the return and this 'then' to ensure the component rerenders with the new info.
         .then(newMember => {
           updateMembersList(newMember)
-          toggleEditMember()
+          this.toggleEditMember()
         })
         .catch(error => this.context.setError(error))
       document.getElementById("add-household-form").reset();
@@ -67,9 +74,8 @@ export default class EditMember extends React.Component {
   };
 
   renderFormButton() {
-    const { toggleEditMember } = this.props;
     return (
-      <button onClick={() => toggleEditMember()}>
+      <button onClick={() => this.toggleEditMember()}>
         <FontAwesomeIcon icon={faPencilAlt} size="2x" color="green"/>
       </button>
     );
@@ -120,7 +126,7 @@ export default class EditMember extends React.Component {
   render() {
     return (
       <>
-        {!!this.props.editMember ? (
+        {!!this.state.showForm ? (
           <>{this.renderForm()}</>
         ) : (
             <>{this.renderFormButton()}</>
