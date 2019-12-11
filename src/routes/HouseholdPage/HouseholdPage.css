@@ -9,25 +9,35 @@ font-family: 'Electrolize', sans-serif; */
     overflow-y: auto;
 }
 
+.tasks-to-approve h3, .assigned-tasks h3{
+	font-family: 'Fredoka One', cursive;
+	letter-spacing: 2px;
+	color: white;
+}
+
 .household-page-container p{
     font-family: 'Fredoka One', cursive;
     font-size: 25px;
     letter-spacing: 2px;
     color: rgb(255, 217, 0);
     margin: auto;
+	padding: 5px
 }
 
 .member-name {
-    letter-spacing: 2px;
-    font-family: 'Fredoka One', cursive;
-    font-size: 25px;
-    display: inline;
-    color: #725F00;
+	letter-spacing: 2px;
+	font-family: 'Fredoka One', cursive;
+	font-size: 25px;
+	display: inline;
+	color: #725F00;
+	padding-right: 50px;
 }
 
 .household-page-container button {
-    font-size: 12px;
-    width: 100px;
+	font-size: 12px;
+	width: 100px;
+	margin: 10px;
+	font-family: 'Electrolize', sans-serif;
 }
  
 .member-card {
@@ -35,7 +45,7 @@ font-family: 'Electrolize', sans-serif; */
 	flex-direction: column;
 	width: 80%;
 	margin: 10px auto;
-	background-color: rgb(158, 226, 0);
+	background-color: #59CC4F;
 	border-radius: 9px;
   border: rgb(75, 107, 0) solid 1px;
   box-shadow: 0 .3em rgb(75, 107, 0);
@@ -45,36 +55,57 @@ font-family: 'Electrolize', sans-serif; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position:relative;
 }
-.delete-edit-name button, .title button, .points button {
+.delete-edit-name button {
 	width: 40px;
 	height: 40px;
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
 	margin: 0;
+	justify-content: flex-end;
 }
+
+.pen-button {
+	position: absolute;
+	right: 50px;
+}
+
+.trash-button {
+	position: absolute;
+	right: 10px;
+}
+
 
 .householdpage-member-task-list {
 	list-style-type: none;
 	padding: 0;
 }
 
-.title, .points {
-	width: 100%;
-	padding-left: 5px;
-	padding-right: 5px;
+.title , .points {
+	width: 45%;
+	display: inline-block;
 }
 
-.title .save-title-edit, .points .save-points-edit {
-	width: 100px;
-  font-family: 'Press Start 2P', cursive;
-  background-color: rgb(255, 217, 0);
-  text-shadow: -1px -1px rgb(105, 90, 0), 1px 1px white;
-  color: #725F00;
+.edit-member-container {
+	position: absolute;
+	background-color: rgba(105,105,105, 0.8);
+	top: 55px;
+	left: 31px;
+	width: 80%;
+	margin-bottom: 20px;
 	border-radius: 7px;
-	box-shadow: 0 .3em rgb(134, 112, 0); 
-	margin-bottom: 15px;
-	height: 30px;
 }
 
+#edit-member-form input {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+button.submit-edit-member {
+	display: block;
+	background-color:rgb(255, 217, 0);
+	width: 80%;
+	margin: 10px auto;
+}

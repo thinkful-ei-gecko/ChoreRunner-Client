@@ -79,15 +79,15 @@ export default class EditMember extends React.Component {
           this.toggleEditMember()
         })
         .catch(error => this.context.setError(error))
-      document.getElementById("add-household-form").reset();
+      document.getElementById("edit-member-form").reset();
     }
 
   };
 
   renderFormButton() {
     return (
-      <button onClick={() => this.toggleEditMember()}>
-        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="green"/>
+      <button className='pen-button' onClick={() => this.toggleEditMember()}>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="grey"/>
       </button>
     );
   }
@@ -95,9 +95,9 @@ export default class EditMember extends React.Component {
   renderForm() {
     const { usernameError, nameError } = this.state.validateError;
     return (
-      <div className="add-member container">
+      <div className="edit-member-container">
         <p>Edit member</p>
-        <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
+        <form onSubmit={this.handleSubmit} id="edit-member-form">
           <label htmlFor="member-name">Name</label>
           <input
             type="text"
@@ -123,7 +123,7 @@ export default class EditMember extends React.Component {
             name="password"
             onChange={this.onChangeHandle}
           ></input>
-          <button type="submit" className="submitHH">
+          <button type="submit" className="submit-edit-member">
             submit changes
           </button>
           {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>
