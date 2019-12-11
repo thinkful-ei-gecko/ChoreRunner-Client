@@ -1,29 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Input } from './Form';
+import Button from './Button';
 import {MemoryRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json'
 
-describe('Form component testing', () => {
+describe('Button component testing', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-  
-    ReactDOM.render(<MemoryRouter><Input /></MemoryRouter>, div);
-  
+
+    ReactDOM.render(<MemoryRouter><Button /></MemoryRouter>, div);
+
     ReactDOM.unmountComponentAtNode(div);
   });
-  
+
   it('renders UI as expected', () => {
     const tree = renderer
-        .create(<MemoryRouter><Input /></MemoryRouter>)
+        .create(<MemoryRouter><Button /></MemoryRouter>)
         .toJSON();
         expect(tree).toMatchSnapshot();
   })
 
   it('renders empty given no tabs', () => {
-    const wrapper = shallow(<Input />)
+    const wrapper = shallow(<Button />)
     expect(toJson(wrapper)).toMatchSnapshot()
   })
 })

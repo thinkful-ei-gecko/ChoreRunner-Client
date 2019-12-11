@@ -49,13 +49,18 @@ export default class TasksToApprove extends React.Component {
     return (
       <section className="tasks-to-approve">
         <h3>Tasks to approve</h3>
-        {this.state.tasks.map(task => {
-          if (task.member_id === memberId) {
-            return <li key={task.id}><span>{task.title}</span>&nbsp;<span>points: {task.points}</span>
-            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>Approve</button>
-            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>Return</button></li>
-          }
-        })}
+        <ul className="householdpage-member-task-list">
+          {this.state.tasks.map(task => {
+            if (task.member_id === memberId) {
+              return <li key={task.id}>
+                <div className="title"><span>{task.title}</span></div>
+                <div className="points"><span>points: {task.points}</span></div>
+                <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>Approve</button>
+                <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>Return</button>
+              </li>
+            }
+          })}
+        </ul>
       </section>
     )
   }

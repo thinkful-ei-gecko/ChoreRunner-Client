@@ -9,12 +9,12 @@ import toJson from 'enzyme-to-json'
 describe('Button component testing', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-  
+
     ReactDOM.render(<MemoryRouter><Button /></MemoryRouter>, div);
-  
+
     ReactDOM.unmountComponentAtNode(div);
   });
-  
+
   it('renders UI as expected', () => {
     const tree = renderer
         .create(<MemoryRouter><Button /></MemoryRouter>)
