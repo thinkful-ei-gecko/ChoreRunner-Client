@@ -12,8 +12,8 @@
   width: 30%;
   padding: 10px;
   margin: 10px auto;
+  height: auto;
   min-height: 100px;
-  border: 2px solid yellow;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,16 +24,24 @@
   width: 30%;
   padding: 10px;
   margin: 10px auto;
+  height: auto;
+  min-height: 100px;
   font-family: 'Press Start 2P', cursive;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   color: white;
 }
 
 
-.level_totalScore span {
-  font-size: 3em;
-  color: white;
+.level p {
   font-family: 'Press Start 2P', cursive;
 }
+
+.total_score {
+  font-size: 3em;
+  color: white;
+}
+
+

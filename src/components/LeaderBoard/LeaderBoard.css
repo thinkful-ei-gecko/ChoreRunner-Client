@@ -1,22 +1,26 @@
 /* this is in the wrong spot */
 
 .leaderboard_container {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  width: 60%;
   min-width: 40%;
-  max-width: 40%;
-  margin: 0 auto 0 auto;
+  margin: 20px auto;
 }
 
 .leader_board {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
   text-align: center;
   padding: 10px;
-  border: 2px solid black;
+  border: 2px solid white;
 }
 
 .headerRow {
   width: auto;
   display: flex;
   padding: 5px 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 .header_rank {
@@ -41,11 +45,10 @@
   width: auto;
   padding-left: 25px;
   margin: 10px auto;
-  /* disly: flex; */
-  /* margin-left: auto; */
 }
 
 .rankings {
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -79,7 +82,7 @@
 
 
 .name_col {
-  width: 80%;
+  width: 70%;
   text-align: center;
   margin: 0 auto;
   float: left;
