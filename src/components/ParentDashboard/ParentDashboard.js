@@ -46,26 +46,28 @@ export default class ParentDashboard extends Component {
   }
 
   //Boolean check for if there are households
-  hasHouseholds = () => {
-    return !this.context.households.length === 0
-  }
-
+  hasHouseholds = () => this.context.households.length !== 0;
+  
   //Boolean check for if there are members
-  hasMembers = () => {
-    return this.state.members !== {}
-  }
+  hasMembers = () => this.state.members === {};
 
   //Returns appropriate feedback if the user has no households.
-  // renderUserFeedback() {
-  //   if (!this.hasHouseholds()) {
-  //     return (<p>To get started, use the Add Households form to create a household (Maybe you have more than one!).</p>)
-  //   }
-  //   else if (this.hasHouseholds() && !this.hasMembers()) {
-  //     return (<p>It looks like you have Households, but no members assigned. Use the Add Members form to populate each household with your family members.</p>)
-  //   } else {
-  //     return (<p>Click on a Household to begin assigning tasks to family members!</p>)
-  //   }
-  // }
+  renderUserFeedback() {
+    const {households } = this.context;
+    const {members} = this.state;
+    console.log('households ', households)
+    console.log('members', members)
+    console.log('Has households? ', this.hasHouseholds())
+    console.log('Has members? ', this.hasMembers())
+    if (!this.hasHouseholds()) {
+      return (<p>To get started, use the Add Households form to create a household (Maybe you have more than one!).</p>)
+    }
+    if (this.hasHouseholds() && !this.hasMembers()) {
+      return (<p>It looks like you have Households, but no members assigned. Use the Add Members form to populate each household with your family members.</p>)
+    } else if (this.hasHouseholds() && this.hasMembers()) {
+      return (<p>Click on a Household to begin assigning tasks to family members!</p>)
+    }
+  }
 
   handleRenderAfterAddMember = res => {
     console.log('THIS IS MEMBERS', this.state.members)
@@ -99,6 +101,7 @@ export default class ParentDashboard extends Component {
       .then(res => {
         this.context.addHousehold(res)
         this.householdName.value = '';
+        this.render();
       })
       .catch(error => console.log(error));
   }
@@ -106,6 +109,7 @@ export default class ParentDashboard extends Component {
   //Toggles whether or not to show the household form.
   toggleEditHousehold = () => {
     this.setState({ editHousehold: !this.state.editHousehold })
+    this.render()
   }
 
   //Sets data of household being edited.
@@ -159,7 +163,7 @@ export default class ParentDashboard extends Component {
   renderEditHouseholdButton() {
     return (
       <button
-        onClick={this.toggleEditHousehold()}>
+        onClick={this.toggleEditHousehold}>
         Edit
       </button>
     )
@@ -188,7 +192,9 @@ export default class ParentDashboard extends Component {
                 return <li key={member.id}>{member.name}</li>
               })}
             </ul>
-            : null}
+            : <p>
+              It looks like this household has no members yet! Use the Add Members form to populate each household with your family members.
+              </p>}
         </div>
       );
     });
@@ -200,7 +206,7 @@ export default class ParentDashboard extends Component {
       <section className="parent_dashboard">
         <div className="parent_dashboard-feedback">
           <h3>Welcome to ChoreRunner!</h3>
-          {/* {this.renderUserFeedback()} */}
+          {this.renderUserFeedback()}
         </div>
         <h2>PARENT DASHBOARD</h2>
         <div className="add-household container">
