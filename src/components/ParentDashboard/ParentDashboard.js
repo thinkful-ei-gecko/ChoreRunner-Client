@@ -104,7 +104,7 @@ export default class ParentDashboard extends Component {
       return (
         <div key={household.id} className="house_card">
           <Link to={`/household/${household.id}`} style={{ textDecoration: 'none' }}>
-            <p >{household.name}</p>
+            <p>{household.name}</p>
           </Link>
           <div className='buttons-container'>
             <button className="delete-household" onClick={event => deleteHousehold(event, household.id)}> Delete </button>

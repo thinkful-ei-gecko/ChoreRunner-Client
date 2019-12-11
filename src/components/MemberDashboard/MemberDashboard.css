@@ -3,7 +3,7 @@
     height: 85vh;
     padding-top: 15vh;
     overflow-y: auto;
-    background-image: url('../../ImgAssets/ChoreRunner.png');
+    background-image: url("../../images/ChoreRunner.png");
     background-size: cover;
     background-position: 0 0;
     background-repeat: repeat-x;

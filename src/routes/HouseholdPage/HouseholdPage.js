@@ -133,7 +133,13 @@ export default class HouseholdPage extends Component {
   handleResetScores = () => {
     let household_id = this.props.match.params.id;
     ApiService.resetScores(household_id)
-      .then(res => console.log(res))
+      .then(res => {
+        const { tasks } = this.context;
+        for (let member in tasks) {
+          tasks[member].total_score = 0;
+        }
+        this.context.setTasks(tasks);
+      })
       .catch(error => this.context.setError(error));
   };
 
