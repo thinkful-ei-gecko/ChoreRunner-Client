@@ -1,8 +1,8 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
@@ -36,7 +36,7 @@ export default class EditMember extends React.Component {
     let nameError = '';
 
     if (this.state.name.length <= 3) {
-      nameError = 'Please enter 4 characters or more'
+      nameError = 'Please enter more characters'
     }
 
     if (nameError) {
@@ -71,6 +71,7 @@ export default class EditMember extends React.Component {
         .catch(error => this.context.setError(error))
       document.getElementById("add-household-form").reset();
     }
+
   };
 
   renderFormButton() {
