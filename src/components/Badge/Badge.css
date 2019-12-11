@@ -1,9 +1,8 @@
 .levelInfo {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
-  width: 60%;
+  width: 90%;
   margin: 20px auto;
-  display: flex;
   justify-content: space-around;
 }
 
@@ -13,7 +12,7 @@
   padding: 10px;
   margin: 10px auto;
   height: auto;
-  min-height: 100px;
+  min-height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,27 +20,81 @@
 
 
 .level {
-  width: 30%;
-  padding: 10px;
+  width: 90%;
+  padding: 5px;
   margin: 10px auto;
   height: auto;
-  min-height: 100px;
   font-family: 'Press Start 2P', cursive;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   color: white;
+  text-align: left;
 }
 
+.image img {
+  padding-top: 25px;
+  height: 200px;
+}
 
 .level p {
   font-family: 'Press Start 2P', cursive;
+  text-align: left;
 }
 
-.total_score {
-  font-size: 3em;
-  color: white;
+.level_totalScore {
+  text-align: center; 
 }
 
 
+
+@media screen and (min-width: 450px) {
+
+  .levelInfo {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .badge {
+    width: 60%;
+    padding: 10px;
+    margin: 10px auto;
+    height: auto;
+    min-height: 100px;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+  }
+
+  .image img {
+    padding-top: 25px;
+    height: 250px;
+  }
+  
+  
+  .level {
+    width: 40%;
+    padding: 10px;
+    margin: 10px auto;
+    height: auto;
+    min-height: 100px;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+  }
+  
+  
+  .level p {
+    font-family: 'Press Start 2P', cursive;
+    width: 90%;
+    text-align: left;
+  }
+
+  
+
+}
