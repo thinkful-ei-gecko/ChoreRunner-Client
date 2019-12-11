@@ -7,7 +7,7 @@
     background-size: cover;
     background-position: 0 0;
     background-repeat: repeat;
-    animation: house 25s linear infinite;
+    animation: house 45s linear infinite;
 
 }
 
@@ -39,7 +39,7 @@
         background-position: 0 0;
     }
     to {
-        background-position: -6845px 0;
+        background-position: -13690px 0;
     }
 }
 
