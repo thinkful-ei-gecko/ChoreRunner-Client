@@ -6,8 +6,8 @@
     background-image: url("../../images/ChoreRunner.png");
     background-size: cover;
     background-position: 0 0;
-    background-repeat: repeat-x;
-    animation: house 15s linear infinite;
+    background-repeat: repeat;
+    animation: house 45s linear infinite;
 
 }
 
@@ -39,7 +39,7 @@
         background-position: 0 0;
     }
     to {
-        background-position: 100% 0;
+        background-position: -13690px 0;
     }
 }
 

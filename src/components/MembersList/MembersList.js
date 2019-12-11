@@ -11,12 +11,10 @@ export default class MembersList extends Component {
     const {
       tasks,
       data,
-      editMember,
       household_id,
       editTitle,
       editPts,
       updateMembersList,
-      toggleEditMember,
       handleDeleteMember,
       handleEditTitleClick,
       handleTitleChange,
@@ -45,9 +43,7 @@ export default class MembersList extends Component {
               <div className="delete-edit-name">
                 <h3 className="member-name">{member.name}</h3>
                 <EditMember
-                  editMember={editMember}
                   updateMembersList={updateMembersList}
-                  toggleEditMember={toggleEditMember}
                   member={member}
                   household_id={household_id}
                 />

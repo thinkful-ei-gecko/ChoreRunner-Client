@@ -1,0 +1,47 @@
+.levelInfo {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  width: 60%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.badge {
+  width: 30%;
+  padding: 10px;
+  margin: 10px auto;
+  height: auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.level {
+  width: 30%;
+  padding: 10px;
+  margin: 10px auto;
+  height: auto;
+  min-height: 100px;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+
+.level p {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.total_score {
+  font-size: 3em;
+  color: white;
+}
+
+
