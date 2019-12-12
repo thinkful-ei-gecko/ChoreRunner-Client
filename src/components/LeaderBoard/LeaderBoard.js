@@ -21,9 +21,15 @@ export default class Leaderboard extends Component {
 
   renderScores() {
     let members = this.state.members;
-    return members.map(member => {
+    return members.map((member, index) => {
       return (
         <li key={member.id} className="score_display">
+          {index > 2
+          ? <div className="">
+            {`${index + 1}`}
+          </div>
+          : null
+          }
           <div className="name_col">
             <span>{member.name}</span>
           </div>

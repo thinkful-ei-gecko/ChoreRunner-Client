@@ -19,6 +19,15 @@ export default class AddTask extends React.Component {
     })
   }
 
+   //Specifically for select option
+   onSelectChangeHandle = (e) => {
+    if (!!e.target.value) {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
   toggleForm = () => {
     const formToggle = !this.state.showForm
     this.setState({ showForm: formToggle })
@@ -94,8 +103,8 @@ export default class AddTask extends React.Component {
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" name="title" required onChange={this.onChangeHandle} value={this.state.title}></input>
       <label htmlFor="assignee">Task assigned to</label>
-      <select type="text" id="assignee" name="member_id" className="select-css" required onChange={this.onChangeHandle} defaultValue="Select household member">
-        <option disabled>Select household member</option>
+      <select type="text" id="assignee" name="member_id" className="select-css" required onChange={this.onSelectChangeHandle} defaultValue="Select household member">
+        <option value=''>Select household member</option>
         {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
       </select>
       <label htmlFor="points">Points</label>

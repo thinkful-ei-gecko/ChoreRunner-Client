@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditMember from '../EditMember/EditMember';
 import TasksList from '../TasksList/TasksList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import TasksToApprove from '../../components/TasksToApprove/TasksToApprove';
 import './MembersList.css'
 
@@ -13,8 +13,6 @@ export default class MembersList extends Component {
       tasks,
       data,
       household_id,
-      editTitle,
-      editPts,
       updateMembersList,
       handleDeleteMember,
       handleTaskDelete } = this.props;
@@ -44,7 +42,7 @@ export default class MembersList extends Component {
                 />
                 
                   <button className='trash-button' onClick={() => handleDeleteMember(member.member_id, household_id)}>
-                  <FontAwesomeIcon icon={faTrashAlt} size="2x" color="grey"/>
+                  <FontAwesomeIcon icon={faUserTimes} size="2x" color="grey"/>
                   </button>
              
               </div>

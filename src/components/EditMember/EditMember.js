@@ -86,6 +86,12 @@ export default class EditMember extends React.Component {
 
   };
 
+  handleCancel = () => {
+    this.setState({
+      showForm: false
+    })
+  }
+
   renderFormButton() {
     return (
       <button className='pen-button' onClick={() => this.toggleEditMember()}>
@@ -137,9 +143,9 @@ export default class EditMember extends React.Component {
           <button type="submit" className="submit-edit-member">
             submit changes
           </button>
-          {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>
-            Delete
-          </button> */}
+
+          <button type="reset" onClick={this.handleCancel} className="cancel">Cancel</button>
+          {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>
     );

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class Task extends Component {
   state = {
     editPts: false,
     editTitle: false,
-    newPoints: '',
-    newTitle: '',
+    newPoints: this.props.task.points,
+    newTitle: this.props.task.title,
   }
 
   static contextType = HouseholdContext;
@@ -80,12 +80,12 @@ export default class Task extends Component {
 
 
     return (
-      <li key={task.id}>
+      <li key={task.id} className="assigned-task">
         {this.state.editTitle ? (
-          <div className='title'>
+          <div className='hhp-title'>
             <input
               className="update-title"
-              placeholder={task.title}
+              value={this.state.newTitle}
               onChange={e => {
                 this.handleTitleChange(e);
               }}
@@ -97,21 +97,19 @@ export default class Task extends Component {
           </button>
           </div>
         ) : (
-            <div className='title'>
-              <div className='content'> 
-                <span>{task.title}&nbsp;</span>
-                <button onClick={() => this.handleEditTitleClick()}>
-                  <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
-                </button>
-              </div>
+            <div className='hhp-title'>
+              <span>{task.title}&nbsp;</span>
+              <button onClick={() => this.handleEditTitleClick()}>
+                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+              </button>
             </div>
           )}
       
         {this.state.editPts ? (
-          <div className='points'>
+          <div className='hhp-points'>
             <input
               className="update-points"
-              placeholder={task.points}
+              value={this.state.newPoints}
               onChange={e => {
                 this.handlePointsChange(e);
               }}
@@ -123,7 +121,7 @@ export default class Task extends Component {
             </button>
           </div>
         ) : (
-            <div className='points'>
+            <div className='hhp-points'>
               <span>points: {task.points}</span>
               <button onClick={() => this.handleEditPointsClick()}>
                 <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
@@ -131,12 +129,12 @@ export default class Task extends Component {
             </div>
           )}
         
-        <button
+        <button className="delete-task"
           onClick={() =>
             handleTaskDelete(task.id, member.member_id)
           }
         >
-          Delete
+          <FontAwesomeIcon icon={faTrashAlt} size="2x" color="grey"/>
         </button>
       </li>
     );
