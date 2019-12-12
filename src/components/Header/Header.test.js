@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json'
 
-describe('Badge component testing', () => {
+describe('Header component testing', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
 

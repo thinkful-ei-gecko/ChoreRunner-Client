@@ -79,9 +79,7 @@ export default class EditMember extends React.Component {
           this.toggleEditMember()
         })
         .catch(error => this.context.setError(error))
-      document.getElementById("edit-member-form").reset();
     }
-
   };
 
   renderFormButton() {
