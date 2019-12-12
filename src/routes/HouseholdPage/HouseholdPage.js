@@ -109,7 +109,7 @@ export default class HouseholdPage extends Component {
           household_id={this.props.match.params.id}
           updateEverything={this.updateEverything}
         />
-        <button onClick={this.handleResetScores}>Reset All Scores</button>
+        <button onClick={this.handleResetScores} className="reset-all-scores">Reset All Scores</button>
         <MembersList
           tasks={tasks}
           data={data}

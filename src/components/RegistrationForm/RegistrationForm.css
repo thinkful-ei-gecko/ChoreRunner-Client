@@ -16,6 +16,13 @@
     margin: auto;
 }
 
+div[role="alert"] {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
 .formItem {
     display: flex;
     flex-direction: column;

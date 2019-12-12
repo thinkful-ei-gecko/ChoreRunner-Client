@@ -32,23 +32,19 @@ class RegistrationForm extends Component {
   validateForm = () => {
     let name = this.state.name.trim();
     let userName = this.state.username.trim()
-    const allLetters = /[a-zA-Z]+\d/;
 
     let usernameError = '';
     let nameError = '';
 
     //Validates the persons name
-		if (name.length === 0) {
-			nameError = 'Input field cannot be empty';
-		}
+
 		if (name.length < 6) {
 			nameError = 'Please enter more than 6 characters';
     }
-
     if(name.length > 50) {
       nameError = 'Your name must be less than 50 characters';
     }
-  
+
     //Validates the username
     if(userName.length < 6) {
       usernameError = 'Please enter more than 6 characters'
@@ -67,7 +63,8 @@ class RegistrationForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault()
     const isValid = this.validateForm();
-    const formError = this.state.error
+    const formError = this.state.error;
+
     const { name, username, password } = ev.target
 
     if(isValid) {
@@ -112,9 +109,6 @@ class RegistrationForm extends Component {
           onSubmit={this.handleSubmit}
           name='registration-form'
         >
-          <div role='alert'>
-            {error && <p className='alertMsg'>{error}</p>}
-          </div>
           <div className='formItem'>
             <Label htmlFor='registration-name-input'>
               Enter your name<Required />
@@ -157,6 +151,9 @@ class RegistrationForm extends Component {
               required
             />
             {/* <div className="valid-error">{passwordError}</div> */}
+          </div>
+          <div role='alert'>
+            {error && <p className='alertMsg'>{error}</p>}
           </div>
           <footer className='formFooter'>
             <Button type='submit' className='basicBtn'>

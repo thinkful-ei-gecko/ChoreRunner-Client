@@ -61,7 +61,7 @@ export default class ParentLogin extends Component {
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
           </div>
           <div role='alert'>
-            {error && <p>{error}</p>}
+            {error && <p>{error.error}</p>}
           </div>
           <button type='submit'>login</button>
         </form>
