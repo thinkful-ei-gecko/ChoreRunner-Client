@@ -5,16 +5,9 @@ export default class TasksList extends Component {
 
   render() {
     const {
+      household_id,
       tasks,
       member,
-      editTitle,
-      editPts,
-      handleEditTitleClick,
-      handleTitleChange,
-      handleTitleUpdate,
-      handleEditPointsClick,
-      handlePointsChange,
-      handlePointsUpdate,
       handleTaskDelete } = this.props;
 
     return (
@@ -25,18 +18,11 @@ export default class TasksList extends Component {
             if (task.status === 'assigned') {
             return (
               <Task
+                household_id={household_id}
                 tasks={tasks}
                 member={member}
                 task={task}
                 key={task.id}
-                editTitle={editTitle}
-                editPts={editPts}
-                handleEditTitleClick={handleEditTitleClick}
-                handleTitleChange={handleTitleChange}
-                handleTitleUpdate={handleTitleUpdate}
-                handleEditPointsClick={handleEditPointsClick}
-                handlePointsChange={handlePointsChange}
-                handlePointsUpdate={handlePointsUpdate}
                 handleTaskDelete={handleTaskDelete}
               />
             )
