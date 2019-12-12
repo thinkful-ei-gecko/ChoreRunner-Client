@@ -44,6 +44,7 @@ div[role="alert"] > p {
 input {
     font-size: 17px;
     padding-left: 25px;
+    padding-right: 15px;
     color:  rgb(105, 90, 0);
     font-family: 'Electrolize', sans-serif;
     margin-bottom: 20px;

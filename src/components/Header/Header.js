@@ -43,11 +43,11 @@ class Header extends Component {
     let display = <h1>
         {TokenService.hasAuthToken() ? (
           <Link to={this.context.user.type === 'user' ? '/parent-dashboard' : '/member-dashboard'} style={{ textDecoration: 'none' }}>
-            ChoreRunner
+            Chore Runner
         </Link>
         ) : (
             <Link to='/' style={{ textDecoration: 'none' }}>
-              ChoreRunner
+              Chore Runner
         </Link>
           )}
       </h1>
