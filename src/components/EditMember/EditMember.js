@@ -1,12 +1,12 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
-import HouseHoldContext from '../../contexts/HouseHoldContext'
+//import HouseHoldContext from '../../contexts/HouseHoldContext'
 import './EditMember.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
-  static contextType = HouseHoldContext
+  //static contextType = HouseHoldContext
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +16,7 @@ export default class EditMember extends React.Component {
       password: '',
       editMember: this.props.editMember,
       showForm: false,
+      error: null,
       validateError: {
         nameError: '',
         usernameError: ''
@@ -79,7 +80,7 @@ export default class EditMember extends React.Component {
           updateMembersList(newMember)
           this.toggleEditMember()
         })
-        .catch(error => this.context.setError(error))
+        .catch(error => this.setState({ error: error.error }))
       document.getElementById("edit-member-form").reset();
     }
 
@@ -93,8 +94,15 @@ export default class EditMember extends React.Component {
     );
   }
 
+  renderError() {
+    return (
+      this.context.error ? <p>{this.context.error.error}</p> : null
+    )
+  }
+
   renderForm() {
     const { usernameError, nameError } = this.state.validateError;
+    const { error } = this.state
     return (
       <div className="edit-member-container">
         <p>Edit member</p>
@@ -107,7 +115,7 @@ export default class EditMember extends React.Component {
             value={this.state.name}
             onChange={this.onChangeHandle}
           ></input>
-          <div className="valid-error">{nameError}</div>
+          {/* <div className="valid-error">{nameError}</div> */}
           <label htmlFor="child-username">Child username</label>
           <input
             type="text"
@@ -116,7 +124,7 @@ export default class EditMember extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandle}
           ></input>
-          <div className="valid-error">{usernameError}</div>
+          {/* <div className="valid-error">{usernameError}</div> */}
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"
@@ -124,13 +132,14 @@ export default class EditMember extends React.Component {
             name="password"
             onChange={this.onChangeHandle}
           ></input>
+          <div className="valid-error">{nameError || usernameError || error}</div>
+          {/* {this.context.error ? <p>{this.context.error.error}</p> : null} */}
           <button type="submit" className="submit-edit-member">
             submit changes
           </button>
           {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>
             Delete
           </button> */}
-          {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>
     );
