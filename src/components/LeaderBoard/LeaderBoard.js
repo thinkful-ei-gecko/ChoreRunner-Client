@@ -35,6 +35,8 @@ export default class Leaderboard extends Component {
     });
   }
 
+
+
   render() {
     console.log(this.state.members);
     return (

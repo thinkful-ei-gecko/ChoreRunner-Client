@@ -35,6 +35,10 @@
   width: 100%;
 }
 
+.badge-task-container {
+  margin: 0 auto 50px auto;
+}
+
 @keyframes house {
   from {
     background-position: 0 0;
@@ -62,13 +66,13 @@
 } 
 
 .task_list p {
-  max-width: 300px;
+  max-width: 200px;
 }
 
 .task_list li button {
   margin: 15px auto;
   font-size: 17px;
-  width: 175px;
+  min-width: 80px;
 }
 
 @media screen and (min-width: 450px) {
@@ -139,10 +143,30 @@
 
   .points {
       margin: 0 20px;
+      min-width: 80px;
   }
 
-  .task_list li button {
+  .task-name {
+    min-width: 250px;
+  }
+
+  /* .task_list li button {
     font-size: 17px;
     width: 175px;
+  } */
+}
+
+@media screen and (min-width: 800px) {
+  .chores-container {
+    width: 60%;
+  }
+
+  .badge-task-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto 100px auto;
+    justify-content: space-between;
+
   }
 }

@@ -20,6 +20,7 @@ export default class Badge extends Component {
 
   renderBadge() {
     const { levelInfo } = this.state;
+    console.log(levelInfo)
     return (
       <section className="levelInfo">
         <div className="badge">
@@ -29,6 +30,7 @@ export default class Badge extends Component {
         </div>
         <div className="level">
           <div className="level_totalScore">
+            <p>{levelInfo.name}</p>
             <p>Level {levelInfo.level_id}</p>
             <p>Total EXP: {levelInfo.total_score}</p>
             <p>Next level in: {levelInfo.nextLevel}</p>
