@@ -109,9 +109,6 @@ class RegistrationForm extends Component {
           onSubmit={this.handleSubmit}
           name='registration-form'
         >
-          <div role='alert'>
-            {error && <p className='alertMsg'>{error}</p>}
-          </div>
           <div className='formItem'>
             <Label htmlFor='registration-name-input'>
               Enter your name<Required />
@@ -154,6 +151,9 @@ class RegistrationForm extends Component {
               required
             />
             {/* <div className="valid-error">{passwordError}</div> */}
+          </div>
+          <div role='alert'>
+            {error && <p className='alertMsg'>{error}</p>}
           </div>
           <footer className='formFooter'>
             <Button type='submit' className='basicBtn'>
