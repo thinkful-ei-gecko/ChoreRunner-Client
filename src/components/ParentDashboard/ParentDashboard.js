@@ -25,6 +25,10 @@ export default class ParentDashboard extends Component {
   }
 
   static contextType = HouseholdContext;
+  static defaultProps = {
+    households: []
+  }
+  
 
   componentDidMount() {
 
@@ -118,21 +122,6 @@ export default class ParentDashboard extends Component {
     this.setState({ editingHousehold: !this.state.editingHousehold })
   }
 
-  //Sets data of household being edited.
-  // handleEditHouseholdClick = household => {
-  //   console.log('Before: ', this.state.editName, this.state.editId);
-  //   this.setState({ editName: household.name, editId: household.id })
-  //   console.log('After: ', this.state.editName, this.state.editId);
-
-  //   this.toggleEditHousehold();
-  //   this.render();
-  // }
-
-  //Clears edit form state
-  // clearEditHousehold = () => {
-  //   this.setState({ name: '', editName: '', editId: '' })
-  // }
-
   handleEditHouseholdName = (householdId, name) => {
     console.log('----------houseid',householdId, name)
     // let name = this.state.name;
@@ -200,8 +189,6 @@ export default class ParentDashboard extends Component {
   }
 
   render() {
-    // const { households } = this.context;
-    // console.log(!!households.length)
     return (
       <section className="parent_dashboard">
         <div className="parent_dashboard-feedback">
@@ -243,31 +230,3 @@ export default class ParentDashboard extends Component {
   }
 }
 
-// //Household edit input takes callback and household as props.
-// function EditHouseholdInput(props) {
-//   const { household, onChangeHandle, handleEditHouseholdName } = this.props;
-//   return (
-//     <span>
-//       <input
-//         className="update-household"
-//         type="text"
-//         name="name"
-//         value={household.name}
-//         placeholder="name"
-//         onChange={onChangeHandle}
-//       />
-//       <button onClick={() => handleEditHouseholdName(this.state.editId)}>Save</button>
-//     </span>
-//   )
-// }
-
-// //Household edit button takes callback and household as props
-// function EditHouseholdButton() {
-//   const { household, handleEditHouseholdClick } = this.props;
-//   return (
-//     <button
-//       onClick={() => handleEditHouseholdClick(household)}>
-//       Edit
-//     </button>
-//   )
-// }

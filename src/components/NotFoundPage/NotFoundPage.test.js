@@ -1,29 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header';
+import NotFoundPage from './NotFoundPage';
 import {MemoryRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json'
 
-describe('Header component testing', () => {
+describe.only('NotFoundPage component testing', () => {
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
-
-    ReactDOM.render(<MemoryRouter><Header /></MemoryRouter>, div);
-
+  
+    ReactDOM.render(<MemoryRouter><NotFoundPage /></MemoryRouter>, div);
+  
     ReactDOM.unmountComponentAtNode(div);
   });
-
+  
   it('renders UI as expected', () => {
     const tree = renderer
-        .create(<MemoryRouter><Header /></MemoryRouter>)
+        .create(<MemoryRouter><NotFoundPage /></MemoryRouter>)
         .toJSON();
         expect(tree).toMatchSnapshot();
   })
 
   it('renders empty given no tabs', () => {
-    const wrapper = shallow(<Header />)
+    const wrapper = shallow(<NotFoundPage />)
     expect(toJson(wrapper)).toMatchSnapshot()
   })
 })
