@@ -11,7 +11,10 @@ export default class EditMember extends React.Component {
     username: this.props.member.username,
     password: '',
     editMember: this.props.editMember,
-    nameError: '',
+    validateError: {
+      nameError: '',
+      usernameError: ''
+    }
   };
 
   onChangeHandle = (e) => {
@@ -21,14 +24,20 @@ export default class EditMember extends React.Component {
   }
 
   validate = () => {
+    let username = this.state.username.trim()
     let nameError = '';
+    let usernameError = '';
 
-    if (this.state.name.length <= 3) {
-      nameError = 'Please enter more characters'
+    if (this.state.name.length <= 2) {
+      nameError = 'Please enter more than 3 characters'
     }
 
-    if (nameError) {
-      this.setState({ nameError })
+    if(username.length > 50) {
+      usernameError = 'Your name must be less than 50 characters';
+    }
+
+    if (nameError || usernameError) {
+      this.setState({ validateError: { usernameError, nameError }})
       return false;
     }
     return true;
@@ -62,24 +71,6 @@ export default class EditMember extends React.Component {
 
   };
 
-  // handleNameChange = e => {
-  //   this.setState({
-  //     name: e.target.value,
-  //   });
-  // };
-
-  // handleChildUsernameChange = e => {
-  //   this.setState({
-  //     username: e.target.value,
-  //   });
-  // };
-
-  // handleChildPasswordChange = e => {
-  //   this.setState({
-  //     password: e.target.value,
-  //   });
-  // };
-
   renderFormButton() {
     const { toggleEditMember } = this.props;
     return (
@@ -90,7 +81,7 @@ export default class EditMember extends React.Component {
   }
 
   renderForm() {
-    let nameError = this.state.nameError;
+    const { usernameError, nameError } = this.state.validateError;
     return (
       <div className="add-member container">
         <p>Edit Member</p>
@@ -112,6 +103,7 @@ export default class EditMember extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandle}
           ></input>
+          <div className="valid-error">{usernameError}</div>
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"

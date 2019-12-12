@@ -32,25 +32,19 @@ class RegistrationForm extends Component {
   validateForm = () => {
     let name = this.state.name.trim();
     let userName = this.state.username.trim()
-    const allLetters = /[a-zA-Z]+\d/;
 
     let usernameError = '';
     let nameError = '';
 
     //Validates the persons name
-		if (name.length === 0) {
-			nameError = 'Input field cannot be empty';
-		}
+
 		if (name.length < 6) {
 			nameError = 'Please enter more than 6 characters';
-    }
-    if (!allLetters.test(name)) {
-      nameError = 'Name must include only alphabetical letters';
     }
     if(name.length > 50) {
       nameError = 'Your name must be less than 50 characters';
     }
-  
+
     //Validates the username
     if(userName.length < 6) {
       usernameError = 'Please enter more than 6 characters'
@@ -69,6 +63,7 @@ class RegistrationForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault()
     const isValid = this.validateForm();
+    const formError = this.state.error;
     const { name, username, password } = ev.target
 
     if(isValid) {
@@ -85,6 +80,15 @@ class RegistrationForm extends Component {
       })
       .catch(res => {
         this.setState({ error: res.error })
+      })
+    }
+    if(formError) {
+      this.setState({
+        name: '', 
+        username: '', 
+        password: '', 
+        error: null,
+        validateError: {}
       })
     }
   }
