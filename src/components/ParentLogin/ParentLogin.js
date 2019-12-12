@@ -52,9 +52,6 @@ export default class ParentLogin extends Component {
       <div className='parent-login container'>
         <h2>Parent Login</h2>
         <form className='parent-form-container' onSubmit={this.handleSubmit}>
-          <div role='alert'>
-            {error && <p>{error.error}</p>}
-          </div>
           <div>
             <label htmlFor='username'>Username</label>
             <input name='username' type='text' onChange={this.onChangeHandle} value={username} required ></input>
@@ -62,6 +59,9 @@ export default class ParentLogin extends Component {
           <div>
             <label htmlFor='password'>Password</label>
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
+          </div>
+          <div role='alert'>
+            {error && <p>{error}</p>}
           </div>
           <button type='submit'>login</button>
         </form>

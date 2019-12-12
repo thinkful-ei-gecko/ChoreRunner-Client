@@ -1,8 +1,8 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
@@ -15,7 +15,10 @@ export default class EditMember extends React.Component {
       password: '',
       editMember: this.props.editMember,
       showForm: false,
-      nameError: '',
+      validateError: {
+        nameError: '',
+        usernameError: ''
+      }
     };
   }
 
@@ -33,14 +36,21 @@ export default class EditMember extends React.Component {
   }
 
   validate = () => {
+    let username = this.state.username.trim()
     let nameError = '';
+    let usernameError = '';
 
-    if (this.state.name.length <= 3) {
-      nameError = 'Please enter 4 characters or more'
+    if (this.state.name.length <= 2) {
+      nameError = 'Please enter 3 characters or more'
     }
 
-    if (nameError) {
-      this.setState({ nameError })
+    // Validates child's username
+    if(username.length > 50) {
+      usernameError = 'Your name must be less than 50 characters';
+    }
+
+    if (nameError || usernameError) {
+      this.setState({ validateError: { usernameError, nameError }})
       return false;
     }
     return true;
@@ -69,24 +79,25 @@ export default class EditMember extends React.Component {
           this.toggleEditMember()
         })
         .catch(error => this.context.setError(error))
-      document.getElementById("add-household-form").reset();
+      document.getElementById("edit-member-form").reset();
     }
+
   };
 
   renderFormButton() {
     return (
-      <button onClick={() => this.toggleEditMember()}>
-        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="green"/>
+      <button className='pen-button' onClick={() => this.toggleEditMember()}>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="grey"/>
       </button>
     );
   }
 
   renderForm() {
-    let nameError = this.state.nameError;
+    const { usernameError, nameError } = this.state.validateError;
     return (
-      <div className="add-member container">
+      <div className="edit-member-container">
         <p>Edit member</p>
-        <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
+        <form onSubmit={this.handleSubmit} id="edit-member-form">
           <label htmlFor="member-name">Name</label>
           <input
             type="text"
@@ -104,6 +115,7 @@ export default class EditMember extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandle}
           ></input>
+          <div className="valid-error">{usernameError}</div>
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"
@@ -111,7 +123,7 @@ export default class EditMember extends React.Component {
             name="password"
             onChange={this.onChangeHandle}
           ></input>
-          <button type="submit" className="submitHH">
+          <button type="submit" className="submit-edit-member">
             submit changes
           </button>
           {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>

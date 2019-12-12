@@ -34,7 +34,7 @@ export default class MemberDashboard extends Component {
             <p>{task.title}</p>
           </div>
           <div className="points">
-            <span>{task.points}</span>
+            <span>{task.points} EXP</span>
           </div>
           <button
             onClick={() => {
@@ -57,7 +57,7 @@ export default class MemberDashboard extends Component {
           </div>
           <Badge />
           <div className='chores-container'>
-            <h2>chore-llenges</h2>
+            <h2>Chore-llenges</h2>
 
             <div className="task_list">
               <ul>{this.renderTasks()}</ul>

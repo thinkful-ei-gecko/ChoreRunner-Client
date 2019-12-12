@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class Task extends Component {
   render() {
@@ -20,29 +22,34 @@ export default class Task extends Component {
 
     return (
       <li key={task.id}>
-        <button onClick={() => handleEditTitleClick()}>
-          edit name
-      </button>
         {editTitle ? (
           <div className='title'>
-            <button onClick={() => handleTitleUpdate(task.id)}>
-              save
-      </button>
             <input
               className="update-title"
               placeholder={task.title}
               onChange={e => {
                 handleTitleChange(e);
               }}
-            />
+          />
+          <button 
+            className="save-title-edit"
+            onClick={() => handleTitleUpdate(task.id)}>
+            Save
+          </button>
           </div>
         ) : (
-            <div className='title'>{task.title}&nbsp;</div>
+            <div className='title'>
+              <div className='content'> 
+                <span>{task.title}&nbsp;</span>
+                <button onClick={() => handleEditTitleClick()}>
+                  <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+                </button>
+              </div>
+            </div>
           )}
-
+      
         {editPts ? (
           <div className='points'>
-            points:{' '}
             <input
               className="update-points"
               placeholder={task.points}
@@ -50,23 +57,28 @@ export default class Task extends Component {
                 handlePointsChange(e);
               }}
             />
-            <button onClick={() => handlePointsUpdate(task.id)}>
-              save
-      </button>
+            <button 
+              className="save-points-edit"
+              onClick={() => handlePointsUpdate(task.id)}>
+              Save
+            </button>
           </div>
         ) : (
-            <div className='points'>points: {task.points}</div>
+            <div className='points'>
+              <span>points: {task.points}</span>
+              <button onClick={() => handleEditPointsClick()}>
+                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+              </button>
+            </div>
           )}
-        <button onClick={() => handleEditPointsClick()}>
-          edit points
-  </button>
+        
         <button
           onClick={() =>
             handleTaskDelete(task.id, member.member_id)
           }
         >
           Delete
-  </button>
+        </button>
       </li>
     );
   }
