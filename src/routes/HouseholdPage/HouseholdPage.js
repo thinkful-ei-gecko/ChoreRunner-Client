@@ -10,11 +10,7 @@ export default class HouseholdPage extends Component {
     membersList: [],
     tasks: {},
     task: '',
-    newPoints: '',
-    newTitle: '',
     editMember: false,
-    editPts: false,
-    editTitle: false,
   };
   static contextType = HouseholdContext;
 
@@ -88,48 +84,6 @@ export default class HouseholdPage extends Component {
       .catch(error => this.context.setError(error));
   };
 
-  //Task Title input callbacks
-  handleEditTitleClick = () => {
-    this.setState({ editTitle: true });
-  };
-
-  handleTitleChange = event => {
-    this.setState({ newTitle: event.target.value });
-  };
-
-  handleTitleUpdate = id => {
-    let reqBody = {
-      method: 'title',
-      id: id,
-      title: this.state.newTitle,
-    };
-
-    ApiService.updateTask(this.props.match.params, reqBody)
-      .then(after => this.setState({ editTitle: false }))
-      .then(after => this.updateEverything());
-  };
-
-  //Task Points input callbacks
-  handleEditPointsClick = () => {
-    this.setState({ editPts: true });
-  };
-
-  handlePointsChange = event => {
-    this.setState({ newPoints: event.target.value });
-  };
-
-  handlePointsUpdate = id => {
-    let reqBody = {
-      method: 'points',
-      id: id,
-      points: this.state.newPoints,
-    };
-
-    ApiService.updateTask(this.props.match.params, reqBody)
-      .then(after => this.setState({ editPts: false }))
-      .then(after => this.updateEverything());
-  };
-
   handleResetScores = () => {
     let household_id = this.props.match.params.id;
     ApiService.resetScores(household_id)
@@ -161,17 +115,11 @@ export default class HouseholdPage extends Component {
           data={data}
           household_id={this.props.match.params.id}
           editMember={this.state.editMember}
-          editTitle={this.state.editTitle}
-          editPts={this.state.editPts}
           updateMembersList={this.updateMembersList}
           toggleEditMember={this.toggleEditMember}
           handleDeleteMember={this.handleDeleteMember}
-          handleEditTitleClick={this.handleEditTitleClick}
           handleTitleChange={this.handleTitleChange}
-          handleTitleUpdate={this.handleTitleUpdate}
-          handleEditPointsClick={this.handleEditPointsClick}
           handlePointsChange={this.handlePointsChange}
-          handlePointsUpdate={this.handlePointsUpdate}
           handleTaskDelete={this.handleTaskDelete}
         />
       </div>

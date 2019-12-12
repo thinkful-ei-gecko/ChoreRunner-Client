@@ -1,39 +1,98 @@
 import React, { Component } from 'react';
+import ApiService from '../../services/api-service';
+import HouseholdContext from '../../contexts/HouseHoldContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class Task extends Component {
+  state = {
+    editPts: false,
+    editTitle: false,
+    newPoints: '',
+    newTitle: '',
+  }
+
+  static contextType = HouseholdContext;
+
+  handleEditTitleClick = () => {
+    this.setState({ editTitle: true });
+  };
+
+  handleEditPointsClick = () => {
+    this.setState({ editPts: true });
+  };
+
+  handleTitleUpdate = (id, member_id) => {
+    const { household_id } = this.props;
+    let reqBody = {
+      method: 'title',
+      id: id,
+      title: this.state.newTitle,
+    };
+
+    ApiService.updateTask(household_id, reqBody)
+      .then(after => {
+        this.setState({ editTitle: false })
+        const memberTasks = this.context.tasks;
+        memberTasks[member_id].tasks.forEach(task => {
+          return parseInt(task.id) === parseInt(id) ? task.title=this.state.newTitle : task.title;
+        })
+        this.context.setTasks(memberTasks);
+      })
+  };
+
+  handlePointsUpdate = (id, member_id) => {
+    const { household_id } = this.props;
+    let reqBody = {
+      method: 'points',
+      id: id,
+      points: this.state.newPoints,
+    };
+
+    ApiService.updateTask(household_id, reqBody)
+      .then(after => {
+        this.setState({ editPts: false })
+        const memberTasks = this.context.tasks;
+        memberTasks[member_id].tasks.forEach(task => {
+          return parseInt(task.id) === parseInt(id) ? task.points=this.state.newPoints : task.points;
+        })
+        
+        console.log(memberTasks)
+        this.context.setTasks(memberTasks);
+      })
+  };
+
+  handleTitleChange = event => {
+    this.setState({ newTitle: event.target.value });
+  };
+
+  handlePointsChange = event => {
+    this.setState({ newPoints: event.target.value });
+  };
+
   render() {
     const {
       task,
       member,
-      editTitle,
-      editPts,
-      handleEditTitleClick,
-      handleTitleChange,
-      handleTitleUpdate,
-      handleEditPointsClick,
-      handlePointsChange,
-      handlePointsUpdate,
       handleTaskDelete} = this.props;
 
-      console.log(task.id);
+      console.log(member.member_id);
 
 
     return (
       <li key={task.id}>
-        {editTitle ? (
+        {this.state.editTitle ? (
           <div className='title'>
             <input
               className="update-title"
               placeholder={task.title}
               onChange={e => {
-                handleTitleChange(e);
+                this.handleTitleChange(e);
               }}
           />
           <button 
             className="save-title-edit"
-            onClick={() => handleTitleUpdate(task.id)}>
+            onClick={() => this.handleTitleUpdate(task.id, member.member_id)}>
             Save
           </button>
           </div>
@@ -41,32 +100,32 @@ export default class Task extends Component {
             <div className='title'>
               <div className='content'> 
                 <span>{task.title}&nbsp;</span>
-                <button onClick={() => handleEditTitleClick()}>
+                <button onClick={() => this.handleEditTitleClick()}>
                   <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
                 </button>
               </div>
             </div>
           )}
       
-        {editPts ? (
+        {this.state.editPts ? (
           <div className='points'>
             <input
               className="update-points"
               placeholder={task.points}
               onChange={e => {
-                handlePointsChange(e);
+                this.handlePointsChange(e);
               }}
             />
             <button 
               className="save-points-edit"
-              onClick={() => handlePointsUpdate(task.id)}>
+              onClick={() => this.handlePointsUpdate(task.id, member.member_id)}>
               Save
             </button>
           </div>
         ) : (
             <div className='points'>
               <span>points: {task.points}</span>
-              <button onClick={() => handleEditPointsClick()}>
+              <button onClick={() => this.handleEditPointsClick()}>
                 <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
               </button>
             </div>
