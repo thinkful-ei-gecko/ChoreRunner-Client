@@ -44,9 +44,7 @@ class RegistrationForm extends Component {
 		if (name.length < 6) {
 			nameError = 'Please enter more than 6 characters';
     }
-    // if (!allLetters.test(name)) {
-    //   nameError = 'Name must include only alphabetical letters';
-    // }
+
     if(name.length > 50) {
       nameError = 'Your name must be less than 50 characters';
     }

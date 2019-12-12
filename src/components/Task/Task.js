@@ -8,8 +8,8 @@ export default class Task extends Component {
   state = {
     editPts: false,
     editTitle: false,
-    newPoints: '',
-    newTitle: '',
+    newPoints: this.props.task.points,
+    newTitle: this.props.task.title,
   }
 
   static contextType = HouseholdContext;
@@ -85,7 +85,7 @@ export default class Task extends Component {
           <div className='title'>
             <input
               className="update-title"
-              placeholder={task.title}
+              value={this.state.newTitle}
               onChange={e => {
                 this.handleTitleChange(e);
               }}
@@ -111,7 +111,7 @@ export default class Task extends Component {
           <div className='points'>
             <input
               className="update-points"
-              placeholder={task.points}
+              value={this.state.newPoints}
               onChange={e => {
                 this.handlePointsChange(e);
               }}
