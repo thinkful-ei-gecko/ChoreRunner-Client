@@ -54,15 +54,19 @@ export default class TasksToApprove extends React.Component {
         <ul className="householdpage-member-task-list">
           {this.state.tasks.map(task => {
             if (task.member_id === memberId) {
-              return <li key={task.id}>
-                <div className="title"><span>{task.title}</span></div>
-                <div className="points"><span>points: {task.points}</span></div>
-                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
-                  <FontAwesomeIcon icon={faThumbsUp} size="lg" color="green"/>
-                </button>
-                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
-                  <FontAwesomeIcon icon={faThumbsDown} size="lg" color="green"/>
-                </button>
+              return <li key={task.id} className="completed-task">
+                <div className="completed-task-container">
+                  <div className="hhp-title"><span>{task.title}</span></div>
+                  <div className="hhp-points"><span>points: {task.points}</span></div>
+                </div>
+                <div className="thumb-container">
+                  <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
+                    <FontAwesomeIcon icon={faThumbsUp} size="lg" color="green"/>
+                  </button>
+                  <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
+                    <FontAwesomeIcon icon={faThumbsDown} size="lg" color="green"/>
+                  </button>
+                </div>
               </li>
             }
           })}
