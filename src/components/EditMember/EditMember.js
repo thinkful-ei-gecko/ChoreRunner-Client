@@ -1,24 +1,12 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
+import './EditMember.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
-<<<<<<< HEAD
-  state = {
-    id: this.props.member.member_id,
-    name: this.props.member.name,
-    username: this.props.member.username,
-    password: '',
-    editMember: this.props.editMember,
-    validateError: {
-      nameError: '',
-      usernameError: ''
-    }
-  };
-=======
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +29,6 @@ export default class EditMember extends React.Component {
     })
     this.setState({showForm: !this.state.showForm})
   }
->>>>>>> master
 
   onChangeHandle = (e) => {
     this.setState({
@@ -55,16 +42,10 @@ export default class EditMember extends React.Component {
     let usernameError = '';
 
     if (this.state.name.length <= 2) {
-<<<<<<< HEAD
-      nameError = 'Please enter more than 3 characters'
-    }
-
-=======
       nameError = 'Please enter 3 characters or more'
     }
 
     // Validates child's username
->>>>>>> master
     if(username.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
