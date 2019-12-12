@@ -80,10 +80,8 @@ export default class EditMember extends React.Component {
           updateMembersList(newMember)
           this.toggleEditMember()
         })
-        .catch(error => this.setState({ error: error.error }))
-      document.getElementById("edit-member-form").reset();
+        .catch(error => this.context.setError(error))
     }
-
   };
 
   handleCancel = () => {

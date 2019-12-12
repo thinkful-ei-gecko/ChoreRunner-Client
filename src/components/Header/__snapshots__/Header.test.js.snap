@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Badge component testing renders UI as expected 1`] = `
+exports[`Header component testing renders UI as expected 1`] = `
 Array [
   <h1>
     <a
@@ -43,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`Badge component testing renders empty given no tabs 1`] = `
+exports[`Header component testing renders empty given no tabs 1`] = `
 <Fragment>
   <h1>
     <Link

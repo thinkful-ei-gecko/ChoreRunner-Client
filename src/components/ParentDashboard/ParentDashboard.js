@@ -25,6 +25,10 @@ export default class ParentDashboard extends Component {
   }
 
   static contextType = HouseholdContext;
+  static defaultProps = {
+    households: []
+  }
+  
 
   componentDidMount() {
 
@@ -198,7 +202,7 @@ export default class ParentDashboard extends Component {
 
   render() {
     const { households } = this.context;
-    console.log(!!households.length)
+    //console.log(!!households.length)
     return (
       <section className="parent_dashboard">
         <div className="parent_dashboard-feedback">
