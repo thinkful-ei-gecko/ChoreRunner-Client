@@ -84,7 +84,7 @@ export default class AddMembers extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { households } = this.context
     const { error } = this.state;
     const { usernameError, householdError } = this.state.validateError;
@@ -105,10 +105,10 @@ export default class AddMembers extends React.Component {
           <input type="text" id="child-username" name="username" required onChange={this.onChangeHandle} value={this.state.username}></input>
           <label htmlFor="child-password">Member Password</label>
           <input type="password" id="child-password" name="password" required onChange={this.onChangeHandle} value={this.state.password}></input>
+          <button type="submit" className="submitHH">+ add new member</button>
           <div role="alert">
             {<p className='alertMsg'>{error || householdError || usernameError}</p>}
           </div>
-          <button type="submit" className="submitHH">+ add new member</button>
         </form>
       </div>
     )

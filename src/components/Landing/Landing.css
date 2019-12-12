@@ -93,9 +93,10 @@ p {
     .landing > h1 {
         font-size: 40px;
     }
-    /* p{
+
+    .landing p{
         width: 500px;
-    } */
+    } 
 
     .parent-container {
         width: 100%;
