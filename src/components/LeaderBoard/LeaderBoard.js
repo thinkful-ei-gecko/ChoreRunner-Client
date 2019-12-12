@@ -42,7 +42,7 @@ export default class Leaderboard extends Component {
     return (
       <section className="leader_board">
         <h3>Leaderboard</h3>
-        <div className="headerRow">
+        <div className="leader_board-grid">
           <div className="header_rank">
             <span>Rank</span>
           </div>
@@ -53,7 +53,7 @@ export default class Leaderboard extends Component {
             <span>Score</span>
           </div>
         </div>
-        <ol className="rankings">{this.renderScores()}</ol>
+        <ul className="rankings">{this.renderScores()}</ul>
       </section>
     );
   }

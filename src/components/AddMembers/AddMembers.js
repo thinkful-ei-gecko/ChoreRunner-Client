@@ -40,8 +40,6 @@ export default class AddMembers extends React.Component {
   }
 
   onChangeHandle = (e) => {
-    console.log(e.target.value)
-
       this.setState({
         [e.target.name]: e.target.value
       })
@@ -49,7 +47,6 @@ export default class AddMembers extends React.Component {
 
   //Specifically for select option
   onSelectChangeHandle = (e) => {
-    console.log(e.target.value)
     if (!!e.target.value) {
       this.setState({
         [e.target.name]: e.target.value
@@ -111,7 +108,7 @@ export default class AddMembers extends React.Component {
           <div role="alert">
             {<p className='alertMsg'>{error || householdError || usernameError}</p>}
           </div>
-          <button type="submit" className="submitHH">add</button>
+          <button type="submit" className="submitHH">+ add new member</button>
         </form>
       </div>
     )

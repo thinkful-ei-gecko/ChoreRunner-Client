@@ -17,12 +17,6 @@ export default class MembersList extends Component {
       editPts,
       updateMembersList,
       handleDeleteMember,
-      handleEditTitleClick,
-      handleTitleChange,
-      handleTitleUpdate,
-      handleEditPointsClick,
-      handlePointsChange,
-      handlePointsUpdate,
       handleTaskDelete } = this.props;
     
     return (
@@ -68,16 +62,9 @@ export default class MembersList extends Component {
                 <p>There are no tasks</p>
                 </section>
               : <TasksList
+                household_id={household_id}
                 tasks={tasks}
                 member={member}
-                editTitle={editTitle}
-                editPts={editPts}
-                handleEditTitleClick={handleEditTitleClick}
-                handleTitleChange={handleTitleChange}
-                handleTitleUpdate={handleTitleUpdate}
-                handleEditPointsClick={handleEditPointsClick}
-                handlePointsChange={handlePointsChange}
-                handlePointsUpdate={handlePointsUpdate}
                 handleTaskDelete={handleTaskDelete}
               />
             }
