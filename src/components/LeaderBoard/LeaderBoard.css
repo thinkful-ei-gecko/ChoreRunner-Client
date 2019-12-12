@@ -1,5 +1,5 @@
-
 /* this is in the wrong spot */
+/* What is? What does this mean? */
 
 body {
   font-size: 1em;
@@ -27,7 +27,9 @@ body {
   border-bottom: 1px solid white;
 }
 
-.header_rank, .header_name, .header_score {
+.header_rank,
+.header_name,
+.header_score {
   text-align: center;
 }
 
@@ -37,8 +39,8 @@ body {
 }
 
 .leader_board-grid {
-  display:grid;
-  grid-template-columns: repeat(3, 1fr)
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .rankings {
@@ -46,9 +48,9 @@ body {
   margin-block-start: 0;
   margin-block-end: 0;
   padding-inline-start: 0;
-  list-style:none;
+  list-style: none;
   margin: 0 auto;
-  font-size: .75em;
+  font-size: 0.75em;
 }
 
 .rankings li {
@@ -56,7 +58,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.rankings li:nth-child(-n+3):before {
+.rankings li:nth-child(-n + 3):before {
   content: '';
   display: inline-block;
   height: 25px;
@@ -66,24 +68,27 @@ body {
   background-image: url('../../ImgAssets/ChoreRunner.png');
 }
 
-
 .rankings li:nth-child(1):before {
   background-image: url('../../ImgAssets/FirstCup.png');
-  width: 25px;
+  display: block;
+  margin: 0 auto;
 }
 
 .rankings li:nth-child(2):before {
   background-image: url('../../ImgAssets/SecondCup.png');
+  display: block;
+  margin: 0 auto;
 }
 
 .rankings li:nth-child(3):before {
   background-image: url('../../ImgAssets/ThirdCup.png');
+  display: block;
+  margin: 0 auto;
 }
 
-.rankings li:nth-child(-n+3) .score {
+.rankings li:nth-child(-n + 3) .score {
   display: block;
 }
-
 
 .name_col {
   text-align: center;
@@ -92,9 +97,11 @@ body {
 }
 
 .score_col {
-  text-align:center;
+  text-align: center;
 }
 
-@media only screen and (max-width: 320px) {
-
+@media only screen and (min-width: 321px) {
+  .leaderboard_container {
+    width: 90%;
+  }
 }
