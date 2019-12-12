@@ -72,6 +72,7 @@ export class UserProvider extends Component {
       username: jwtPayload.sub,
       type: type
     })
+    console.log('THIS IS USER CONTEXT', this.state.user)
     IdleService.regiserIdleTimerResets()
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
