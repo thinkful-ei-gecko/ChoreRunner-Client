@@ -34,8 +34,9 @@ export default class MemberDashboard extends Component {
             <p>{task.title}</p>
           </div>
           <div className="points">
-            <span>{task.points}</span>
+            <span>{task.points} EXP</span>
           </div>
+          <div className="task-control">
           <button
             onClick={() => {
               this.handleCompleted(task.id);
@@ -43,27 +44,32 @@ export default class MemberDashboard extends Component {
           >
             Finished!
           </button>
+          </div>
         </li>
       );
     });
   }
 
   render() {
+    const {memberTasks} = this.context;
+    console.log(memberTasks)
     return (
       <section className="memberDashboard">
         <div className='member-container'>
           <div className="leaderboard_container">
             <Leaderboard />
           </div>
+          {/* <div className="badge-task-container"> */}
           <Badge />
           <div className='chores-container'>
-            <h2>chore-llenges</h2>
+            <h2>Chore-llenges</h2>
 
             <div className="task_list">
               <ul>{this.renderTasks()}</ul>
             </div>
           </div>
-        </div>
+          </div>
+        {/* </div> */}
       </section>
     );
   }

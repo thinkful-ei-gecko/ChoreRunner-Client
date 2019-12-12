@@ -8,11 +8,13 @@ import Landing from './components/Landing/Landing'
 import ParentLogin from './components/ParentLogin/ParentLogin'
 import RegistrationRoute from './routes/RegistrationRoute/RegistrationRoute'
 import ParentDashboard from './components/ParentDashboard/ParentDashboard'
+import MemberOnlyRoute from './routes/MemberOnlyRoute'
 import Header from './components/Header/Header'
 import HouseholdPage from './routes/HouseholdPage/HouseholdPage'
 import MemberDashboard from './components/MemberDashboard/MemberDashboard'
 import MemberLogin from './components/MemberLogin/MemberLogin'
 import NotFoundPage from './components/NotFoundPage/NotFoundPage'
+import './normalize.css';
 import './App.css';
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
           <PublicRoute exact path={'/kidLogin'} component={MemberLogin} />
           <PublicRoute exact path={'/register'} component={RegistrationRoute} />
           <ParentOnlyRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
-          <Route exact path={'/member-dashboard'} component={MemberDashboard}/>
+          <MemberOnlyRoute exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
           {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}
           <Route component={NotFoundPage} />

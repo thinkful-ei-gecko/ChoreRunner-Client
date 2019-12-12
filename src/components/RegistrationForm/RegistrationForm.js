@@ -64,6 +64,7 @@ class RegistrationForm extends Component {
     ev.preventDefault()
     const isValid = this.validateForm();
     const formError = this.state.error;
+
     const { name, username, password } = ev.target
 
     if(isValid) {
@@ -103,8 +104,10 @@ class RegistrationForm extends Component {
 
     return (
       <div className='box'>
-        <form className='registration'
+        <form 
+          className='registration'
           onSubmit={this.handleSubmit}
+          name='registration-form'
         >
           <div role='alert'>
             {error && <p className='alertMsg'>{error}</p>}

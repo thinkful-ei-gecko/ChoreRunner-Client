@@ -62,6 +62,7 @@ export default class AddTask extends React.Component {
             'member_id': this.state.member_id,
             'name' : memberName,
             'username': userName,
+            'total_score': 0,
             'tasks' : [{'id' : task.id, 'title' : task.title, 'points': task.points}],
           }
         }
@@ -80,6 +81,12 @@ export default class AddTask extends React.Component {
       })
   }
 
+  handleCancel = () => {
+    this.setState({
+      showForm: false
+    })
+  }
+
   render() {
     let display; 
     if(this.state.showForm) {
@@ -87,21 +94,24 @@ export default class AddTask extends React.Component {
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" name="title" required onChange={this.onChangeHandle} value={this.state.title}></input>
       <label htmlFor="assignee">Task assigned to</label>
-      <select type="text" id="assignee" name="member_id" required onChange={this.onChangeHandle} defaultValue="Select household member">
+      <select type="text" id="assignee" name="member_id" className="select-css" required onChange={this.onChangeHandle} defaultValue="Select household member">
         <option disabled>Select household member</option>
         {this.props.members.map((member, index) => <option key={index} value={member.id}>{member.name}</option>)}
       </select>
       <label htmlFor="points">Points</label>
       <input type="number" id="points" min="1" max="100" name="points" required onChange={this.onChangeHandle} value={this.state.points}></input>
-      <button type="submit">Add task</button>
+      <div className="add-task-buttons">
+        <button type="submit">Add</button>
+        <button type="reset" onClick={this.handleCancel}>Cancel</button>
+      </div>
     </form>
-    } 
+    }
 
     return (
-      <div>
-        <button onClick={this.toggleForm}>Add a new task</button>
+      <>
+        <button onClick={this.toggleForm} id="toggle-add-task">Add a new task</button>
         {display}
-      </div>
+      </>
     )
   }
 }

@@ -1,10 +1,12 @@
 import React from 'react';
-//Got rid of unused imports. Delete this line when you merge!
 import ApiService from '../../services/api-service';
 import HouseHoldContext from '../../contexts/HouseHoldContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
   static contextType = HouseHoldContext
+<<<<<<< HEAD
   state = {
     id: this.props.member.member_id,
     name: this.props.member.name,
@@ -16,6 +18,30 @@ export default class EditMember extends React.Component {
       usernameError: ''
     }
   };
+=======
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.member.member_id,
+      name: this.props.member.name,
+      username: this.props.member.username,
+      password: '',
+      editMember: this.props.editMember,
+      showForm: false,
+      validateError: {
+        nameError: '',
+        usernameError: ''
+      }
+    };
+  }
+
+  toggleEditMember = () => {
+    this.setState({
+      editMember: !this.state.editMember
+    })
+    this.setState({showForm: !this.state.showForm})
+  }
+>>>>>>> master
 
   onChangeHandle = (e) => {
     this.setState({
@@ -29,9 +55,16 @@ export default class EditMember extends React.Component {
     let usernameError = '';
 
     if (this.state.name.length <= 2) {
+<<<<<<< HEAD
       nameError = 'Please enter more than 3 characters'
     }
 
+=======
+      nameError = 'Please enter 3 characters or more'
+    }
+
+    // Validates child's username
+>>>>>>> master
     if(username.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
@@ -45,7 +78,7 @@ export default class EditMember extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { toggleEditMember, updateMembersList } = this.props;
+    const { updateMembersList } = this.props;
     let isValid = this.validate();
     let household_id = this.props.household_id;
     let updatedMember = {
@@ -63,19 +96,18 @@ export default class EditMember extends React.Component {
         //I added the return and this 'then' to ensure the component rerenders with the new info.
         .then(newMember => {
           updateMembersList(newMember)
-          toggleEditMember()
+          this.toggleEditMember()
         })
         .catch(error => this.context.setError(error))
-      document.getElementById("add-household-form").reset();
+      document.getElementById("edit-member-form").reset();
     }
 
   };
 
   renderFormButton() {
-    const { toggleEditMember } = this.props;
     return (
-      <button onClick={() => toggleEditMember()}>
-        Edit Member
+      <button className='pen-button' onClick={() => this.toggleEditMember()}>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="grey"/>
       </button>
     );
   }
@@ -83,9 +115,9 @@ export default class EditMember extends React.Component {
   renderForm() {
     const { usernameError, nameError } = this.state.validateError;
     return (
-      <div className="add-member container">
-        <p>Edit Member</p>
-        <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
+      <div className="edit-member-container">
+        <p>Edit member</p>
+        <form onSubmit={this.handleSubmit} id="edit-member-form">
           <label htmlFor="member-name">Name</label>
           <input
             type="text"
@@ -111,7 +143,7 @@ export default class EditMember extends React.Component {
             name="password"
             onChange={this.onChangeHandle}
           ></input>
-          <button type="submit" className="submitHH">
+          <button type="submit" className="submit-edit-member">
             submit changes
           </button>
           {/* <button onClick={() => this.props.handleDeleteMember(this.state.id)}>
@@ -126,7 +158,7 @@ export default class EditMember extends React.Component {
   render() {
     return (
       <>
-        {!!this.props.editMember ? (
+        {!!this.state.showForm ? (
           <>{this.renderForm()}</>
         ) : (
             <>{this.renderFormButton()}</>

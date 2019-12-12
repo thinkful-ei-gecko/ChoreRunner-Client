@@ -61,9 +61,9 @@ export default class MemberLogin extends Component {
           <div>
             <label htmlFor='password'>Password</label>
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
-            <div role='alert'>
+          </div>
+          <div role='alert'>
               {error && <p>{error}</p>}
-            </div>
           </div>
           <button type='submit'>login</button>
         </form>

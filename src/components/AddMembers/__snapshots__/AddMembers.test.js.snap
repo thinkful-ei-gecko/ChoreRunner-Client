@@ -25,11 +25,6 @@ exports[`AddMembers component renders UI as expected 1`] = `
       type="text"
       value=""
     />
-    <div
-      className="valid-error"
-    >
-      
-    </div>
     <label
       htmlFor="household"
     >
@@ -76,6 +71,15 @@ exports[`AddMembers component renders UI as expected 1`] = `
       type="password"
       value=""
     />
+    <div
+      role="alert"
+    >
+      <p
+        className="alertMsg"
+      >
+        
+      </p>
+    </div>
     <button
       className="submitHH"
       type="submit"
@@ -83,6 +87,5 @@ exports[`AddMembers component renders UI as expected 1`] = `
       add
     </button>
   </form>
-  <p />
 </div>
 `;

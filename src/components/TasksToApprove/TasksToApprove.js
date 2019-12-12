@@ -1,6 +1,8 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class TasksToApprove extends React.Component {
 
@@ -9,7 +11,7 @@ export default class TasksToApprove extends React.Component {
   }
   static contextType = HouseholdContext;
   componentDidMount() {
-    ApiService.getTasksToApprove(this.props.household_id)
+    ApiService.getTasksToApprove(this.props.householdId)
       .then(result => {
         this.setState({
           tasks: result
@@ -31,19 +33,40 @@ export default class TasksToApprove extends React.Component {
             return task.id !== taskId;
           });
           tasks[memberId].tasks = filteredTasks;
+          tasks[memberId].total_score += points;
+          this.context.setTasks(tasks)
+        } 
+        if (status === 'assigned') {
+          tasks[memberId].tasks.map(task => {
+            if (task.id === taskId) {
+              task.status = 'assigned'}
+          })
           this.context.setTasks(tasks)
         }
       })
   }
 
   render() {
-    const householdId = this.props.household_id;
+    const { householdId, memberId } = this.props;
     return (
-      <section>
-        {this.state.tasks.map(task => 
-          <li key={task.id}>{task.title}
-            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>Approve</button>
-            <button onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>Return</button></li>)}
+      <section className="tasks-to-approve">
+        <h3>Completed Tasks</h3>
+        <ul className="householdpage-member-task-list">
+          {this.state.tasks.map(task => {
+            if (task.member_id === memberId) {
+              return <li key={task.id}>
+                <div className="title"><span>{task.title}</span></div>
+                <div className="points"><span>points: {task.points}</span></div>
+                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
+                  <FontAwesomeIcon icon={faThumbsUp} size="lg" color="green"/>
+                </button>
+                <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
+                  <FontAwesomeIcon icon={faThumbsDown} size="lg" color="green"/>
+                </button>
+              </li>
+            }
+          })}
+        </ul>
       </section>
     )
   }
