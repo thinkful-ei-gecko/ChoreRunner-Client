@@ -111,7 +111,7 @@ export default class AddMembers extends React.Component {
           <div role="alert">
             {<p className='alertMsg'>{error || householdError || usernameError}</p>}
           </div>
-          <button type="submit" className="submitHH">add</button>
+          <button type="submit" className="submitHH">+ add new member</button>
         </form>
       </div>
     )

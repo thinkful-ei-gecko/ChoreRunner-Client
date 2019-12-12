@@ -10,6 +10,86 @@ font-family: 'Electrolize', sans-serif; */
   padding-top: 15vh;
   overflow-y: auto;
 }
+.parent_dashboard-feedback {
+  width: 90%;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  background: rgb(0, 0, 0, .5);
+  position:relative;
+    animation: bounce 500ms infinite alternate;
+  -webkit-animation: bounce 500ms infinite alternate;
+  border-radius: 10px;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+
+.household-add-form-feedback {
+  padding: 5px;
+  margin:0;
+  color: white;
+}
+
+.card-info{
+  padding-top:40px;  
+}
+.add-member button, .add-household button {
+    text-align: center;
+    margin:20px 5px;
+    font-family: 'Electrolize', sans-serif; 
+    font-size: 20px;
+    padding: 10px ;
+    background-color: rgb(255, 217, 0);
+    text-shadow: -1px -1px rgb(105, 90, 0), 1px 1px white;
+    color: #725F00;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+    box-shadow: 0 .3em rgb(134, 112, 0);
+    cursor: pointer;
+}
+
+
+.add-member label {
+  font-size: 20px;
+  color: rgb(255, 217, 0);
+  padding-bottom: 5px;
+  font-family: 'Electrolize', sans-serif; 
+}
+
+.parent_dashboard input {
+  margin-bottom: 20px;
+  width: 270px;
+}
+
+.add-house-label {
+  font-family: 'Press Start 2P', cursive;
+  color: rgb(255, 217, 0);
+  line-height: 25px;
+  margin: 0;
+  padding: 20px 20px
+
+}
 
 .add-household-form {
   display: flex;
@@ -17,10 +97,14 @@ font-family: 'Electrolize', sans-serif; */
   justify-content: center;
   align-items: center;
 }
-.add-household-form input {
-  width: 270px;
-}
 
+
+.add-member p{
+  font-family: 'Press Start 2P', cursive;
+  color: rgb(255, 217, 0);
+  line-height: 25px;
+  margin: 0;
+}
 .household_buttons {
   display: flex;
   flex-direction: column;
@@ -28,12 +112,13 @@ font-family: 'Electrolize', sans-serif; */
   margin: 20px 0;
 }
 .house_card {
+  position:relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 250px;
-  height: 250px;
+  min-height: 250px;
   text-align: center;
   margin:10px;
   font-family: 'Fredoka One', cursive;
@@ -47,20 +132,36 @@ font-family: 'Electrolize', sans-serif; */
   border-radius: 9px;
   border: rgb(75, 107, 0) solid 1px;
   box-shadow: 0 .3em rgb(75, 107, 0); 
-  cursor: pointer;
+}
+.house_card li, .house_card ul {
+    list-style: none;
+    margin:0;
+    padding: 5px;
 }
 
-.house_card p{ 
-  padding: 0;
-  margin: 0;
-  font-weight: 600;
-  color: rgb(75, 107, 0);
+.house_card ul {
+  font-family: 'Electrolize', sans-serif; 
+  font-size: 20px;
 
 }
-
 .buttons-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  position: absolute;
+  top: 10px;
+}
+
+.buttons-container button {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    justify-content: flex-end;
+    cursor: pointer;
 }
 
 .add-member{
@@ -71,12 +172,48 @@ font-family: 'Electrolize', sans-serif; */
   align-items: center;
 }
 
-.add-member p {
+/*-------- typography -------------- */
+.parent_dashboard-feedback p {
+  padding: 5px;
+  margin:0;
+  color: white;
+}
+.parent_dashboard-feedback h3{
   font-family: 'Press Start 2P', cursive;
   color: rgb(255, 217, 0);
-  line-height: 25px;
-  margin: 0;
 }
+
+.see-dash {
+  cursor: pointer;
+  color: white;
+  margin: 10px 20px 10px 0px;
+  font-family: 'Electrolize', sans-serif;
+}
+
+.see-dash:hover {
+  border-bottom: solid white 1px;
+}
+
+.card-info span{
+  font-family: 'Press Start 2P', cursive;
+}
+
+.house_card p{ 
+  padding-top: 15px;
+  padding-bottom: 0px;
+  margin: 0;
+  font-weight: 600;
+  color: rgba(86,74,216,1) ;
+}
+
+.card-info li > span {
+  font-size: 12px;
+}
+.alertMsg {
+  font-family: 'Electrolize', sans-serif;
+  font-size: 16px;
+}
+
 
 /*  ------------- select dropdown ------------- */ 
 .select-css {
