@@ -424,21 +424,17 @@ button.delete-task {
 		width: 50%;
 	} 
 
-	.add-task-form {
-		position: absolute;
-		left: 2%;
-	}
 }
 
 @media screen and (min-width:1400px) {
 	.member-card {
 		width: 600px;
-	} 
-
-	.add-task-form {
+  } 
+  	/* .add-task-form {
 		position: absolute;
-		left: 10%;
-	}
+		left: 2%;
+	} */
+
   .member-name{
    text-align:left;
    padding: 0 50px;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import './Landing.css';
 import images from '../../ImgAssets/index';
 
@@ -8,7 +10,6 @@ export default class Landing extends Component {
     return (
       <div className="landing">
         <div className='greeting'>
-          {/* <div className='shade'> */}
           <h1>Chore Runner</h1>
           <p className="tagline">The Smart Shared To-Do List</p>
 
@@ -38,15 +39,18 @@ export default class Landing extends Component {
               I am new
             </Link>
           </div>
-            <span><a style={{ textDecoration: 'none' }} href={'#about-info'}>How does it work?</a></span>
-            {/* </div> */}
+            <div className='about'><a style={{ textDecoration: 'none' }} href={'#about-info'}>
+              How does it work?
+              <FontAwesomeIcon className='down-arrow'icon={faCaretDown} size="5x" color="white"/>
+            
+            </a></div>
         </div>
 
       <div className='for-kids' id='about-info'>
          <h3>For kids</h3>
         <div className="kids-container">
           <div className="badge-placeholder">
-						<img src={images.Badge10} alt="Badge"></img>
+						<img src={images.kidScreen} alt="Badge"></img>
 					</div>
           <div className="kids">
 
@@ -113,7 +117,7 @@ export default class Landing extends Component {
           </Link>
           </div>
           <div className="img-placeholder">
-					<iframe title="test-video" width="auto" height="300" src="https://www.youtube.com/embed/McMzoUhhym4" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+					  <img src={images.parentScreen} alt="Badge"></img>
 					</div>
           </div>
         </div>
