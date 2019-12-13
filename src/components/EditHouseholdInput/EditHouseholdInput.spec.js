@@ -1,33 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EditMember from './EditMember';
+import EditHouseholdInput from './EditHouseholdInput';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-describe('EditMember component testing', () => {
-  const member = {
-    member_id: 1,
-    name: 'test',
-    username: 'test-user',
-  }
+describe('EditHouseholdInput component testing', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-
-    ReactDOM.render(
-      <MemoryRouter>
-        <EditMember member={member}/>
-      </MemoryRouter>, div);
-
+    ReactDOM.render(<MemoryRouter><EditHouseholdInput />} /></MemoryRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   it('renders UI as expected', () => {
     const tree = renderer
-      .create(<MemoryRouter><EditMember member={member} /></MemoryRouter>)
+      .create(<MemoryRouter><EditHouseholdInput /></MemoryRouter>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   })
-
-
 })

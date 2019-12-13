@@ -44,7 +44,6 @@ export default class Leaderboard extends Component {
 
 
   render() {
-    console.log(this.state.members);
     return (
       <section className="leader_board">
         <h3>Leaderboard</h3>

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HouseholdPage component testing renders UI as expected 1`] = `
+<div
+  className="household-page-container"
+>
+  <h2>
+    Household page
+  </h2>
+  <button
+    id="toggle-add-task"
+    onClick={[Function]}
+  >
+    Add a new task
+  </button>
+  <button
+    className="reset-all-scores"
+    onClick={[Function]}
+  >
+    Reset All Scores
+  </button>
+  <div />
+</div>
+`;
