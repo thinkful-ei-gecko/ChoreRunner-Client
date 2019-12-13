@@ -1,7 +1,7 @@
 .levelInfo {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
-  width: 90%;
+  width: 95%;
   margin: 20px auto;
   justify-content: space-around;
 }
@@ -45,7 +45,7 @@
 
 
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 600px) {
 
   .levelInfo {
     background: rgba(0, 0, 0, 0.7);
@@ -96,22 +96,11 @@
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 850px) {
   .levelInfo {
     width: 60%;
     justify-content: space-evenly;
   }
-
-  /* .levelInfo {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    width: 50%;
-    margin: 0px auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-   */
   
   .badge {
     width: 50%;
@@ -143,10 +132,17 @@
   .level p {
     font-family: 'Press Start 2P', cursive;
     text-align: left;
-    margin: 0;
+    /* margin: 0; */
   }
   
   .level_totalScore {
     text-align: center; 
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .levelInfo {
+    width: 700px;
+    justify-content: space-evenly;
   }
 }

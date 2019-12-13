@@ -25,7 +25,7 @@ export default class Leaderboard extends Component {
       return (
         <li key={member.id} className="score_display">
           {index > 2
-          ? <div className="">
+          ? <div className="rank">
             {`${index + 1}`}
           </div>
           : null

@@ -82,7 +82,9 @@ font-family: 'Electrolize', sans-serif; */
   padding-bottom: 5px;
   font-family: 'Electrolize', sans-serif; 
 }
-
+.household-details, .add-household {
+  padding-top:50px;
+}
 .household-details input {
   margin-bottom: 20px;
   width: 270px;
@@ -110,6 +112,7 @@ font-family: 'Electrolize', sans-serif; */
   color: rgb(255, 217, 0);
   line-height: 25px;
   margin: 0;
+  text-align: center;
 }
 .household_buttons {
   display: flex;
@@ -207,6 +210,7 @@ color: rgb(255, 217, 0); /* yellow */
   padding: 5px;
   margin:0;
   color: white;
+  text-align:center;
 }
 .parent_dashboard-feedback p >span {
   color: #b1b1b1
@@ -246,6 +250,7 @@ color: rgb(255, 217, 0); /* yellow */
   margin: 0;
   font-weight: 600;
   color: rgb(255, 217, 0);
+  text-align: center;
 }
 
 .card-info li > span a {
@@ -313,7 +318,7 @@ color: rgb(255, 217, 0); /* yellow */
 @media screen and (min-width:580px){
 
   .house_card{
-    width: 60%;
+    width: 80%;
   }
 
   .parent_dashboard-feedback {

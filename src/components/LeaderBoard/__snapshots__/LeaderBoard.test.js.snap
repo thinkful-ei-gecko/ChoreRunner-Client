@@ -8,7 +8,7 @@ exports[`LeaderBoard component testing renders UI as expected 1`] = `
     Leaderboard
   </h3>
   <div
-    className="headerRow"
+    className="leader_board-grid"
   >
     <div
       className="header_rank"
@@ -32,45 +32,7 @@ exports[`LeaderBoard component testing renders UI as expected 1`] = `
       </span>
     </div>
   </div>
-  <ol
-    className="rankings"
-  />
-</section>
-`;
-
-exports[`LeaderBoard component testing renders empty given no tabs 1`] = `
-<section
-  className="leader_board"
->
-  <h3>
-    Leaderboard
-  </h3>
-  <div
-    className="headerRow"
-  >
-    <div
-      className="header_rank"
-    >
-      <span>
-        Rank
-      </span>
-    </div>
-    <div
-      className="header_name"
-    >
-      <span>
-        Member Name
-      </span>
-    </div>
-    <div
-      className="header_score"
-    >
-      <span>
-        Score
-      </span>
-    </div>
-  </div>
-  <ol
+  <ul
     className="rankings"
   />
 </section>

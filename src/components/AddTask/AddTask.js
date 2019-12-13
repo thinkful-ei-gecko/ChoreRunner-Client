@@ -100,6 +100,7 @@ export default class AddTask extends React.Component {
     let display; 
     if(this.state.showForm) {
       display = <form onSubmit={this.handleSubmit} id="add-task-form" className='add-task-form'>
+      <p>assign tasks</p>
       <label htmlFor="task-name">Task name</label>
       <input type="text" id="task-name" name="title" required onChange={this.onChangeHandle} value={this.state.title}></input>
       <label htmlFor="assignee">Task assigned to</label>
@@ -110,15 +111,15 @@ export default class AddTask extends React.Component {
       <label htmlFor="points">Points</label>
       <input type="number" id="points" min="1" max="100" name="points" required onChange={this.onChangeHandle} value={this.state.points}></input>
       <div className="add-task-buttons">
-        <button type="submit">Add</button>
-        <button type="reset" onClick={this.handleCancel}>Cancel</button>
+        <button type="submit" className='submit'>Add</button>
+        <button type="reset" className='cancel'onClick={this.handleCancel}>Cancel</button>
       </div>
     </form>
     }
 
     return (
       <>
-        <button onClick={this.toggleForm} id="toggle-add-task">Add a new task</button>
+        <button onClick={this.toggleForm} id="toggle-add-task">+ assign tasks</button>
         {display}
       </>
     )

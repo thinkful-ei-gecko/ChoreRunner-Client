@@ -61,10 +61,10 @@ export default class TasksToApprove extends React.Component {
                 </div>
                 <div className="thumb-container">
                   <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'approved', task.points, task.member_id)}>
-                    <FontAwesomeIcon icon={faThumbsUp} size="lg" color="green"/>
+                    <FontAwesomeIcon icon={faThumbsUp} size="lg" color="rgb(255, 217, 0)"/>
                   </button>
                   <button className="thumb" onClick={() => this.handleUpdateTaskStatus(task.id, householdId, 'assigned', task.points, task.member_id)}>
-                    <FontAwesomeIcon icon={faThumbsDown} size="lg" color="green"/>
+                    <FontAwesomeIcon icon={faThumbsDown} size="lg" color="rgb(255, 217, 0)"/>
                   </button>
                 </div>
               </li>

@@ -1,7 +1,7 @@
 .memberDashboard {
   position: relative;
   height: 85vh;
-  padding-top: 15vh;
+  padding: 15vh 0;
   overflow-y: auto;
   background-image: url('../../ImgAssets/ChoreRunner.png');
   background-size: cover;
@@ -13,15 +13,22 @@
 .chores-container {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
-  width: 90%;
+  width: 95%;
   margin: auto;
   padding-bottom: 20px;
 }
-.chores-container p,
-.chores-container span {
+
+.points span {
+  color: white;
+  font-size: 18px;
+  font-family: 'Electrolize', sans-serif; 
+}
+.taskName p {
   color: white;
   font-size: 30px;
 }
+
+
 .chores-container h2 {
   padding-top: 20px;
   color: rgb(255, 217, 0);
@@ -33,10 +40,32 @@
 .member-container {
   position: absolute;
   width: 100%;
+  padding-bottom: 15vh;
 }
 
 .badge-task-container {
   margin: 0 auto 50px auto;
+}
+
+.task-control button {
+      text-align: center;
+    margin:20px 5px;
+  font-family: 'Press Start 2P', cursive;
+    font-size: 13px;
+    padding: 10px ;
+    background-color: rgb(255, 217, 0);
+    text-shadow: -.5px -1px rgb(105, 90, 0), 1px 1px white;
+    color: #725F00;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+    box-shadow: 0 .3em rgb(134, 112, 0);
+    cursor: pointer;
+    animation: bounce 500ms infinite alternate;
+  -webkit-animation: bounce 500ms infinite alternate;
+  cursor: pointer;
+
 }
 
 @keyframes house {
@@ -74,31 +103,13 @@
   font-size: 17px;
   min-width: 80px;
 }
-
-@media screen and (min-width: 450px) {
-  .memberDashboard {
-    position: relative;
-    height: 85vh;
-    padding-top: 15vh;
-    overflow-y: auto;
-    background-image: url("../../ImgAssets/ChoreRunner.png");
-    background-size: cover;
-    background-position: 0 0;
-    background-repeat: repeat;
-    animation: house 45s linear infinite;
-  }
-
-  .chores-container {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    width: 80%;
-    margin: auto;
-  }
+@media screen and (min-width: 470px){
+/* 
   .chores-container p,
   .chores-container span {
     color: white;
     font-size: 30px;
-  }
+  } */
   .chores-container h2 {
     padding-top: 20px;
     color: rgb(255, 217, 0);
@@ -132,7 +143,7 @@
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -142,21 +153,43 @@
   }
 
   .points {
-      margin: 0 20px;
+      /* margin: 0 20px; */
       min-width: 80px;
   }
+
+  .taskName {
+  min-width: 45%;
+}
 
   .task-name {
     min-width: 250px;
   }
 
-  /* .task_list li button {
-    font-size: 17px;
-    width: 175px;
-  } */
+}
+@media screen and (min-width: 600px) {
+  .memberDashboard {
+    position: relative;
+    height: 85vh;
+    overflow-y: auto;
+    background-image: url("../../ImgAssets/ChoreRunner.png");
+    background-size: cover;
+    background-position: 0 0;
+    background-repeat: repeat;
+    animation: house 45s linear infinite;
+  }
+
+  .chores-container {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+  }
+
+
+
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 850px) {
   .chores-container {
     width: 60%;
   }
@@ -168,5 +201,10 @@
     margin: 0 auto 100px auto;
     justify-content: space-between;
 
+  }
+}
+@media screen and (min-width: 1050px) {
+  .chores-container {
+    width: 700px;
   }
 }

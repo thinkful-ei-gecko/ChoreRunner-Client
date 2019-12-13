@@ -41,7 +41,7 @@ export default class MembersList extends Component {
                 />
                 
                   <button className='trash-button' onClick={() => handleDeleteMember(member.member_id, household_id)}>
-                  <FontAwesomeIcon icon={faUserTimes} size="2x" color="grey"/>
+                  <FontAwesomeIcon icon={faUserTimes} size="2x" color="#b1b1b1"/>
                   </button>
              
               </div>
@@ -49,14 +49,14 @@ export default class MembersList extends Component {
             {!completed.length ?
             <section className="tasks-to-approve">
             <h3>Completed Tasks</h3>
-            <p>There are no tasks</p>
+            <p>There are no tasks completed</p>
             </section>
             :
             <TasksToApprove householdId={household_id} memberId={member.member_id}/>}
             {!assigned.length
               ? <section className="assigned-tasks">
                 <h3>Assigned tasks</h3>
-                <p>There are no tasks</p>
+                <p>There are no tasks assigned</p>
                 </section>
               : <TasksList
                 household_id={household_id}

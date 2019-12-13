@@ -11,7 +11,6 @@ export default class Badge extends Component {
     levelInfo: {},
   };
 
-  
   componentDidMount() {
     ApiService.getBadge().then(res => {
       this.setState({ levelInfo: res });
@@ -32,7 +31,7 @@ export default class Badge extends Component {
             <p>{levelInfo.name}</p>
             <p>Level {levelInfo.level_id}</p>
             <p>Total EXP: {levelInfo.total_score}</p>
-            <p>Next level in: {levelInfo.nextLevel}</p>
+            <p>EXP needed to level up: {levelInfo.nextLevel}</p>
           </div>
         </div>
       </section>

@@ -7,36 +7,43 @@ export default class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <h1>Chore Runner</h1>
-        <p className="tagline">The Smart Shared To-Do List</p>
+        <div className='greeting'>
+          {/* <div className='shade'> */}
+          <h1>Chore Runner</h1>
+          <p className="tagline">The Smart Shared To-Do List</p>
 
-        <div className="button-container">
-          <Link
-            className="kid-button"
-            tabIndex={1}
-            style={{ textDecoration: 'none' }}
-            to="/kidLogin"
-          >
-            I am a kid
-          </Link>
-          <Link
-            className="parent-button"
-            tabIndex={2}
-            style={{ textDecoration: 'none' }}
-            to="/login"
-          >
-            I am a parent
-          </Link>
-          <Link
-            className="new-button"
-            tabIndex={3}
-            style={{ textDecoration: 'none' }}
-            to="/register"
-          >
-            I am new
-          </Link>
+          <div className="button-container">
+            <Link
+              className="kid-button"
+              tabIndex={1}
+              style={{ textDecoration: 'none' }}
+              to="/kidLogin"
+            >
+              I am a kid
+            </Link>
+            <Link
+              className="parent-button"
+              tabIndex={2}
+              style={{ textDecoration: 'none' }}
+              to="/login"
+            >
+              I am a parent
+            </Link>
+            <Link
+              className="new-button"
+              tabIndex={3}
+              style={{ textDecoration: 'none' }}
+              to="/register"
+            >
+              I am new
+            </Link>
+          </div>
+            <span><a style={{ textDecoration: 'none' }} href={'#about-info'}>How does it work?</a></span>
+            {/* </div> */}
         </div>
-            <h3>For kids</h3>
+
+      <div className='for-kids' id='about-info'>
+         <h3>For kids</h3>
         <div className="kids-container">
           <div className="badge-placeholder">
 						<img src={images.Badge10} alt="Badge"></img>
@@ -62,6 +69,9 @@ export default class Landing extends Component {
           </Link>
           </div>
         </div>
+        </div>
+
+        <div className='for-parents'>
             <h3>For parents</h3>
         <div className="parent-container">
           <div className="parents">
@@ -91,7 +101,7 @@ export default class Landing extends Component {
             style={{ textDecoration: 'none' }}
             to="/login"
           >
-            I have and account
+            I am a parent
           </Link>
 					<Link
             className="new-button"
@@ -105,6 +115,7 @@ export default class Landing extends Component {
           <div className="img-placeholder">
 					<iframe title="test-video" width="auto" height="300" src="https://www.youtube.com/embed/McMzoUhhym4" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 					</div>
+          </div>
         </div>
       </div>
     );

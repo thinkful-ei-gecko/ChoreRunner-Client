@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ApiService from '../../services/api-service';
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faTrashAlt, faSave } from '@fortawesome/free-solid-svg-icons'
 
 export default class Task extends Component {
   state = {
@@ -79,6 +79,7 @@ export default class Task extends Component {
 
     return (
       <li key={task.id} className="assigned-task">
+          <div className='title-points'>
         {this.state.editTitle ? (
           <div className='hhp-title'>
             <input
@@ -91,14 +92,14 @@ export default class Task extends Component {
           <button 
             className="save-title-edit"
             onClick={() => this.handleTitleUpdate(task.id, member.member_id)}>
-            Save
+            <FontAwesomeIcon className='save-icon' icon={faSave} size="2x" color=" #b1b1b1"/>
           </button>
           </div>
         ) : (
             <div className='hhp-title'>
               <span>{task.title}&nbsp;</span>
               <button onClick={() => this.handleEditTitleClick()}>
-                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="#b1b1b1"/>
               </button>
             </div>
           )}
@@ -115,25 +116,29 @@ export default class Task extends Component {
             <button 
               className="save-points-edit"
               onClick={() => this.handlePointsUpdate(task.id, member.member_id)}>
-              Save
+              <FontAwesomeIcon className='save-icon' icon={faSave} size="2x" color=" #b1b1b1"/>
             </button>
           </div>
         ) : (
             <div className='hhp-points'>
               <span>points: {task.points}</span>
               <button onClick={() => this.handleEditPointsClick()}>
-                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="green"/>
+                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="#b1b1b1"/>
               </button>
             </div>
           )}
-        
-        <button className="delete-task"
-          onClick={() =>
-            handleTaskDelete(task.id, member.member_id)
-          }
-        >
-          <FontAwesomeIcon icon={faTrashAlt} size="2x" color="grey"/>
-        </button>
+          </div>
+        <div className='delete-task-cont'>
+          <button className="delete-task"
+            onClick={() =>
+              handleTaskDelete(task.id, member.member_id)
+            }
+          >
+            <FontAwesomeIcon icon={faTrashAlt} size="2x" color="#b1b1b1"/>
+            <p>Delete Task</p>
+          </button>
+          {/* <p>Delete Task</p> */}
+        </div>
       </li>
     );
   }

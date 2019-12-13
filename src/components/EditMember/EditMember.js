@@ -93,7 +93,7 @@ export default class EditMember extends React.Component {
   renderFormButton() {
     return (
       <button className='pen-button' onClick={() => this.toggleEditMember()}>
-        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="grey"/>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="#b1b1b1"/>
       </button>
     );
   }
@@ -139,7 +139,7 @@ export default class EditMember extends React.Component {
           <div className="valid-error">{nameError || usernameError || error}</div>
           {/* {this.context.error ? <p>{this.context.error.error}</p> : null} */}
           <button type="submit" className="submit-edit-member">
-            submit changes
+            Submit Changes
           </button>
 
           <button type="reset" onClick={this.handleCancel} className="cancel">Cancel</button>

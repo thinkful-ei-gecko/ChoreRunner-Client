@@ -252,7 +252,7 @@ const ApiService = {
       },
       body: JSON.stringify(reqBody),
     }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : console.log(res)
+      !res.ok ? res.json().then(e => Promise.reject(e)) : null //console.log(res)
     );
   },
 

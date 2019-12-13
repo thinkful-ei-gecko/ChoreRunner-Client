@@ -42,7 +42,7 @@ export default class MemberDashboard extends Component {
               this.handleCompleted(task.id);
             }}
           >
-            Finished!
+            Clear!
           </button>
           </div>
         </li>
