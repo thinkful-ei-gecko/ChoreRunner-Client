@@ -26,7 +26,7 @@ const ApiService = {
         'content-type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ name }), // req.body = {name: ["dunders"]}
+      body: JSON.stringify({ name }), 
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
@@ -54,18 +54,6 @@ const ApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
-
-  //Get an individual household based on /:id
-  // getHousehold(id) {
-  //   return fetch(`${config.API_ENDPOINT}/households/${id}`, {
-  //     headers: {
-  //       'content-type': 'application/json',
-  //       authorization: `bearer ${TokenService.getAuthToken()}`,
-  //     },
-  //   }).then(res =>
-  //     !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-  //   );
-  // },
 
   addMember(newMember, householdId) {
     return fetch(`${config.API_ENDPOINT}/${householdId}/members`, {
@@ -241,7 +229,6 @@ const ApiService = {
     );
   },
 
-  //DELETED COMPLETETASK BECAUSE IT WAS DUPLICATED
 
   updateTask(household_id, reqBody) {
     return fetch(`${config.API_ENDPOINT}/households/${household_id}/tasks`, {
@@ -252,7 +239,7 @@ const ApiService = {
       },
       body: JSON.stringify(reqBody),
     }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : null //console.log(res)
+      !res.ok ? res.json().then(e => Promise.reject(e)) : null 
     );
   },
 

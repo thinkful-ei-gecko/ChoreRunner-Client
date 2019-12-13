@@ -33,7 +33,6 @@ function App() {
           <ParentOnlyRoute exact path={'/parent-dashboard'} component={ParentDashboard}/>
           <MemberOnlyRoute exact path={'/member-dashboard'} component={MemberDashboard}/>
           <PrivateRoute exact path={'/household/:id'} component={HouseholdPage}/>
-          {/* <PrivateRoute exact path={'/households/:id'} component={EditHousehold}/> */}
           <Route component={NotFoundPage} />
         </Switch>
       </main>

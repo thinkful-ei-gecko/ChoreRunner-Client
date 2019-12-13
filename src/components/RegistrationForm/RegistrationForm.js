@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-//Removed Link because it was not being used. 
-import { Input, Required, Label } from '../Form/Form'
-import AuthApiService from '../../services/auth-api-service'
-import Button from '../Button/Button'
-import './RegistrationForm.css'
+import React, { Component } from 'react';
+import { Input, Required, Label } from '../Form/Form';
+import AuthApiService from '../../services/auth-api-service';
+import Button from '../Button/Button';
+import './RegistrationForm.css';
 
 class RegistrationForm extends Component {
   static defaultProps = {
-    onRegistrationSuccess: () => { }
-  }
+    onRegistrationSuccess: () => {},
+  };
 
   state = {
     name: '',
@@ -18,152 +17,150 @@ class RegistrationForm extends Component {
     validateError: {
       nameError: '',
       usernameError: '',
-    }
-  }
+    },
+  };
 
-  firstInput = React.createRef()
+  firstInput = React.createRef();
 
-  onChangeHandle = (e) => {
+  onChangeHandle = e => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   validateForm = () => {
     let name = this.state.name.trim();
-    let userName = this.state.username.trim()
+    let userName = this.state.username.trim();
 
     let usernameError = '';
     let nameError = '';
 
     //Validates the persons name
 
-		if (name.length < 6) {
-			nameError = 'Please enter more than 6 characters';
+    if (name.length < 6) {
+      nameError = 'Please enter more than 6 characters';
     }
-    if(name.length > 50) {
+    if (name.length > 50) {
       nameError = 'Your name must be less than 50 characters';
     }
 
     //Validates the username
-    if(userName.length < 6) {
-      usernameError = 'Please enter more than 6 characters'
+    if (userName.length < 6) {
+      usernameError = 'Please enter more than 6 characters';
     }
-    if(userName.length > 50) {
+    if (userName.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
 
-    if(usernameError || nameError) {
-      this.setState({ validateError: { usernameError, nameError } })
+    if (usernameError || nameError) {
+      this.setState({ validateError: { usernameError, nameError } });
       return false;
     }
     return true;
-  }
+  };
 
   handleSubmit = ev => {
-    ev.preventDefault()
+    ev.preventDefault();
     const isValid = this.validateForm();
     const formError = this.state.error;
 
-    const { name, username, password } = ev.target
+    const { name, username, password } = ev.target;
 
-    if(isValid) {
+    if (isValid) {
       AuthApiService.postUser({
         name: name.value,
         username: username.value,
         password: password.value,
       })
-      .then(user => {
-        name.value = ''
-        username.value = ''
-        password.value = ''
-        this.props.onRegistrationSuccess()
-      })
-      .catch(res => {
-        this.setState({ error: res.error })
-      })
+        .then(user => {
+          name.value = '';
+          username.value = '';
+          password.value = '';
+          this.props.onRegistrationSuccess();
+        })
+        .catch(res => {
+          this.setState({ error: res.error });
+        });
     }
-    if(formError) {
+    if (formError) {
       this.setState({
-        name: '', 
-        username: '', 
-        password: '', 
+        name: '',
+        username: '',
+        password: '',
         error: null,
-        validateError: {}
-      })
+        validateError: {},
+      });
     }
-  }
-
+  };
 
   render() {
     const { name, username, password, error } = this.state;
     const { nameError, usernameError } = this.state.validateError;
 
     return (
-      <div className='box'>
-        <form 
-          className='registration'
+      <div className="box">
+        <form
+          className="registration"
           onSubmit={this.handleSubmit}
-          name='registration-form'
+          name="registration-form"
         >
-          <div className='formItem'>
-            <Label htmlFor='registration-name-input'>
-              Enter your name<Required />
+          <div className="formItem">
+            <Label htmlFor="registration-name-input">
+              Enter your name
+              <Required />
             </Label>
-            <Input className='formBox'
+            <Input
+              className="formBox"
               ref={this.firstInput}
-              id='registration-name-input'
-              name='name'
+              id="registration-name-input"
+              name="name"
               value={name}
               onChange={this.onChangeHandle}
               required
             />
-            <div role="alert">
-              {nameError}
-            </div>
+            <div role="alert">{nameError}</div>
           </div>
-          <div className='formItem'>
-            <Label htmlFor='registration-username-input'>
-              Choose a username<Required />
+          <div className="formItem">
+            <Label htmlFor="registration-username-input">
+              Choose a username
+              <Required />
             </Label>
-            <Input className='formBox'
-              id='registration-username-input'
-              name='username'
+            <Input
+              className="formBox"
+              id="registration-username-input"
+              name="username"
               value={username}
               onChange={this.onChangeHandle}
               required
             />
             <div role="alert">{usernameError}</div>
           </div>
-          <div className='formItem'>
-            <Label htmlFor='registration-password-input'>
-              Choose a password<Required />
+          <div className="formItem">
+            <Label htmlFor="registration-password-input">
+              Choose a password
+              <Required />
             </Label>
-            <Input className='formBox'
-              id='registration-password-input'
-              name='password'
-              type='password'
+            <Input
+              className="formBox"
+              id="registration-password-input"
+              name="password"
+              type="password"
               value={password}
               onChange={this.onChangeHandle}
               required
             />
-            {/* <div className="valid-error">{passwordError}</div> */}
           </div>
-          <div role='alert'>
-            {error && <p className='alertMsg'>{error}</p>}
-          </div>
-          <footer className='formFooter'>
-            <Button type='submit' className='basicBtn'>
+          <div role="alert">{error && <p className="alertMsg">{error}</p>}</div>
+          <footer className="formFooter">
+            <Button type="submit" className="basicBtn">
               Sign up
-            </Button>
-            {' '}
+            </Button>{' '}
             <br />
-            {/* <Link to='/login' className='already'>Already have an account?</Link> */}
           </footer>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default RegistrationForm
+export default RegistrationForm;

@@ -1,6 +1,5 @@
-
-import config from '../config'
-import TokenService from './token-service'
+import config from '../config';
+import TokenService from './token-service';
 
 const AuthApiService = {
   postUser(user) {
@@ -10,12 +9,9 @@ const AuthApiService = {
         'content-type': 'application/json',
       },
       body: JSON.stringify(user),
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   },
   postLogin({ username, password, type }) {
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
@@ -24,27 +20,20 @@ const AuthApiService = {
         'content-type': 'application/json',
       },
       body: JSON.stringify({ username, password, type }),
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(err => Promise.reject(err))
-          : res.json()
-      )
+    }).then(res =>
+      !res.ok ? res.json().then(err => Promise.reject(err)) : res.json()
+    );
   },
   refreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
       method: 'PUT',
       headers: {
-        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   },
-
 
   postMemberLogin({ username, password }) {
     return fetch(`${config.API_ENDPOINT}/membersAuth/token`, {
@@ -53,26 +42,20 @@ const AuthApiService = {
         'content-type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(err => Promise.reject(err))
-          : res.json()
-      )
+    }).then(res =>
+      !res.ok ? res.json().then(err => Promise.reject(err)) : res.json()
+    );
   },
   refreshMemberToken() {
     return fetch(`${config.API_ENDPOINT}/membersAuth/token`, {
       method: 'PUT',
       headers: {
-        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   },
-}
+};
 
-export default AuthApiService
+export default AuthApiService;

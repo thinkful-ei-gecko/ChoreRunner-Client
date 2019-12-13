@@ -3,9 +3,6 @@ import ApiService from '../../services/api-service';
 import './Badge.css';
 import images from '../../ImgAssets/index';
 
-//THIS MIGHT NOT BE NECESSARY, DEPENDING ON OUR REFACTORING OF ENDPOINTS.
-//AT THE VERY LEAST, THE REQUESTED ENDPOINT WILL NEED TO BE CHANGED.
-
 export default class Badge extends Component {
   state = {
     levelInfo: {},

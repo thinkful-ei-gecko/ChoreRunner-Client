@@ -8,7 +8,7 @@ exports[`EditMember component testing renders UI as expected 1`] = `
   <svg
     aria-hidden="true"
     className="svg-inline--fa fa-pencil-alt fa-w-16 fa-2x "
-    color="grey"
+    color="#b1b1b1"
     data-icon="pencil-alt"
     data-prefix="fas"
     focusable="false"

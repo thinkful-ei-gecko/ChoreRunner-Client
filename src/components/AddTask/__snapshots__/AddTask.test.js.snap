@@ -5,6 +5,6 @@ exports[`renders AddTask as expected 1`] = `
   id="toggle-add-task"
   onClick={[Function]}
 >
-  Add a new task
+  + assign tasks
 </button>
 `;
