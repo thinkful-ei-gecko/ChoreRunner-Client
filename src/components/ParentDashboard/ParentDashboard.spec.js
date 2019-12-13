@@ -4,7 +4,7 @@ import ParentDashboard from './ParentDashboard';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-describe.only('ParentDashboard component testing', () => {
+describe('ParentDashboard component testing', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');

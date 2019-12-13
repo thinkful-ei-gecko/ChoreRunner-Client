@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-describe.only('Badge component testing', () => {
+describe('Badge component testing', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');

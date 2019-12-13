@@ -4,7 +4,7 @@ import LeaderBoard from './LeaderBoard';
 import {MemoryRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-describe.only('LeaderBoard component testing', () => {
+describe('LeaderBoard component testing', () => {
     
   it('renders without crashing', () => {
     const div = document.createElement('div');
