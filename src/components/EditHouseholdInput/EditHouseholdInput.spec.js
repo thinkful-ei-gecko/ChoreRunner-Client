@@ -4,7 +4,7 @@ import EditHouseholdInput from './EditHouseholdInput';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-describe.only('EditHouseholdInput component testing', () => {
+describe('EditHouseholdInput component testing', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');

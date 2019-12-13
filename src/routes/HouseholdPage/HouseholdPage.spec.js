@@ -4,7 +4,7 @@ import HouseholdPage from './HouseholdPage';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-describe.only('HouseholdPage component testing', () => {
+describe('HouseholdPage component testing', () => {
 
   const match = {
     params: {
