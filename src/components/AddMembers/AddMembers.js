@@ -89,7 +89,7 @@ export default class AddMembers extends React.Component {
     const { error } = this.state;
     const { usernameError, householdError } = this.state.validateError;
     return (
-      <div id="add-member" className="add-member container">
+      <div className="add-member container">
         <p>ADD HOUSEHOLD MEMBERS:</p>
         <form onSubmit={this.handleSubmit} id="add-household-form" className="add-household-form">
           <label htmlFor="member-name">Name</label>
