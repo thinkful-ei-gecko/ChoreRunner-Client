@@ -78,13 +78,11 @@ export default class AddMembers extends React.Component {
           this.props.handleRenderUpdate(member);
         })
         .catch(res => this.setState({ error: res.error }))
-      console.log(householdId)
       this.setState({ error: 'Success!'})
     }
   }
 
   render() {
-    // console.log(this.state);
     const { households } = this.context
     const { error } = this.state;
     const { usernameError, householdError } = this.state.validateError;

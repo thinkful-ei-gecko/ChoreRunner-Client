@@ -29,6 +29,6 @@ describe('Landing component testing', () => {
 
   it('should count all <p> tags', () => {
     const wrapper = shallow(<Landing />)
-    expect(wrapper.find('p').length).toEqual(8)
+    expect(wrapper.find('p').length).toEqual(6)
   })
 })

@@ -42,7 +42,6 @@ export default class ParentLogin extends Component {
         this.onLoginSuccess()
       })
       .catch(res => {
-        console.log(res.error)
         this.setState({ error: res.error })
       })
   }

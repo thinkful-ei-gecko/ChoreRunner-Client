@@ -111,7 +111,6 @@ export default class ParentDashboard extends Component {
       .catch(error => {
         //Set form feedback to error on failure
         this.setState({ submitFeedback: error });
-        //console.log(error)
       });
   }
 
@@ -121,7 +120,7 @@ export default class ParentDashboard extends Component {
   }
 
   handleEditHouseholdName = (householdId, name) => {
-    // let name = this.state.name;
+
     let user_id = this.state.user_id
 
     const newHousehold = {

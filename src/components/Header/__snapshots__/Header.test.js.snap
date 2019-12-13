@@ -12,7 +12,7 @@ Array [
         }
       }
     >
-      ChoreRunner
+      Chore Runner
     </a>
   </h1>,
   <nav>
@@ -54,7 +54,7 @@ exports[`Header component testing renders empty given no tabs 1`] = `
       }
       to="/"
     >
-      ChoreRunner
+      Chore Runner
     </Link>
   </h1>
   <nav>

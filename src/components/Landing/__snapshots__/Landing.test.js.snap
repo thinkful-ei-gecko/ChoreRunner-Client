@@ -13,47 +13,6 @@ exports[`Landing component testing renders UI as expected 1`] = `
     The Smart Shared To-Do List
   </p>
   <div
-    className="header-background"
-  >
-    <h2>
-      Nobody's Perfect
-    </h2>
-  </div>
-  <p>
-    Is it done? Whose turn was it to do the dishes anyway? Didn't you ask her to finish that two days ago? How did you forget this?
-  </p>
-  <p>
-    Chores pile up around you like loud, hungry cats around an empty dish. You can only deal with one thing at a time. So you ask your family to step in. But delegating to them is a thankless, stressful job. There's also that one family member with constant amnesia and the other who remembers too much.
-  </p>
-  <p>
-    So you've decided that having a system in place will clear things up. Everyone has to get on board, which also means you have to bribe them. Sounds great, right?
-  </p>
-  <p>
-    ChoreRunner can help here. This app keeps track of the status of any given task and assigns it to whoever you want. It also creates incentives for the more reluctant members of your family by making it into a game.
-  </p>
-  <h2>
-    How it Works
-  </h2>
-  <p>
-    To get started, you sign up and set your households.  Your minions then create their accounts. Each member of the family can be assigned jobs. When they finish, they check it off themselves. If it's up to your standards, you confirm the item is complete.
-  </p>
-  <p>
-    Here comes the fun part! ChoreRunner has a reward system in place for completing chores. You can assign point values to tasks. For example, doing the dishes could be worth 5 points, mowing the lawn worth 10. Your family members can level up with enough points. A ranking board lets everyone see who is the most on top of their chores.
-  </p>
-  <p>
-    ChoreRunner will organize that busy to-do list into something a little more manageable. Everyone wants to help, so help them show you how!
-  </p>
-  <div
-    className="img-placeholder"
-  >
-    IMAGE/VIDEO PLACEHOLDER
-  </div>
-  <div
-    className="img-placeholder"
-  >
-     IMAGE/VIDEO PLACEHOLDER
-  </div>
-  <div
     className="button-container"
   >
     <a
@@ -96,6 +55,109 @@ exports[`Landing component testing renders UI as expected 1`] = `
       I am new
     </a>
   </div>
+  <h3>
+    For kids
+  </h3>
+  <div
+    className="kids-container"
+  >
+    <div
+      className="badge-placeholder"
+    >
+      <img
+        alt="Badge"
+        src="Badge10.png"
+      />
+    </div>
+    <div
+      className="kids"
+    >
+      <h4>
+        Complete challenges, get badges!
+      </h4>
+      <p>
+        Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
+      </p>
+      <a
+        className="kid-button"
+        href="/kidLogin"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={4}
+      >
+        I am a kid
+      </a>
+    </div>
+  </div>
+  <h3>
+    For parents
+  </h3>
+  <div
+    className="parent-container"
+  >
+    <div
+      className="parents"
+    >
+      <h4>
+        Make chores easy and fun!
+      </h4>
+      <p>
+        Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
+      </p>
+      <p>
+        Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
+      </p>
+      <p>
+        Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
+      </p>
+      <p>
+        Spend less time working and more time playing. Sign in or sign up to get started!
+      </p>
+      <a
+        className="parent-button"
+        href="/login"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={2}
+      >
+        I have and account
+      </a>
+      <a
+        className="new-button"
+        href="/register"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={3}
+      >
+        I am new
+      </a>
+    </div>
+    <div
+      className="img-placeholder"
+    >
+      <iframe
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen={true}
+        frameBorder="0"
+        height="300"
+        src="https://www.youtube.com/embed/McMzoUhhym4"
+        title="test-video"
+        width="auto"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -111,47 +173,6 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
   >
     The Smart Shared To-Do List
   </p>
-  <div
-    className="header-background"
-  >
-    <h2>
-      Nobody's Perfect
-    </h2>
-  </div>
-  <p>
-    Is it done? Whose turn was it to do the dishes anyway? Didn't you ask her to finish that two days ago? How did you forget this?
-  </p>
-  <p>
-    Chores pile up around you like loud, hungry cats around an empty dish. You can only deal with one thing at a time. So you ask your family to step in. But delegating to them is a thankless, stressful job. There's also that one family member with constant amnesia and the other who remembers too much.
-  </p>
-  <p>
-    So you've decided that having a system in place will clear things up. Everyone has to get on board, which also means you have to bribe them. Sounds great, right?
-  </p>
-  <p>
-    ChoreRunner can help here. This app keeps track of the status of any given task and assigns it to whoever you want. It also creates incentives for the more reluctant members of your family by making it into a game.
-  </p>
-  <h2>
-    How it Works
-  </h2>
-  <p>
-    To get started, you sign up and set your households.  Your minions then create their accounts. Each member of the family can be assigned jobs. When they finish, they check it off themselves. If it's up to your standards, you confirm the item is complete.
-  </p>
-  <p>
-    Here comes the fun part! ChoreRunner has a reward system in place for completing chores. You can assign point values to tasks. For example, doing the dishes could be worth 5 points, mowing the lawn worth 10. Your family members can level up with enough points. A ranking board lets everyone see who is the most on top of their chores.
-  </p>
-  <p>
-    ChoreRunner will organize that busy to-do list into something a little more manageable. Everyone wants to help, so help them show you how!
-  </p>
-  <div
-    className="img-placeholder"
-  >
-    IMAGE/VIDEO PLACEHOLDER
-  </div>
-  <div
-    className="img-placeholder"
-  >
-     IMAGE/VIDEO PLACEHOLDER
-  </div>
   <div
     className="button-container"
   >
@@ -191,6 +212,106 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
     >
       I am new
     </Link>
+  </div>
+  <h3>
+    For kids
+  </h3>
+  <div
+    className="kids-container"
+  >
+    <div
+      className="badge-placeholder"
+    >
+      <img
+        alt="Badge"
+        src="Badge10.png"
+      />
+    </div>
+    <div
+      className="kids"
+    >
+      <h4>
+        Complete challenges, get badges!
+      </h4>
+      <p>
+        Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
+      </p>
+      <Link
+        className="kid-button"
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={4}
+        to="/kidLogin"
+      >
+        I am a kid
+      </Link>
+    </div>
+  </div>
+  <h3>
+    For parents
+  </h3>
+  <div
+    className="parent-container"
+  >
+    <div
+      className="parents"
+    >
+      <h4>
+        Make chores easy and fun!
+      </h4>
+      <p>
+        Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
+      </p>
+      <p>
+        Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
+      </p>
+      <p>
+        Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
+      </p>
+      <p>
+        Spend less time working and more time playing. Sign in or sign up to get started!
+      </p>
+      <Link
+        className="parent-button"
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={2}
+        to="/login"
+      >
+        I have and account
+      </Link>
+      <Link
+        className="new-button"
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+        tabIndex={3}
+        to="/register"
+      >
+        I am new
+      </Link>
+    </div>
+    <div
+      className="img-placeholder"
+    >
+      <iframe
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen={true}
+        frameBorder="0"
+        height="300"
+        src="https://www.youtube.com/embed/McMzoUhhym4"
+        title="test-video"
+        width="auto"
+      />
+    </div>
   </div>
 </div>
 `;
