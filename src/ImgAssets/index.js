@@ -8,6 +8,8 @@ import Badge7 from './Badge7.png'
 import Badge8 from './Badge8.png'
 import Badge9 from './Badge9.png'
 import Badge10 from './Badge10.png'
+import kidScreen from './kidScreen.png'
+import parentScreen from './parentScreen.png'
 
 export default {
 	Badge1,
@@ -19,6 +21,8 @@ export default {
 	Badge7,
 	Badge8,
 	Badge9,
-	Badge10
+	Badge10,
+	parentScreen,
+	kidScreen
 
 }
