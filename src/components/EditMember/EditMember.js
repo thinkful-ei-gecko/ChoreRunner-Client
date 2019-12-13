@@ -1,12 +1,11 @@
 import React from 'react';
 import ApiService from '../../services/api-service';
 //import HouseHoldContext from '../../contexts/HouseHoldContext'
-import './EditMember.css'
+import './EditMember.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditMember extends React.Component {
-  //static contextType = HouseHoldContext
   constructor(props) {
     super(props);
     this.state = {
@@ -19,44 +18,44 @@ export default class EditMember extends React.Component {
       error: null,
       validateError: {
         nameError: '',
-        usernameError: ''
-      }
+        usernameError: '',
+      },
     };
   }
 
   toggleEditMember = () => {
     this.setState({
-      editMember: !this.state.editMember
-    })
-    this.setState({showForm: !this.state.showForm})
-  }
+      editMember: !this.state.editMember,
+    });
+    this.setState({ showForm: !this.state.showForm });
+  };
 
-  onChangeHandle = (e) => {
+  onChangeHandle = e => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   validate = () => {
-    let username = this.state.username.trim()
+    let username = this.state.username.trim();
     let nameError = '';
     let usernameError = '';
 
     if (this.state.name.length <= 2) {
-      nameError = 'Please enter 3 characters or more'
+      nameError = 'Please enter 3 characters or more';
     }
 
     // Validates child's username
-    if(username.length > 50) {
+    if (username.length > 50) {
       usernameError = 'Your name must be less than 50 characters';
     }
 
     if (nameError || usernameError) {
-      this.setState({ validateError: { usernameError, nameError }})
+      this.setState({ validateError: { usernameError, nameError } });
       return false;
     }
     return true;
-  }
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -71,42 +70,40 @@ export default class EditMember extends React.Component {
     };
 
     if (isValid) {
-      ApiService.editMember(updatedMember, household_id, this.state.id).then(res => {
-        let newMember = res[0]
-        return newMember
-      })
-        //I added the return and this 'then' to ensure the component rerenders with the new info.
-        .then(newMember => {
-          updateMembersList(newMember)
-          this.toggleEditMember()
+      ApiService.editMember(updatedMember, household_id, this.state.id)
+        .then(res => {
+          let newMember = res[0];
+          return newMember;
         })
-        .catch(error => this.context.setError(error))
+        .then(newMember => {
+          updateMembersList(newMember);
+          this.toggleEditMember();
+        })
+        .catch(error => this.context.setError(error));
     }
   };
 
   handleCancel = () => {
     this.setState({
-      showForm: false
-    })
-  }
+      showForm: false,
+    });
+  };
 
   renderFormButton() {
     return (
-      <button className='pen-button' onClick={() => this.toggleEditMember()}>
-        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="#b1b1b1"/>
+      <button className="pen-button" onClick={() => this.toggleEditMember()}>
+        <FontAwesomeIcon icon={faPencilAlt} size="2x" color="#b1b1b1" />
       </button>
     );
   }
 
   renderError() {
-    return (
-      this.context.error ? <p>{this.context.error.error}</p> : null
-    )
+    return this.context.error ? <p>{this.context.error.error}</p> : null;
   }
 
   renderForm() {
     const { usernameError, nameError } = this.state.validateError;
-    const { error } = this.state
+    const { error } = this.state;
     return (
       <div className="edit-member-container">
         <p>Edit member</p>
@@ -119,7 +116,6 @@ export default class EditMember extends React.Component {
             value={this.state.name}
             onChange={this.onChangeHandle}
           ></input>
-          {/* <div className="valid-error">{nameError}</div> */}
           <label htmlFor="child-username">Child username</label>
           <input
             type="text"
@@ -128,7 +124,6 @@ export default class EditMember extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandle}
           ></input>
-          {/* <div className="valid-error">{usernameError}</div> */}
           <label htmlFor="child-password">Child password</label>
           <input
             type="password"
@@ -136,13 +131,15 @@ export default class EditMember extends React.Component {
             name="password"
             onChange={this.onChangeHandle}
           ></input>
-          <div className="valid-error">{nameError || usernameError || error}</div>
-          {/* {this.context.error ? <p>{this.context.error.error}</p> : null} */}
+          <div className="valid-error">
+            {nameError || usernameError || error}
+          </div>
           <button type="submit" className="submit-edit-member">
             Submit Changes
           </button>
-
-          <button type="reset" onClick={this.handleCancel} className="cancel">Cancel</button>
+          <button type="reset" onClick={this.handleCancel} className="cancel">
+            Cancel
+          </button>
           {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>
@@ -155,8 +152,8 @@ export default class EditMember extends React.Component {
         {!!this.state.showForm ? (
           <>{this.renderForm()}</>
         ) : (
-            <>{this.renderFormButton()}</>
-          )}
+          <>{this.renderFormButton()}</>
+        )}
       </>
     );
   }

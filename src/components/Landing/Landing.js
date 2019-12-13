@@ -9,10 +9,9 @@ export default class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className='greeting'>
+        <div className="greeting">
           <h1>Chore Runner</h1>
           <p className="tagline">The Smart Shared To-Do List</p>
-
           <div className="button-container">
             <Link
               className="kid-button"
@@ -63,18 +62,17 @@ export default class Landing extends Component {
               today!
             </p>
 
-						<Link
-            className="kid-button"
-            tabIndex={4}
-            style={{ textDecoration: 'none' }}
-            to="/kidLogin"
-          >
-            I am a kid
-          </Link>
+              <Link
+                className="kid-button"
+                tabIndex={4}
+                style={{ textDecoration: 'none' }}
+                to="/kidLogin"
+              >
+                I am a kid
+              </Link>
+            </div>
           </div>
         </div>
-        </div>
-
         <div className='for-parents'>
             <h3>For parents</h3>
         <div className="parent-container">

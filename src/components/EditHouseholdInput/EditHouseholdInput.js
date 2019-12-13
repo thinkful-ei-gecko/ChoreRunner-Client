@@ -25,9 +25,9 @@ export default class EditHouseholdInput extends Component {
               this.onChangeHandle(e)
               }}
           />
-          <button onClick={() => this.props.handleEditHouseholdName(this.state.id, this.state.name)}><FontAwesomeIcon className='save-icon' icon={faSave} size="1x" color=" #b1b1b1"/></button>
-          {/* {CANCEL BUTTON IN PROGRESS----- NANCY} */}
-          {/* <button onClick={() => this.props.handleCancel()}><FontAwesomeIcon className='cancel-icon' icon={faWindowClose} size="1x" color=" #b1b1b1"/></button> */}
+          <button onClick={() => this.props.handleEditHouseholdName(this.state.id, this.state.name)}>
+            <FontAwesomeIcon className='save-icon' icon={faSave} size="1x" color=" #b1b1b1"/>
+          </button>
       </div>
     )
   }

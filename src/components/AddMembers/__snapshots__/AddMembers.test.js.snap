@@ -3,7 +3,6 @@
 exports[`renders AddMembers as expected 1`] = `
 <div
   className="add-member container"
-  id="add-member"
 >
   <p>
     ADD HOUSEHOLD MEMBERS:

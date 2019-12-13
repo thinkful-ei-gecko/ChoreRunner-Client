@@ -55,10 +55,10 @@ exports[`ParentDashboard component testing renders UI as expected 1`] = `
     </div>
     <div
       className="household-details container"
+      id="add-member"
     >
       <div
         className="add-member container"
-        id="add-member"
       >
         <p>
           ADD HOUSEHOLD MEMBERS:

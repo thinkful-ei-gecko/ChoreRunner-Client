@@ -5,13 +5,13 @@ const HouseholdContext = React.createContext({
   households: [],
   memberTasks: [],
   error: null,
-  setHouseholds: () => { },
-  addHousehold: () => { },
-  deleteHousehold: () => { },
-  completeTask: () => { },
-  setError: () => { },
-  setTask: () => { },
-  setTasks: () => { },
+  setHouseholds: () => {},
+  addHousehold: () => {},
+  deleteHousehold: () => {},
+  completeTask: () => {},
+  setError: () => {},
+  setTask: () => {},
+  setTasks: () => {},
   task: '',
   tasks: {},
 });
@@ -41,26 +41,28 @@ export class HouseholdProvider extends Component {
     event.preventDefault();
     ApiService.deleteHousehold(householdId)
 
-      .then( () => {
-        const newHouseholds = this.state.households.filter(household => household.id !== householdId)
+      .then(() => {
+        const newHouseholds = this.state.households.filter(
+          household => household.id !== householdId
+        );
         this.setHouseholds([...newHouseholds]);
       })
-      .catch (this.setError('Household could not be deleted.'))
-  }
+      .catch(this.setError('Household could not be deleted.'));
+  };
 
   setMemberTasks = memberTasks => {
     this.setState({
-      memberTasks
+      memberTasks,
     });
-  }
+  };
 
   setTask = task => {
-    this.setState({ task })
-  }
+    this.setState({ task });
+  };
 
   setTasks = tasks => {
-    this.setState({ tasks })
-  }
+    this.setState({ tasks });
+  };
 
   completeTask = taskId => {
     const newTasks = this.state.memberTasks.filter(
@@ -70,8 +72,8 @@ export class HouseholdProvider extends Component {
   };
 
   setError = error => {
-    this.setState({ error })
-  }
+    this.setState({ error });
+  };
 
   render() {
     const value = {
@@ -89,7 +91,7 @@ export class HouseholdProvider extends Component {
       setTasks: this.setTasks,
       completeTask: this.completeTask,
     };
-    
+
     return (
       <HouseholdContext.Provider value={value}>
         {this.props.children}

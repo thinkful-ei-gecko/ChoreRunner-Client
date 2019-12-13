@@ -7,18 +7,22 @@ exports[`HouseholdPage component testing renders UI as expected 1`] = `
   <h2>
     Household page
   </h2>
-  <button
-    id="toggle-add-task"
-    onClick={[Function]}
+  <div
+    className="top-buttons-cont"
   >
-    Add a new task
-  </button>
-  <button
-    className="reset-all-scores"
-    onClick={[Function]}
-  >
-    Reset All Scores
-  </button>
+    <button
+      id="toggle-add-task"
+      onClick={[Function]}
+    >
+      + assign tasks
+    </button>
+    <button
+      className="reset-all-scores"
+      onClick={[Function]}
+    >
+      reset all scores
+    </button>
+  </div>
   <div />
 </div>
 `;

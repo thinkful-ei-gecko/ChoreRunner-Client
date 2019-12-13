@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//Removed Link because it was not being used.
 import HouseholdContext from '../../contexts/HouseHoldContext';
 import ApiService from '../../services/api-service.js';
 import './MemberDashboard.css'
@@ -18,7 +17,6 @@ export default class MemberDashboard extends Component {
       .catch(error => this.context.setError(error));
   }
 
-  //Updated to handle marking completed. May want to update so that task remains but is marked 'completed' and button is deactivated?
   handleCompleted(id) {
     ApiService.completeTask(id)
       .then(this.context.completeTask(id))
@@ -57,7 +55,6 @@ export default class MemberDashboard extends Component {
           <div className="leaderboard_container">
             <Leaderboard />
           </div>
-          {/* <div className="badge-task-container"> */}
           <Badge />
           <div className='chores-container'>
             <h2>Chore-llenges</h2>
@@ -67,7 +64,6 @@ export default class MemberDashboard extends Component {
             </div>
           </div>
           </div>
-        {/* </div> */}
       </section>
     );
   }

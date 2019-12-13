@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
-import '../../components/RegistrationForm/RegistrationForm.css'
+import React, { Component } from 'react';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import '../../components/RegistrationForm/RegistrationForm.css';
 class RegistrationRoute extends Component {
   static defaultProps = {
     history: {
       push: () => {},
     },
-  }
+  };
 
   handleRegistrationSuccess = () => {
-    const { history } = this.props
-    history.push('/login')
-  }
+    const { history } = this.props;
+    history.push('/login');
+  };
 
   render() {
     return (
-      <section className='register-container'>
-        <p className='descriptionLine'>
+      <section className="register-container">
+        <p className="descriptionLine">
           Assign tasks for your kids to earn rewards in this fun app.
         </p>
         <h2>Sign up</h2>
@@ -28,4 +28,4 @@ class RegistrationRoute extends Component {
   }
 }
 
-export default RegistrationRoute
+export default RegistrationRoute;

@@ -4,80 +4,20 @@ exports[`Landing component testing renders UI as expected 1`] = `
 <div
   className="landing"
 >
-  <h1>
-    Chore Runner
-  </h1>
-  <p
-    className="tagline"
-  >
-    The Smart Shared To-Do List
-  </p>
   <div
-    className="button-container"
+    className="greeting"
   >
-    <a
-      className="kid-button"
-      href="/kidLogin"
-      onClick={[Function]}
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={1}
+    <h1>
+      Chore Runner
+    </h1>
+    <p
+      className="tagline"
     >
-      I am a kid
-    </a>
-    <a
-      className="parent-button"
-      href="/login"
-      onClick={[Function]}
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={2}
-    >
-      I am a parent
-    </a>
-    <a
-      className="new-button"
-      href="/register"
-      onClick={[Function]}
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={3}
-    >
-      I am new
-    </a>
-  </div>
-  <h3>
-    For kids
-  </h3>
-  <div
-    className="kids-container"
-  >
+      The Smart Shared To-Do List
+    </p>
     <div
-      className="badge-placeholder"
+      className="button-container"
     >
-      <img
-        alt="Badge"
-        src="Badge10.png"
-      />
-    </div>
-    <div
-      className="kids"
-    >
-      <h4>
-        Complete challenges, get badges!
-      </h4>
-      <p>
-        Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
-      </p>
       <a
         className="kid-button"
         href="/kidLogin"
@@ -87,36 +27,10 @@ exports[`Landing component testing renders UI as expected 1`] = `
             "textDecoration": "none",
           }
         }
-        tabIndex={4}
+        tabIndex={1}
       >
         I am a kid
       </a>
-    </div>
-  </div>
-  <h3>
-    For parents
-  </h3>
-  <div
-    className="parent-container"
-  >
-    <div
-      className="parents"
-    >
-      <h4>
-        Make chores easy and fun!
-      </h4>
-      <p>
-        Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
-      </p>
-      <p>
-        Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
-      </p>
-      <p>
-        Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
-      </p>
-      <p>
-        Spend less time working and more time playing. Sign in or sign up to get started!
-      </p>
       <a
         className="parent-button"
         href="/login"
@@ -128,7 +42,7 @@ exports[`Landing component testing renders UI as expected 1`] = `
         }
         tabIndex={2}
       >
-        I have and account
+        I am a parent
       </a>
       <a
         className="new-button"
@@ -144,18 +58,129 @@ exports[`Landing component testing renders UI as expected 1`] = `
         I am new
       </a>
     </div>
+    <span>
+      <a
+        href="#about-info"
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        How does it work?
+      </a>
+    </span>
+  </div>
+  <div
+    className="for-kids"
+    id="about-info"
+  >
+    <h3>
+      For kids
+    </h3>
     <div
-      className="img-placeholder"
+      className="kids-container"
     >
-      <iframe
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen={true}
-        frameBorder="0"
-        height="300"
-        src="https://www.youtube.com/embed/McMzoUhhym4"
-        title="test-video"
-        width="auto"
-      />
+      <div
+        className="badge-placeholder"
+      >
+        <img
+          alt="Badge"
+          src="Badge10.png"
+        />
+      </div>
+      <div
+        className="kids"
+      >
+        <h4>
+          Complete challenges, get badges!
+        </h4>
+        <p>
+          Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
+        </p>
+        <a
+          className="kid-button"
+          href="/kidLogin"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={4}
+        >
+          I am a kid
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="for-parents"
+  >
+    <h3>
+      For parents
+    </h3>
+    <div
+      className="parent-container"
+    >
+      <div
+        className="parents"
+      >
+        <h4>
+          Make chores easy and fun!
+        </h4>
+        <p>
+          Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
+        </p>
+        <p>
+          Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
+        </p>
+        <p>
+          Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
+        </p>
+        <p>
+          Spend less time working and more time playing. Sign in or sign up to get started!
+        </p>
+        <a
+          className="parent-button"
+          href="/login"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={2}
+        >
+          I am a parent
+        </a>
+        <a
+          className="new-button"
+          href="/register"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={3}
+        >
+          I am new
+        </a>
+      </div>
+      <div
+        className="img-placeholder"
+      >
+        <iframe
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          frameBorder="0"
+          height="300"
+          src="https://www.youtube.com/embed/McMzoUhhym4"
+          title="test-video"
+          width="auto"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -165,77 +190,20 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
 <div
   className="landing"
 >
-  <h1>
-    Chore Runner
-  </h1>
-  <p
-    className="tagline"
-  >
-    The Smart Shared To-Do List
-  </p>
   <div
-    className="button-container"
+    className="greeting"
   >
-    <Link
-      className="kid-button"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={1}
-      to="/kidLogin"
+    <h1>
+      Chore Runner
+    </h1>
+    <p
+      className="tagline"
     >
-      I am a kid
-    </Link>
-    <Link
-      className="parent-button"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={2}
-      to="/login"
-    >
-      I am a parent
-    </Link>
-    <Link
-      className="new-button"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-      tabIndex={3}
-      to="/register"
-    >
-      I am new
-    </Link>
-  </div>
-  <h3>
-    For kids
-  </h3>
-  <div
-    className="kids-container"
-  >
+      The Smart Shared To-Do List
+    </p>
     <div
-      className="badge-placeholder"
+      className="button-container"
     >
-      <img
-        alt="Badge"
-        src="Badge10.png"
-      />
-    </div>
-    <div
-      className="kids"
-    >
-      <h4>
-        Complete challenges, get badges!
-      </h4>
-      <p>
-        Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
-      </p>
       <Link
         className="kid-button"
         style={
@@ -243,37 +211,11 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
             "textDecoration": "none",
           }
         }
-        tabIndex={4}
+        tabIndex={1}
         to="/kidLogin"
       >
         I am a kid
       </Link>
-    </div>
-  </div>
-  <h3>
-    For parents
-  </h3>
-  <div
-    className="parent-container"
-  >
-    <div
-      className="parents"
-    >
-      <h4>
-        Make chores easy and fun!
-      </h4>
-      <p>
-        Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
-      </p>
-      <p>
-        Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
-      </p>
-      <p>
-        Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
-      </p>
-      <p>
-        Spend less time working and more time playing. Sign in or sign up to get started!
-      </p>
       <Link
         className="parent-button"
         style={
@@ -284,7 +226,7 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
         tabIndex={2}
         to="/login"
       >
-        I have and account
+        I am a parent
       </Link>
       <Link
         className="new-button"
@@ -299,18 +241,126 @@ exports[`Landing component testing renders empty given no tabs 1`] = `
         I am new
       </Link>
     </div>
+    <span>
+      <a
+        href="#about-info"
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        How does it work?
+      </a>
+    </span>
+  </div>
+  <div
+    className="for-kids"
+    id="about-info"
+  >
+    <h3>
+      For kids
+    </h3>
     <div
-      className="img-placeholder"
+      className="kids-container"
     >
-      <iframe
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen={true}
-        frameBorder="0"
-        height="300"
-        src="https://www.youtube.com/embed/McMzoUhhym4"
-        title="test-video"
-        width="auto"
-      />
+      <div
+        className="badge-placeholder"
+      >
+        <img
+          alt="Badge"
+          src="Badge10.png"
+        />
+      </div>
+      <div
+        className="kids"
+      >
+        <h4>
+          Complete challenges, get badges!
+        </h4>
+        <p>
+          Chores are boring, games are fun! The rules are simple: race your family members to complete chore-lenges, earn points, and get badges. Can you collect all 10 badges and become the top chorerunner in your house? Ask your parents to help you sign up today!
+        </p>
+        <Link
+          className="kid-button"
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={4}
+          to="/kidLogin"
+        >
+          I am a kid
+        </Link>
+      </div>
+    </div>
+  </div>
+  <div
+    className="for-parents"
+  >
+    <h3>
+      For parents
+    </h3>
+    <div
+      className="parent-container"
+    >
+      <div
+        className="parents"
+      >
+        <h4>
+          Make chores easy and fun!
+        </h4>
+        <p>
+          Who's turn is it to do the dishes? Didn't you ask them to finish this two days ago?
+        </p>
+        <p>
+          Sound familiar? We know that managing and delegating household chores can be a struggle. Let Chorerunner help!
+        </p>
+        <p>
+          Chorerunner makes chores a fun competition between kids and family members. Simply sign up, add household members, assign tasks, and let chorerunner do the rest. As members complete tasks, they move up the household leaderboard, gain levels, and earn badges.
+        </p>
+        <p>
+          Spend less time working and more time playing. Sign in or sign up to get started!
+        </p>
+        <Link
+          className="parent-button"
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={2}
+          to="/login"
+        >
+          I am a parent
+        </Link>
+        <Link
+          className="new-button"
+          style={
+            Object {
+              "textDecoration": "none",
+            }
+          }
+          tabIndex={3}
+          to="/register"
+        >
+          I am new
+        </Link>
+      </div>
+      <div
+        className="img-placeholder"
+      >
+        <iframe
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          frameBorder="0"
+          height="300"
+          src="https://www.youtube.com/embed/McMzoUhhym4"
+          title="test-video"
+          width="auto"
+        />
+      </div>
     </div>
   </div>
 </div>

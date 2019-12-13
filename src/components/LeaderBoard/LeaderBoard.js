@@ -10,7 +10,6 @@ export default class Leaderboard extends Component {
     members: [],
   };
 
-  // Might need to adapt this to make use of props if we are using it in the household page. -Daniel
   componentDidMount() {
     ApiService.getMemberScores()
       .then(res => {
