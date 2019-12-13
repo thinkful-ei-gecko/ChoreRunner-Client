@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 export default class EditHouseholdInput extends Component {
 
   state = {

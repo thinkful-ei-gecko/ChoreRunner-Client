@@ -27,6 +27,9 @@ export default class TasksList extends Component {
               />
             )
             }
+            else {
+              return null
+            }
           })
           }
         </ul>

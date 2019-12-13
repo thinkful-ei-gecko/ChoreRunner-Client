@@ -68,6 +68,8 @@ export default class TasksToApprove extends React.Component {
                   </button>
                 </div>
               </li>
+            } else {
+              return null
             }
           })}
         </ul>
