@@ -1,5 +1,7 @@
 # ChoreRunner 1.0
 
+![Add Entry page image](./wide-screenshot.png "ChoreRunner!")
+
 ## Divide and Conquer
 
 Authors: Daniel Nichols, Hubert Yang, Nancy Phiukhao, Yulia Khisamutdinova, Alexander Fukui
