@@ -52,7 +52,6 @@ export default class MemberDashboard extends Component {
 
   render() {
     const {memberTasks} = this.context;
-    console.log(memberTasks)
     return (
       <section className="memberDashboard">
         <div className='member-container'>

@@ -69,8 +69,6 @@ export default class ParentDashboard extends Component {
   }
 
   handleRenderAfterAddMember = res => {
-    // console.log('THIS IS MEMBERS', this.state.members)
-    // console.log('this is new member', res)
     if (this.state.members[res.household_id]) {
       let members = this.state.members;
       members[res.household_id].members =
@@ -113,7 +111,6 @@ export default class ParentDashboard extends Component {
       .catch(error => {
         //Set form feedback to error on failure
         this.setState({ submitFeedback: error });
-        console.log(error)
       });
   }
 
@@ -123,8 +120,6 @@ export default class ParentDashboard extends Component {
   }
 
   handleEditHouseholdName = (householdId, name) => {
-    console.log('----------houseid',householdId, name)
-    // let name = this.state.name;
     let user_id = this.state.user_id
 
     const newHousehold = {
@@ -141,17 +136,14 @@ export default class ParentDashboard extends Component {
   }
 
   onChangeHandle = e => {
-    console.log('IN ONCHANGE', e.target.value,e.target.name)
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
   renderHouseholds = () => {
-    console.log('IN RENDERHOUSEHOLDS')
     const { households, deleteHousehold } = this.context;
     return households.map((household) => {
-      console.log('IN the map', household)
       return (
         <div key={household.id} className="house_card">
           {/*TODO: move textDecoration to css and remove from style*/}

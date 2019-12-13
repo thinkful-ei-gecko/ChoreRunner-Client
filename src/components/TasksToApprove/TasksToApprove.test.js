@@ -17,7 +17,7 @@ it('TasksToApprove renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('renders Edit Review as expected', () => {
+it('renders Tasks To approve as expected', () => {
   const tree = renderer
     .create(
       <MemoryRouter>

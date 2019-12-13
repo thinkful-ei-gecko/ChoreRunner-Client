@@ -46,15 +46,10 @@ export default class HouseholdPage extends Component {
   };
 
   toggleEditMember = () => {
-    console.log('toggle firing');
     this.setState({ editMember: !this.state.editMember });
-    console.log(this.state.editMember);
   };
 
   handleDeleteMember = (id, household_id) => {
-    // console.log(this.state.membersList)
-    console.log(household_id);
-    // const household_id = this.props.match.params.id;
     ApiService.deleteMember(id, household_id)
       .then(() => {
         let newMembers = this.state.membersList.filter(

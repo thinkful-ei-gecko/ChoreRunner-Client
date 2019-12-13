@@ -9,8 +9,7 @@ export default class TasksList extends Component {
       tasks,
       member,
       handleTaskDelete } = this.props;
-      console.log('this is the Task list')
-      console.log(this.props)
+
     return (
       <section className="assigned-tasks">
         <h3>Assigned tasks</h3>

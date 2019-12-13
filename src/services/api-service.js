@@ -45,7 +45,6 @@ const ApiService = {
   },
 
   getHouseholds() {
-    console.log('in api-service gettting household');
     return fetch(`${config.API_ENDPOINT}/households`, {
       headers: {
         'content-type': 'application/json',
@@ -187,7 +186,6 @@ const ApiService = {
 
   parentUpdateTaskStatus(taskId, householdId, newStatus, points, memberId) {
     let data = { newStatus, points, memberId };
-    console.log(' inside parent update', data, taskId);
     return fetch(
       `${config.API_ENDPOINT}/households/${householdId}/tasks/status/${taskId}`,
       {
@@ -231,7 +229,6 @@ const ApiService = {
   },
 
   editHouseholdName(id, updateHousehold) {
-    console.log('in api edit household');
     return fetch(`${config.API_ENDPOINT}/households/${id}`, {
       method: 'PATCH',
       headers: {

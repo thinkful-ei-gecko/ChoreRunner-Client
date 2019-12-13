@@ -9,8 +9,6 @@ import './MembersList.css'
 export default class MembersList extends Component {
 
   render() {
-    console.log('memberslist')
-    console.log(this.props)
     const {
       tasks,
       data,
@@ -32,7 +30,6 @@ export default class MembersList extends Component {
               completed.push(task)
             }
           })
-          console.log(completed, assigned)
           return (
             <section key={index} className="member-card">
               <div className="delete-edit-name">

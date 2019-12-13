@@ -7,7 +7,7 @@ import {MemoryRouter} from 'react-router-dom'
 const history = {push: () => []}
 
 
-it('Edit Review renders without crashing', () => {
+it('Registration Routerenders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <MemoryRouter>
@@ -17,7 +17,7 @@ it('Edit Review renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div)
 })
 
-it('renders Edit Review as expected', () => {
+it('renders Registration Route as expected', () => {
   const tree = renderer
   .create(
     <MemoryRouter>

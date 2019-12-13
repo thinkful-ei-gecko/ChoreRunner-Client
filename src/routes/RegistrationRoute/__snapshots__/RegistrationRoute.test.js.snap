@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Edit Review as expected 1`] = `
+exports[`renders Registration Route as expected 1`] = `
 <section
   className="register-container"
 >

@@ -20,7 +20,6 @@ export default class Badge extends Component {
 
   renderBadge() {
     const { levelInfo } = this.state;
-    console.log(levelInfo)
     return (
       <section className="levelInfo">
         <div className="badge">
@@ -45,7 +44,6 @@ export default class Badge extends Component {
       return this.renderBadge();
     }
     const { levelInfo } = this.state;
-    console.log(this.state);
     return <>{!!levelInfo.badge ? this.renderBadge() : <p> LOADING... </p>}</>;
   }
 }

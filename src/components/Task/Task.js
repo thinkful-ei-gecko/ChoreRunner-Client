@@ -57,7 +57,6 @@ export default class Task extends Component {
           return parseInt(task.id) === parseInt(id) ? task.points=this.state.newPoints : task.points;
         })
         
-        console.log(memberTasks)
         this.context.setTasks(memberTasks);
       })
   };
@@ -76,7 +75,6 @@ export default class Task extends Component {
       member,
       handleTaskDelete} = this.props;
 
-      console.log(member.member_id);
 
 
     return (
