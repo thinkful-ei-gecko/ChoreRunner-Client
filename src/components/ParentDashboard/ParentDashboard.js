@@ -218,7 +218,7 @@ export default class ParentDashboard extends Component {
               }
             </form>
           </div>
-          <div className='household-details container'>
+          <div id="add-member" className='household-details container'>
             <AddMembers handleRenderUpdate={this.handleRenderAfterAddMember} />
           </div>
         </div>

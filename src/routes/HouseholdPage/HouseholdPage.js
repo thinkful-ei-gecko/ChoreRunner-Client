@@ -104,12 +104,14 @@ export default class HouseholdPage extends Component {
     return (
       <div className="household-page-container">
         <h2>Household page</h2>
-        <AddTask
-          members={this.state.membersList}
-          household_id={this.props.match.params.id}
-          updateEverything={this.updateEverything}
-        />
-        <button onClick={this.handleResetScores} className="reset-all-scores">Reset All Scores</button>
+        <div className='top-buttons-cont'>
+          <AddTask
+            members={this.state.membersList}
+            household_id={this.props.match.params.id}
+            updateEverything={this.updateEverything}
+          />
+          <button onClick={this.handleResetScores} className="reset-all-scores">reset all scores</button>
+        </div>
         <MembersList
           tasks={tasks}
           data={data}
