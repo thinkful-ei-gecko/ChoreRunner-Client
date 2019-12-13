@@ -94,9 +94,6 @@ class RegistrationForm extends Component {
     }
   }
 
-  componentDidMount() {
-    this.firstInput.current.focus()
-  }
 
   render() {
     const { name, username, password, error } = this.state;

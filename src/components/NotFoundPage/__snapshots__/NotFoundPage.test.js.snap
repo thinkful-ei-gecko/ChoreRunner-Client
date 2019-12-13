@@ -9,13 +9,3 @@ exports[`NotFoundPage component testing renders UI as expected 1`] = `
   </h2>
 </div>
 `;
-
-exports[`NotFoundPage component testing renders empty given no tabs 1`] = `
-<div
-  className="notfound-container"
->
-  <h2>
-    Page not found
-  </h2>
-</div>
-`;

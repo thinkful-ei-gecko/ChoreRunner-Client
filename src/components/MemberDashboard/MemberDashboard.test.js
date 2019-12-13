@@ -6,9 +6,9 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-describe.skip('MemberDashboard component testing', () => {
+describe('MemberDashboard component testing', () => {
 
-  const tasks = [
+  const memberTasks = [
     {
       id: 1,
       title: 'hi',
@@ -20,34 +20,26 @@ describe.skip('MemberDashboard component testing', () => {
       points: 2
     },
   ]
-  let memberTasks;
-  beforeEach(() => {
-    memberTasks = shallow(<MemberDashboard tasks={tasks}/>)
-  })
 
-  const component = shallow(<MemberDashboard tasks={tasks}/>)
+  // beforeEach(() => {
+  //   memberTasks = shallow(<MemberDashboard tasks={tasks}/>)
+  // })
+
+  // const component = shallow(<MemberDashboard memberTasks={memberTasks}/>)
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
   
-    ReactDOM.render(<MemoryRouter><MemberDashboard /></MemoryRouter>, div);
+    ReactDOM.render(<MemoryRouter><MemberDashboard memberTasks={memberTasks}/></MemoryRouter>, div);
   
     ReactDOM.unmountComponentAtNode(div);
   });
   
   it('renders UI as expected', () => {
     const tree = renderer
-      .create(<MemoryRouter><MemberDashboard /></MemoryRouter>)
+      .create(<MemoryRouter><MemberDashboard memberTasks={memberTasks} /></MemoryRouter>)
       .toJSON();
       expect(tree).toMatchSnapshot();
   })
 
-  it.skip('renders empty given no tabs', () => {
-    const wrapper = renderer.create(<MemberDashboard tasks={tasks}/>)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
-
-  it('renders 2 tasks', () => {
-    expect(memberTasks.find('li').length).toBe(2);
-  });
 })

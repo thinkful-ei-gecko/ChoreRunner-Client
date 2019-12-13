@@ -1,27 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import ParentLogin from './ParentLogin'
+import RegistrationRoute from './RegistrationRoute'
 import renderer from 'react-test-renderer'
 import {MemoryRouter} from 'react-router-dom'
 
+const history = {push: () => []}
 
 
-
-it('ParentLogin renders without crashing', () => {
+it('Edit Review renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <MemoryRouter>
-      <ParentLogin />
+      <RegistrationRoute history={history}/>
     </MemoryRouter>
     , div);
   ReactDOM.unmountComponentAtNode(div)
 })
 
-it('renders Parent Login as expected', () => {
+it('renders Edit Review as expected', () => {
   const tree = renderer
   .create(
     <MemoryRouter>
-      <ParentLogin />
+      <RegistrationRoute history={history}/>
     </MemoryRouter>
   )
   .toJSON();

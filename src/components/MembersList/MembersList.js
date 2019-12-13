@@ -9,6 +9,8 @@ import './MembersList.css'
 export default class MembersList extends Component {
 
   render() {
+    console.log('memberslist')
+    console.log(this.props)
     const {
       tasks,
       data,

@@ -6,38 +6,36 @@ import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json'
 
-describe.skip('TasksList component testing', () => {
+describe('TasksList component testing', () => {
+  const member = {
+    member_id: 2,
+    name: 'Daniel',
+    tasks:[{title: "Obtain currency", id: 17, points: 3, status: "assigned"}]
+  }
+  
+  const tasks=[{title: "Obtain currency", id: 17, points: 3, status: "assigned"}]
+  
 
-  const tasks = [
-    {
-      id: 1,
-      title: 'Test',
-      household_id: 1,
-      user_id: 1,
-      member_id: 1,
-      points: 5,
-      status: 'assigned'
-    }
-  ]
+  const household_id = 1
   it('renders without crashing', () => {
     const div = document.createElement('div');
 
-    ReactDOM.render(<MemoryRouter><TasksList {...tasks}/></MemoryRouter>, div);
+    ReactDOM.render(<MemoryRouter><TasksList 
+      member={member}
+      tasks={tasks}
+      household_id={household_id}/></MemoryRouter>, div);
 
     ReactDOM.unmountComponentAtNode(div);
   });
 
   it('renders UI as expected', () => {
     const tree = renderer
-        .create(<MemoryRouter><TasksList {...tasks}/></MemoryRouter>)
+        .create(<MemoryRouter><TasksList 
+          member={member}
+          tasks={tasks}
+          household_id={household_id}
+        /></MemoryRouter>)
         .toJSON();
         expect(tree).toMatchSnapshot();
   })
-
-  it('renders empty given no tabs', () => {
-    const wrapper = mount(<TasksList {...tasks}/>)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
-
-
 })
