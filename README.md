@@ -6,6 +6,11 @@
 
 Authors: Daniel Nichols, Hubert Yang, Nancy Phiukhao, Yulia Khisamutdinova, Alexander Fukui
 
+* Live version: http://chorerunner-client.now.sh
+* Required API: 
+  - Live: https://enigmatic-waters-75582.herokuapp.com/
+  - Repo:  https://github.com/thinkful-ei-gecko/ChoreRunner-API
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
