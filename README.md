@@ -4,7 +4,7 @@
 
 ## Divide and Conquer
 
-Authors: Daniel Nichols, Hubert Yang, Nancy Phiukhao, Yulia Khisamutdinova, Alexander Fukui
+Authors: Daniel Nichols, Hubert Yang, Chitchanok Nancy Phiukhao, Yulia Khisamutdinova, Alexander Fukui
 
 * Live version: http://chorerunner-client.now.sh
 * Required API: 
