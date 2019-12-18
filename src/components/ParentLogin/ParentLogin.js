@@ -40,6 +40,7 @@ export default class ParentLogin extends Component {
         password.value = ''
         this.context.processLogin(res.authToken, res.type)
         this.onLoginSuccess()
+        this.setState({error:null})
       })
       .catch(res => {
         this.setState({ error: res.error })
@@ -50,6 +51,12 @@ export default class ParentLogin extends Component {
     return (
       <div className='parent-login container'>
         <h2>Parent Login</h2>
+
+        <div className="demo">
+          <h3>Demo:</h3>
+          <p>username: margeincharge</p>
+          <p>password: Password123!</p>
+        </div>
         <form className='parent-form-container' onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor='username'>Username</label>
@@ -60,7 +67,7 @@ export default class ParentLogin extends Component {
             <input name='password' type='password' onChange={this.onChangeHandle} value={password} required ></input>
           </div>
           <div role='alert'>
-            {error && <p>{error.error}</p>}
+            {error && <p>{error}</p>}
           </div>
           <button type='submit'>login</button>
         </form>
