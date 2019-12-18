@@ -13,6 +13,11 @@ Authors: Daniel Nichols, Hubert Yang, Nancy Phiukhao, Yulia Khisamutdinova, Alex
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Tech stack
+- ReactJS
+- HTML5
+- CSS3
+
 ## Available Scripts
 
 In the project directory, you can run:
