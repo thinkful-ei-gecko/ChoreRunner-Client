@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
-import './MemberLogin.css';
 
 export default class MemberLogin extends Component {
   static contextType = UserContext;
@@ -51,6 +50,11 @@ export default class MemberLogin extends Component {
     return (
       <div className="parent-login">
         <h2>Member login</h2>
+        <div className="demo">
+          <h3>Demo:</h3>
+          <p>username: bartman</p>
+          <p>password: bartman</p>
+        </div>
         <form
           className="parent-form-container"
           id="member-login"

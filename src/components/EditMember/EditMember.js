@@ -77,9 +77,10 @@ export default class EditMember extends React.Component {
         })
         .then(newMember => {
           updateMembersList(newMember);
+          this.setState({error: null});
           this.toggleEditMember();
         })
-        .catch(error => this.context.setError(error));
+        .catch(error => this.setState({error: error.error}));
     }
   };
 
@@ -97,9 +98,6 @@ export default class EditMember extends React.Component {
     );
   }
 
-  renderError() {
-    return this.context.error ? <p>{this.context.error.error}</p> : null;
-  }
 
   renderForm() {
     const { usernameError, nameError } = this.state.validateError;
@@ -140,7 +138,6 @@ export default class EditMember extends React.Component {
           <button type="reset" onClick={this.handleCancel} className="cancel">
             Cancel
           </button>
-          {this.context.error ? <p>{this.context.error.error}</p> : null}
         </form>
       </div>
     );

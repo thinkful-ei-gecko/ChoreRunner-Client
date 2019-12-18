@@ -57,7 +57,8 @@ export default class Landing extends Component {
             <p>
               Chores are boring, games are fun! The rules are simple: race your
               family members to complete chore-lenges, earn points, and get
-              badges. Can you collect all 10 badges and become the top
+              badges. However, you can only earn points after your parents have approved your chores.
+              Can you collect all 10 badges and become the top
               chorerunner in your house? Ask your parents to help you sign up
               today!
             </p>
